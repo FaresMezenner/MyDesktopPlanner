@@ -11,5 +11,8 @@ module com.example.mydesktopplanner {
     requires com.almasb.fxgl.all;
 
     opens com.example.mydesktopplanner to javafx.fxml;
+    opens com.example.mydesktopplanner.Authentification to javafx.fxml;
     exports com.example.mydesktopplanner;
+    exports com.example.mydesktopplanner.Models;
+
 }
