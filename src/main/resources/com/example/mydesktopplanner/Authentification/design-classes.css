@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Nunito';
+    src: url('Oswald-Bold.ttf');
+}
+
+.font {
+    -fx-font-family: "Nunito";
+}
