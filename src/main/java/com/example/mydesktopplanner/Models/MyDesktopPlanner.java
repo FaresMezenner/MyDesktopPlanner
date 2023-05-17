@@ -1,6 +1,7 @@
 package com.example.mydesktopplanner.Models;
 
-import ExceptionsPackage.*;
+
+import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.util.HashMap;
 
