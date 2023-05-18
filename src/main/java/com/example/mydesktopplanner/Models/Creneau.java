@@ -29,7 +29,9 @@ public class Creneau implements Decomposable<Void>, Serializable {
         if (Duration.between(debut.toLocalTime(),fin.toLocalTime()).compareTo(MyDesktopPlanner.getInstance().getTempsMinCreneau()) < 0){
             throw new ExceptionDureeInvalide("La durée du creneau est invalide");
         } else if (debut.isBefore(LocalDateTime.now())){
-            throw new ExceptionDureeInvalide("La date de debut du creneau est invalide");
+            throw new ExceptionDureeInvalide("La date de debut ou de fin du creneau sont invalides");
+        } else if (debut.toLocalDate().equals(fin.toLocalDate()) == false){
+            throw new ExceptionDureeInvalide("La date de debut et de fin ne sont pas dans le meme jour");
         }
         this.debut = debut;
         this.fin = fin;
@@ -82,6 +84,11 @@ public class Creneau implements Decomposable<Void>, Serializable {
     @Override
     public Creneau decomposer(Void args) {
         return null;
+    }
+
+    public void afficherCreneau() {
+        System.out.println("\n\n\n ------- crenau affiche ------- ");
+        System.out.println("Debut : " + this.debut + " Fin : " + this.fin);
     }
 }
 

@@ -13,13 +13,13 @@ import java.util.LinkedList;
 // LocalDateTime debut LocalDateTime fin
 public class Periode implements Serializable {
 
-    private LocalDateTime debut,fin;
+    private LocalDate debut,fin;
     private LinkedList<Jour> jours; // On stocke les jours pour avoir un acces simple et dynamique aux creneaux (au lieu de les stocker dans une ArrayList)
 
 
 
 
-    public Periode(LocalDateTime debut, LocalDateTime fin, LinkedList<Jour> jours) throws ExceptionDateInvalide {
+    public Periode(LocalDate debut, LocalDate fin, LinkedList<Jour> jours) throws ExceptionDateInvalide {
 
         this.debut = debut;
         this.fin = fin;
@@ -46,11 +46,11 @@ public class Periode implements Serializable {
         this.jours.remove(jour);
     }
 
-    public LocalDateTime getDebut() {
+    public LocalDate getDebut() {
         return this.debut;
     }
 
-    public LocalDateTime getFin() {
+    public LocalDate getFin() {
         return this.fin;
     }
 

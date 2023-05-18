@@ -192,6 +192,10 @@ public class Utilisateur {
         }
         System.out.println("Nombre minimal de tâches par jour pour le badge good : " + nbMinimalTachesParJourBadgeGood);
     }
+
+    public void afficherCrenaux() {
+        calendrier.afficherCrenaux();
+    }
 }
 
 

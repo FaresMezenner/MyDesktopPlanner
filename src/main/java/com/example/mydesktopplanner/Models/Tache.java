@@ -81,17 +81,6 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
 
     abstract boolean isDecomposable();  // Retourne vrai si la tache est décomposable , faux sinon
 
-    // Cette méthode affiche les informations d'une tache
-    public  void afficher(){
-        System.out.println("Nom : "+nom);
-        System.out.println("Durée : "+duree);
-        System.out.println("Priorité : "+ priorite);
-        System.out.println("Date limite : "+dateLimite);
-        System.out.println("Catégorie : "+categorie);
-        System.out.println("Etat : "+etat);
-        System.out.println("Est décomposable : "+isDecomposable());
-    }
-
 
     // Fonction qui permet de comparer deux taches
     // la comparaison se fait en fonction de la priorité et de la date limite
@@ -112,5 +101,19 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
             }
 
         }
+    }
+
+
+    // Cette méthode affiche les informations d'une tache
+    public void afficher() {
+
+            System.out.println("\n\n\n -------------- tache ---------------- \n\n");
+            System.out.println("Nom : " + getNom());
+            System.out.println("Duree : " + getDuree());
+            System.out.println("Priorite : " + getPriorite());
+            System.out.println("Duraion : " + getDuree());
+            System.out.println("Categorie: "+getCategorie());
+            System.out.println("Date Limite : " + getDateLimite());
+        
     }
 }

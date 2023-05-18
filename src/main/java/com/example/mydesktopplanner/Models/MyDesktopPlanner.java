@@ -70,14 +70,12 @@ public class MyDesktopPlanner {
 
     public void afficherTaches(){
         for (Tache t : utilisateur.getUnscheduledTaches()) {
-            System.out.println("\n\n\n -------------- tache ---------------- \n\n");
-            System.out.println("Nom : " + t.getNom());
-            System.out.println("Duree : " + t.getDuree());
-            System.out.println("Priorite : " + t.getPriorite());
-            System.out.println("Duraion : " + t.getDuree());
-            System.out.println("Categorie: "+t.getCategorie());
-            System.out.println("Date Limite : " + t.getDateLimite());
+            t.afficher();
         }
+    }
+
+    public void afficherCreneaux(){
+        utilisateur.afficherCrenaux();
     }
 
 }
