@@ -11,14 +11,15 @@ import java.time.format.DateTimeFormatter;
 
 // Cette classe contient les informations d'un creaneau
 // Cette classe n'est pas encore finie (il manque les méthodes)
-// TODO: Ajouter l'attribut IsBloque
-public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Serializable {
+public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Serializable, Comparable<Creneau>{
 
 
 
     private LocalDateTime debut,fin;
     private boolean libre, blocked;
     private Tache tache;
+
+
 
 
     // Tache simple car un creneau ne peux contenir qu'une seule tache , pas une liste de taches
@@ -100,23 +101,25 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
     @Override
     public boolean isColliding(Creneau creneau) {
 
-        if (
-                timeCollision(getDebut(), getFin(), creneau.getDebut()) ||
-                        timeCollision(getDebut(), getFin(), creneau.getFin()) ||
-                        timeCollision(creneau.getDebut(), creneau.getFin(), getDebut()) ||
-                        timeCollision(creneau.getDebut(), creneau.getFin(), getFin()) ||
-                        getDebut().isEqual(creneau.getDebut()) ||
-                        getFin().isEqual(creneau.getFin())
-        ) {
-            return true;
-        } else {
-            return false;
-        }
+          return timeCollision(getDebut(), getFin(), creneau.getDebut()) ||
+                  timeCollision(getDebut(), getFin(), creneau.getFin()) ||
+                  timeCollision(creneau.getDebut(), creneau.getFin(), getDebut()) ||
+                  timeCollision(creneau.getDebut(), creneau.getFin(), getFin()) ||
+                  getDebut().isEqual(creneau.getDebut()) ||
+                  getFin().isEqual(creneau.getFin());
+
     }
 
-    private boolean timeCollision(LocalDateTime startTime, LocalDateTime endTime, LocalDateTime currentTime) {
-        // Cette fonction retourne vrai si currentTime est compris entre startTime et endTime
-        return currentTime.isAfter(startTime) && currentTime.isBefore(endTime);
+    @Override
+    public int compareTo(Creneau o) {
+        if (this == o) return  0;
+        if (getFin().isBefore(o.getDebut())) {
+            return -1;
+        } else if (getDebut().isAfter(o.getFin())) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
 

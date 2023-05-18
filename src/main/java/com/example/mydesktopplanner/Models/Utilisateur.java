@@ -200,6 +200,10 @@ public class Utilisateur {
     public void ajouterTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
         calendrier.ajouterTachePeriodique(tache, nJours, nbFois);
     }
+
+    public void suprimerTachePeriodique(CreneauPeriodique tache) {
+        calendrier.supprimerTachePeriodique(tache);
+    }
 }
 
 

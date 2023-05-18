@@ -92,4 +92,7 @@ public Calendrier() {
 
 
     }
+
+    public void supprimerTachePeriodique(CreneauPeriodique tache) {
+    }
 }

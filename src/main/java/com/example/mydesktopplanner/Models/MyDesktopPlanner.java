@@ -64,6 +64,10 @@ public class MyDesktopPlanner {
         utilisateur.ajouterTachePeriodique(tache, nJours, nbFois);
     }
 
+    public void suprimerTachePeriodique(CreneauPeriodique tache){
+        utilisateur.suprimerTachePeriodique(tache);
+    }
+
     public void ajouterPeriode(){
         utilisateur.ajouterPeriode();
     }

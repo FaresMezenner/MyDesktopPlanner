@@ -20,6 +20,7 @@ public class Jour implements Serializable {
     private LocalDateTime date;
 
 
+
     private int nbTachesAccomplies = 0;
     private boolean felicitations = false;
 
@@ -30,6 +31,12 @@ public class Jour implements Serializable {
             throw new ExceptionDateInvalide("La date est invalide");
         }
         this.date = date;
+
+//        if (true) {
+//            System.out.println("TEST IS TRUE");
+//        } else {
+//            System.out.println("TEST IS FALSE");
+//        }
     }
 
     public void ajouterCreneau(Creneau creneau) throws ExceptionCollisionHorairesCreneau {
@@ -42,7 +49,7 @@ public class Jour implements Serializable {
 
 
                 if (!creneauIt.isColliding(creneau)) {
-                    if (creneauIt.getFin().isBefore(creneau.getDebut())) {
+                    if (creneauIt.compareTo(creneau) < 0) {
                         i++;
                         if (it.hasNext() && creneau.isColliding((Creneau) it.next())) {
                             throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
@@ -50,6 +57,10 @@ public class Jour implements Serializable {
                             creneaux.add(i, creneau);
                             break;
                         }
+                    } else if (creneauIt.compareTo(creneau) > 0) {
+
+                        creneaux.add(i, creneau);
+                        break;
                     }
                 } else {
                     throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
