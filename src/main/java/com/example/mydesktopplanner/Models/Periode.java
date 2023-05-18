@@ -21,6 +21,12 @@ public class Periode implements Serializable {
 
     public Periode(LocalDate debut, LocalDate fin, LinkedList<Jour> jours) throws ExceptionDateInvalide {
 
+        if (debut.isBefore(LocalDate.now())) {
+            throw new ExceptionDateInvalide("La date de debut est deja passee et invalide");
+        } else if (debut.isBefore(fin)) {
+            throw new ExceptionDateInvalide("La date de debut doit etre avant la date de fin");
+        }
+
         this.debut = debut;
         this.fin = fin;
         this.jours = jours;

@@ -26,13 +26,15 @@ public class Creneau implements Decomposable<Void>, Serializable {
     public Creneau(LocalDateTime debut, LocalDateTime fin) throws ExceptionDureeInvalide{
 
         // Si la durée d'un creneau est inferieure a user.getTempsMinCreneau() , on lance une exception
-        if (Duration.between(debut.toLocalTime(),fin.toLocalTime()).compareTo(MyDesktopPlanner.getInstance().getTempsMinCreneau()) < 0){
-            throw new ExceptionDureeInvalide("La durée du creneau est invalide");
-        } else if (debut.isBefore(LocalDateTime.now())){
+         if (debut.isBefore(LocalDateTime.now())){
+            throw new ExceptionDureeInvalide("La date de debut est deja passee et invalide");
+        }  else if (debut.isAfter(fin)){
             throw new ExceptionDureeInvalide("La date de debut ou de fin du creneau sont invalides");
+        } else if (Duration.between(debut.toLocalTime(),fin.toLocalTime()).compareTo(MyDesktopPlanner.getInstance().getTempsMinCreneau()) < 0){
+            throw new ExceptionDureeInvalide("La durée du creneau est invalide");
         } else if (debut.toLocalDate().equals(fin.toLocalDate()) == false){
-            throw new ExceptionDureeInvalide("La date de debut et de fin ne sont pas dans le meme jour");
-        }
+             throw new ExceptionDureeInvalide("La date de debut et de fin ne sont pas dans le meme jour");
+         }
         this.debut = debut;
         this.fin = fin;
         this.libre = true;
