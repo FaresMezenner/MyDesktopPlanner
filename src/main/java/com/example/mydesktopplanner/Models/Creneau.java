@@ -28,6 +28,8 @@ public class Creneau implements Decomposable<Void>, Serializable {
         // Si la durée d'un creneau est inferieure a user.getTempsMinCreneau() , on lance une exception
         if (Duration.between(debut.toLocalTime(),fin.toLocalTime()).compareTo(MyDesktopPlanner.getInstance().getTempsMinCreneau()) < 0){
             throw new ExceptionDureeInvalide("La durée du creneau est invalide");
+        } else if (debut.isBefore(LocalDateTime.now())){
+            throw new ExceptionDureeInvalide("La date de debut du creneau est invalide");
         }
         this.debut = debut;
         this.fin = fin;

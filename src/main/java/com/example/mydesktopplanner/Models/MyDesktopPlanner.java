@@ -1,6 +1,8 @@
 package com.example.mydesktopplanner.Models;
 
 
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionSaisieInvalide;
 
 import java.time.Duration;
@@ -56,6 +58,14 @@ public class MyDesktopPlanner {
 
     public void ajouterTache(Tache tache){
         utilisateur.ajouterTache(tache);
+    }
+
+    public void ajouterPeriode(){
+        utilisateur.ajouterPeriode();
+    }
+
+    public void ajouterCreneau(Creneau creneau) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
+        utilisateur.ajouterCreneau(creneau);
     }
 
     public void afficherTaches(){

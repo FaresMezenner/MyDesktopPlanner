@@ -5,6 +5,7 @@ import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -22,11 +23,16 @@ public class Jour implements Serializable {
 
 
     public Jour(LocalDateTime date) throws ExceptionDateInvalide{
-        if (date == null || date.isBefore(LocalDateTime.now())){
+        if (date == null || date.toLocalDate().isBefore(LocalDateTime.now().toLocalDate())){
             // Si la date est null , ou elle est avant la date actuelle , on lance une exception
             throw new ExceptionDateInvalide("La date est invalide");
         }
         this.date = date;
     }
+
+    public void ajouterCreneau(Creneau creneau) throws ExceptionCollisionHorairesCreneau {
+
+    }
+
 
 }
