@@ -55,9 +55,10 @@ public class Main {
         myDesktopPlanner.ajouterCreneau(b);
         myDesktopPlanner.ajouterCreneau(c);
 
+        CreneauPeriodique creneauPeriodique = null;
         try {
             myDesktopPlanner.ajouterTachePeriodique(
-                    new CreneauPeriodique(
+                    creneauPeriodique = new CreneauPeriodique(
                             LocalDateTime.of(2023, 07, 19, 03, 10),
                             LocalDateTime.of(2023, 07, 19, 05, 10),
                             new TacheSimple("tache", Duration.ofHours(2), Priorite.HIGH, LocalDateTime.now().plusHours(5), Categorie.HEALTH, false)
@@ -73,7 +74,7 @@ public class Main {
         System.out.println("BEFORE DELETION:   ------------------");
         myDesktopPlanner.afficherCreneaux();
 
-//        myDesktopPlanner.supprimerTachesPeriodique(b);
+        myDesktopPlanner.supprimerTachesPeriodique(creneauPeriodique);
 
 
 

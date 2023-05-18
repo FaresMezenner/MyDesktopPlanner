@@ -141,18 +141,16 @@ public Calendrier() {
             jour.afficher();
         }
     }
+    public void supprimerTachesPeriodique(CreneauPeriodique c) {
+        while (c.getPrecedent() != null) {
+            c = c.getPrecedent();
+        }
+
+        while (c.getSuivant() != null) {
+            supprimerCreneau(c);
+            c = c.getSuivant();
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 }

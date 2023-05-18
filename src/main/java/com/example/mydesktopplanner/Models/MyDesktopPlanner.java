@@ -89,6 +89,13 @@ public class MyDesktopPlanner {
         utilisateur.afficherCrenaux();
     }
 
+    /**
+     * WARNING: THIS METHOD TAKES THE REAL INSTANCES OF THE OBJECTS, NOT COPIES
+     * @param b
+     */
+    public void supprimerTachesPeriodique(CreneauPeriodique b) {
+        utilisateur.supprimerTachesPeriodique(b);
+    }
 }
 
 

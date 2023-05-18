@@ -206,6 +206,10 @@ public class Utilisateur {
     public void suprimerCreneau(Creneau tache) {
         calendrier.supprimerCreneau(tache);
     }
+
+    public void supprimerTachesPeriodique(CreneauPeriodique b) {
+        calendrier.supprimerTachesPeriodique(b);
+    }
 }
 
 
