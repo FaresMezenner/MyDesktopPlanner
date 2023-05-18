@@ -8,6 +8,7 @@ import java.time.*;
 import java.time.LocalDateTime;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.TreeMap;
 
 // Cette classe contiens les informations du calendrier
@@ -21,12 +22,20 @@ public class Calendrier implements Serializable {
     // Les jours des periodes doivent etre ajoutés a ArrayList jours.
 
 
-public Calendrier() {
+    public Calendrier() {
 
-}
+    }
 
 
-    public void ajouterPeriode() {
+    public void ajouterPeriode(Periode periode) throws ExceptionCollisionPeriode{
+        // On vérifie si la période est en collision avec une période deja existante
+        for (Periode periode_existante : periodes.values()) {
+            if (periode.isColliding(periode_existante)) {
+                throw new ExceptionCollisionPeriode("ERREUR : Collision avec periode existante");
+            }
+        }
+        // On ajoute la période
+        periodes.put(periode.getDebut(),periode);
     }
 
     public void ajouterCreneau(Creneau creneau) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
@@ -35,7 +44,7 @@ public Calendrier() {
             System.out.println("day doesn't exist");
             //on va ajouter un nouveau jour, une exception est levée si la date est invalide
             //ie si la date est null ou si elle est avant la date actuelle
-            jour = new Jour(creneau.getDebut());
+            jour = new Jour(creneau.getDebut().toLocalDate());
             //on ajoute le creneau au jour, une exception est levée si la date du creneau est invalide
             //ie s'il exist deja un creneau dans la meme interval du temp
             jour.ajouterCreneau(creneau);
@@ -95,4 +104,54 @@ public Calendrier() {
 
     public void supprimerTachePeriodique(CreneauPeriodique tache) {
     }
+
+    public ArrayList<Jour> getJoursIntervalle(LocalDate debut , LocalDate fin){
+        // Cette fonction renvoies une liste contenant tout les jours du calendrier [EXISTANTS] dans l'intervalle indiqué
+        return new ArrayList<>(jours.subMap(debut,fin.plusDays(1)).values());
+    }
+
+    public LinkedList<Creneau> getCreneauxJour(LocalDate date) throws ExceptionDateInvalide{
+    // Cette fonction renvoies la liste des creneaux d'un jour donné
+        Jour jour =  jours.get(date);
+        if (jour != null){
+            return jour.getCreneaux();
+        }
+        else{
+            throw new ExceptionDateInvalide("Le jour n'existe pas");
+        }
+    }
+
+
+
+
+    public void ajouterJour(LocalDate date) throws ExceptionDateInvalide {
+        if (date.isBefore(LocalDate.now())) {
+            throw new ExceptionDateInvalide("La date est invalide");
+        }
+        if (jours.containsKey(date)) {
+            throw new ExceptionDateInvalide("Le jour existe déja");
+        }
+        Jour jour = new Jour(date);
+        jours.put(date, jour);
+    }
+
+    public void afficher(){
+        for (Jour jour : jours.values()) {
+            jour.afficher();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

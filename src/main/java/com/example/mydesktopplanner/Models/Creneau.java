@@ -110,6 +110,7 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
 
     }
 
+
     @Override
     public int compareTo(Creneau o) {
         if (this == o) return  0;
@@ -121,5 +122,8 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
             return 0;
         }
     }
+
+
+
 }
 

@@ -2,10 +2,12 @@ package com.example.mydesktopplanner.Models;
 
 
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionPeriode;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionSaisieInvalide;
 
 import java.time.Duration;
+import java.time.LocalDate;
 
 // Cette classe est la classe globale du DesktopPlanner
 // Cette classe n'est pas finie , il manque les methodes.
@@ -68,8 +70,8 @@ public class MyDesktopPlanner {
         utilisateur.suprimerTachePeriodique(tache);
     }
 
-    public void ajouterPeriode(){
-        utilisateur.ajouterPeriode();
+    public void ajouterPeriode(Periode periode) throws ExceptionDateInvalide , ExceptionCollisionPeriode {
+        utilisateur.ajouterPeriode(periode);
     }
 
     public void ajouterCreneau(Creneau creneau) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {

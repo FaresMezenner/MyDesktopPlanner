@@ -1,9 +1,11 @@
 package com.example.mydesktopplanner.Models;
 
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionPeriode;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -147,8 +149,8 @@ public class Utilisateur {
         unscheduledTaches.remove(tache);
     }
 
-    public void ajouterPeriode() {
-        calendrier.ajouterPeriode();
+    public void ajouterPeriode(Periode periode) throws ExceptionDateInvalide , ExceptionCollisionPeriode {
+        calendrier.ajouterPeriode(periode);
     }
 
     public void ajouterCreneau(Creneau creneau) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {

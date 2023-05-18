@@ -84,4 +84,7 @@ ajouterPeriode(LocalDate debut , LocalDate fin) : Ajoute une periode au calendri
 supprimerPeriode(LocalDate debut , LocalDate fin) : Supprime une periode du calendrier de l'utilisateur
 
 
+
+
+
 // TODO : Ajouter couleures aux taches de méme categorie

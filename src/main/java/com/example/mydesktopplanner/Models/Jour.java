@@ -5,6 +5,7 @@ import com.almasb.fxgl.time.LocalTimer;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -17,26 +18,48 @@ import java.util.LinkedList;
 
 public class Jour implements Serializable {
     private LinkedList<Creneau> creneaux = new LinkedList<Creneau>();
-    private LocalDateTime date;
-
+    private final LocalDate date;
 
 
     private int nbTachesAccomplies = 0;
     private boolean felicitations = false;
 
 
-    public Jour(LocalDateTime date) throws ExceptionDateInvalide{
-        if (date == null || date.toLocalDate().isBefore(LocalDateTime.now().toLocalDate())){
+    public Jour(LocalDate date) throws ExceptionDateInvalide{
+        if (date == null || date.isBefore(LocalDateTime.now().toLocalDate())){
             // Si la date est null , ou elle est avant la date actuelle , on lance une exception
             throw new ExceptionDateInvalide("La date est invalide");
         }
         this.date = date;
+    }
 
-//        if (true) {
-//            System.out.println("TEST IS TRUE");
-//        } else {
-//            System.out.println("TEST IS FALSE");
-//        }
+
+    public LinkedList<Creneau> getCreneaux() {
+        return creneaux;
+    }
+
+    public void setCreneaux(LinkedList<Creneau> creneaux) {
+        this.creneaux = creneaux;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public int getNbTachesAccomplies() {
+        return nbTachesAccomplies;
+    }
+
+    public void setNbTachesAccomplies(int nbTachesAccomplies) {
+        this.nbTachesAccomplies = nbTachesAccomplies;
+    }
+
+    public boolean isFelicitations() {
+        return felicitations;
+    }
+
+    public void setFelicitations(boolean felicitations) {
+        this.felicitations = felicitations;
     }
 
     public void ajouterCreneau(Creneau creneau) throws ExceptionCollisionHorairesCreneau {
@@ -49,7 +72,7 @@ public class Jour implements Serializable {
 
 
                 if (!creneauIt.isColliding(creneau)) {
-                    if (creneauIt.compareTo(creneau) < 0) {
+                    if (creneauIt.getFin().isBefore(creneau.getDebut())) {
                         i++;
                         if (it.hasNext() && creneau.isColliding((Creneau) it.next())) {
                             throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
@@ -57,10 +80,6 @@ public class Jour implements Serializable {
                             creneaux.add(i, creneau);
                             break;
                         }
-                    } else if (creneauIt.compareTo(creneau) > 0) {
-
-                        creneaux.add(i, creneau);
-                        break;
                     }
                 } else {
                     throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
@@ -86,5 +105,11 @@ public class Jour implements Serializable {
             Creneau creneau = (Creneau) it.next();
             creneau.afficherCreneau();
         }
+    }
+
+    public void afficher(){
+        System.out.println("Date : " + date);
+        afficherCrenaux();
+
     }
 }

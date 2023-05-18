@@ -11,54 +11,72 @@ import java.util.LinkedList;
 // Cette classe concerne les periodes que l'utilisateur pourra spécifier sur son calendrier
 // Cette classe peut etre supprimée
 // LocalDateTime debut LocalDateTime fin
-public class Periode implements Serializable {
+public class Periode implements Serializable , Collidable<Periode>{
 
     private LocalDate debut,fin;
-    private LinkedList<Jour> jours; // On stocke les jours pour avoir un acces simple et dynamique aux creneaux (au lieu de les stocker dans une ArrayList)
 
 
 
 
-    public Periode(LocalDate debut, LocalDate fin, LinkedList<Jour> jours) throws ExceptionDateInvalide {
+    public Periode(LocalDate debut, LocalDate fin) throws ExceptionDateInvalide {
 
         if (debut.isBefore(LocalDate.now())) {
             throw new ExceptionDateInvalide("La date de debut est deja passee et invalide");
-        } else if (debut.isBefore(fin)) {
+        } else if (fin.isBefore(debut)) {
             throw new ExceptionDateInvalide("La date de debut doit etre avant la date de fin");
         }
 
         this.debut = debut;
         this.fin = fin;
-        this.jours = jours;
+
     }
 
     // -------------------------------------- Delimitation Setters/Getters --------------------------------------
-
-    public LinkedList<Jour> getJours() {
-        return jours;
-    }
-
-    public void setJours(LinkedList<Jour> jours) {
-        this.jours = jours;
-    }
-
-    // -------------------------------------- Delimitation Setters/Getters --------------------------------------
-
-    public void ajouterJour(Jour jour) {
-        this.jours.add(jour);
-    }
-
-    public void suppJour(Jour jour) {
-        this.jours.remove(jour);
-    }
 
     public LocalDate getDebut() {
-        return this.debut;
+        return debut;
+    }
+
+    public void setDebut(LocalDate debut) {
+        this.debut = debut;
     }
 
     public LocalDate getFin() {
-        return this.fin;
+        return fin;
     }
+
+    public void setFin(LocalDate fin) {
+        this.fin = fin;
+    }
+
+
+    // -------------------------------------- Delimitation Setters/Getters --------------------------------------
+
+
+
+    @Override
+    public boolean isColliding(Periode periode) {
+        LocalDateTime debut_periode = getDebut().atStartOfDay();
+        LocalDateTime fin_periode = getFin().atStartOfDay();
+
+        LocalDateTime debut_periode_argument = periode.getDebut().atStartOfDay();
+        LocalDateTime fin_periode_argument = periode.getFin().atStartOfDay();
+
+
+        return timeCollision(debut_periode, fin_periode, debut_periode_argument) ||
+                timeCollision(debut_periode, fin_periode, fin_periode_argument) ||
+                timeCollision(debut_periode_argument, fin_periode_argument, debut_periode) ||
+                timeCollision(debut_periode_argument, fin_periode_argument, fin_periode) ||
+                debut_periode.isEqual(debut_periode_argument) ||
+                fin_periode.isEqual(fin_periode_argument);
+    }
+
+    public void afficher(){
+        System.out.println("Debut : " + debut + " Fin : " + fin);
+    }
+
+
+
 
 
 }
