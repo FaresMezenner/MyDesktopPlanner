@@ -3,27 +3,26 @@ package com.example.mydesktopplanner.Models;// Cette classe contiens les informa
 
 import java.io.Serializable;
 import java.time.Duration;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public abstract class Tache implements Serializable {
     private String nom;
     private Duration duree;
     private Priorite priorite;
-    private LocalDate dateLimite;   // Dans ce projet , la limite est une date et non une heure
+    private LocalDateTime dateLimite;   // Dans ce projet , la limite est une date et non une heure
     private Categorie categorie;
 
-    private LocalDate changementEtat; // Sauvegarde la derniére fois que l'etat de la tache a ete modifié
+    private LocalDateTime changementEtat; // Sauvegarde la derniére fois que l'etat de la tache a ete modifié
                                       // C'est fait pour faciliter le calcul des statistiques et l'historique.
-    private Etat etat;
+    private Etat etat = Etat.UNSCHEDULED;
 
-    public Tache(String nom, Duration duree, Priorite priorite, LocalDate dateLimite, Categorie categorie, Etat etat) {
+    public Tache(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie) {
         this.nom = nom;
         this.duree = duree;
         this.priorite = priorite;
         this.dateLimite = dateLimite;
         this.categorie = categorie;
-        this.etat = etat;
     }
 
     public String getNom() {
@@ -62,11 +61,11 @@ public abstract class Tache implements Serializable {
         this.priorite = priorite;
     }
 
-    public LocalDate getDateLimite() {
+    public LocalDateTime getDateLimite() {
         return dateLimite;
     }
 
-    public void setDateLimite(LocalDate dateLimite) {
+    public void setDateLimite(LocalDateTime dateLimite) {
         this.dateLimite = dateLimite;
     }
 

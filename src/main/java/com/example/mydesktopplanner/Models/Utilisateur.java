@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 
 public class Utilisateur {
     private String pseudo;
@@ -12,6 +13,9 @@ public class Utilisateur {
     private Jour jourRentable;
     private LocalDateTime[] tempsCategories;
     private Duration tempsMinCreneau;
+
+    //TODO: tache periodique
+    private LinkedList<Tache> unscheduledTaches = new LinkedList<>();
     private Calendrier calendrier = new Calendrier();
     private int[] badges;
     private ArrayList<Projet> projets = new ArrayList<>();
@@ -23,6 +27,7 @@ public class Utilisateur {
 
 
     // ----------------------------- Delimitation Gettes / Setters ----------------------------------
+
 
     public String getPseudo() {
         return pseudo;
@@ -80,6 +85,14 @@ public class Utilisateur {
         this.tempsMinCreneau = tempsMinCreneau;
     }
 
+    public LinkedList<Tache> getUnscheduledTaches() {
+        return unscheduledTaches;
+    }
+
+    public void setUnscheduledTaches(LinkedList<Tache> unscheduledTaches) {
+        this.unscheduledTaches = unscheduledTaches;
+    }
+
     public Calendrier getCalendrier() {
         return calendrier;
     }
@@ -113,5 +126,11 @@ public class Utilisateur {
     }
 
 
-    // ----------------------------- Delimitation Gettes / Setters ----------------------------------
+    public void ajouterTache(Tache tache) {
+    }
 }
+
+
+
+
+

@@ -1,9 +1,13 @@
 package com.example.mydesktopplanner;
 
+import com.example.mydesktopplanner.Models.Creneau;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInvalide;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.time.LocalDateTime;
 
 
 public class Main extends Application {
@@ -18,7 +22,11 @@ public class Main extends Application {
 
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws ExceptionDureeInvalide {
+
+        Creneau c = new Creneau(
+                LocalDateTime.now(), LocalDateTime.now().plusHours(2)
+        );
 
     }
 }
