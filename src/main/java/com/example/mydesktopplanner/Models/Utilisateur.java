@@ -127,7 +127,7 @@ public class Utilisateur {
     public void setNbMinimalTachesParJour(int nbMinimalTachesParJour) {
         this.nbMinimalTachesParJourBadgeGood = nbMinimalTachesParJour;
     }
-
+    // ----------------------------- Delimitation Gettes / Setters ----------------------------------
 
     public void ajouterTache(Tache tache) {
         int i = 0;
@@ -143,6 +143,10 @@ public class Utilisateur {
         }
     }
 
+    public void supprimerTache(Tache tache) {
+        unscheduledTaches.remove(tache);
+    }
+
     public void ajouterPeriode() {
         calendrier.ajouterPeriode();
     }
@@ -150,6 +154,43 @@ public class Utilisateur {
     public void ajouterCreneau(Creneau creneau) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
         calendrier.ajouterCreneau(creneau);
 
+    }
+
+    public void ajouterTacheProjet(Tache tache, Projet projet) {
+        unscheduledTaches.add(tache);
+        projet.ajouterTache(tache);
+
+    }
+
+    public void supprimerTacheProjet(Tache tache, Projet projet) {
+        unscheduledTaches.remove(tache);
+        projet.supprimerTache(tache);
+    }
+
+    public void ajouterProjet(Projet projet) {
+        projets.add(projet);
+    }
+
+    public void supprimerProjet(Projet projet) {
+        projets.remove(projet);
+    }
+
+    public void afficher(){
+        System.out.println("Pseudo : " + pseudo);
+        System.out.println("Rendement journalier : " + rendementJournalier);
+        System.out.println("Rendement période : " + rendementPeriode);
+        System.out.println("Nombre d'encouragements : " + nbEncouragements);
+        System.out.println("Jour rentable : " + jourRentable);
+        System.out.println("Temps par catégories : " + tempsCategories);
+        System.out.println("Temps minimal par créneau : " + tempsMinCreneau);
+        System.out.println("Tâches non planifiées : " + unscheduledTaches);
+        System.out.println("Calendrier : " + calendrier);
+        System.out.println("Badges : " + badges);
+        System.out.println("Projets : " );
+        for (Projet p : projets){
+            p.afficher();
+        }
+        System.out.println("Nombre minimal de tâches par jour pour le badge good : " + nbMinimalTachesParJourBadgeGood);
     }
 }
 

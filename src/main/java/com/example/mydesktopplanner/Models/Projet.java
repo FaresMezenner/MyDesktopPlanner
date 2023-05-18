@@ -45,6 +45,19 @@ public class Projet implements Serializable {
         taches.add(tache);
     }
 
+    public void supprimerTache(Tache tache) {
+        taches.remove(tache);
+    }
+
+    public void afficher(){
+        System.out.println("Nom : "+nom);
+        System.out.println("Description : "+description);
+        System.out.println("Taches : ");
+        for(Tache tache : taches){
+            System.out.println(tache.getNom());
+        }
+    }
+
 }
 
 
