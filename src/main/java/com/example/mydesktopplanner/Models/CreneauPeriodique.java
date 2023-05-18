@@ -16,8 +16,8 @@ public class CreneauPeriodique extends Creneau  {
 
     public void suprimerTachePeriodique(){
 
-        precedent.setSuivant(suivant);
-        suivant.setPrecedent(precedent);
+        if (precedent != null) precedent.setSuivant(suivant);
+        if (suivant != null) suivant.setPrecedent(precedent);
     }
 
     public CreneauPeriodique getSuivant() {

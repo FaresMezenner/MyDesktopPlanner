@@ -22,9 +22,9 @@ public class Calendrier implements Serializable {
     // Les jours des periodes doivent etre ajoutés a ArrayList jours.
 
 
-    public Calendrier() {
+public Calendrier() {
 
-    }
+}
 
 
     public void ajouterPeriode(Periode periode) throws ExceptionCollisionPeriode{
@@ -102,7 +102,8 @@ public class Calendrier implements Serializable {
 
     }
 
-    public void supprimerTachePeriodique(CreneauPeriodique tache) {
+    public void supprimerCreneau(Creneau tache) {
+        jours.get(tache.getDebut().toLocalDate()).suprimerCreneau(tache);
     }
 
     public ArrayList<Jour> getJoursIntervalle(LocalDate debut , LocalDate fin){

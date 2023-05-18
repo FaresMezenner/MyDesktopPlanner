@@ -62,13 +62,14 @@ public class MyDesktopPlanner {
         utilisateur.ajouterTache(tache);
     }
 
+    public void suprimerTache(Creneau tache){
+        utilisateur.suprimerCreneau(tache);
+    }
+
     public void ajouterTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
         utilisateur.ajouterTachePeriodique(tache, nJours, nbFois);
     }
 
-    public void suprimerTachePeriodique(CreneauPeriodique tache){
-        utilisateur.suprimerTachePeriodique(tache);
-    }
 
     public void ajouterPeriode(Periode periode) throws ExceptionDateInvalide , ExceptionCollisionPeriode {
         utilisateur.ajouterPeriode(periode);

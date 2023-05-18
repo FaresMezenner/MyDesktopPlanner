@@ -72,7 +72,7 @@ public class Jour implements Serializable {
 
 
                 if (!creneauIt.isColliding(creneau)) {
-                    if (creneauIt.getFin().isBefore(creneau.getDebut())) {
+                    if (creneauIt.compareTo(creneau) < 0) {
                         i++;
                         if (it.hasNext() && creneau.isColliding((Creneau) it.next())) {
                             throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
@@ -80,6 +80,10 @@ public class Jour implements Serializable {
                             creneaux.add(i, creneau);
                             break;
                         }
+                    } else if (creneauIt.compareTo(creneau) > 0) {
+
+                        creneaux.add(i, creneau);
+                        break;
                     }
                 } else {
                     throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
@@ -111,5 +115,17 @@ public class Jour implements Serializable {
         System.out.println("Date : " + date);
         afficherCrenaux();
 
+    }
+
+    public void suprimerCreneau(Creneau tache) {
+        Iterator it = creneaux.iterator();
+        while (it.hasNext()) {
+            Creneau creneau = (Creneau) it.next();
+            if (creneau.compareTo(tache) == 0) {
+                creneaux.remove(creneau);
+                if (tache.getClass().equals(CreneauPeriodique.class)) ((CreneauPeriodique) creneau).suprimerTachePeriodique();
+                break;
+            }
+        }
     }
 }

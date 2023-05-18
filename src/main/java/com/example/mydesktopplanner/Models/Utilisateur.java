@@ -203,8 +203,8 @@ public class Utilisateur {
         calendrier.ajouterTachePeriodique(tache, nJours, nbFois);
     }
 
-    public void suprimerTachePeriodique(CreneauPeriodique tache) {
-        calendrier.supprimerTachePeriodique(tache);
+    public void suprimerCreneau(Creneau tache) {
+        calendrier.supprimerCreneau(tache);
     }
 }
 

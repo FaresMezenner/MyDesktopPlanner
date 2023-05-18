@@ -2,7 +2,6 @@ package com.example.mydesktopplanner;
 
 import com.example.mydesktopplanner.Models.*;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionPeriode;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInvalide;
 import javafx.application.Application;
@@ -11,22 +10,21 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 
-public class Main extends Application {
+public class Main {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Authentification/AuthentificationScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-
-    }
+//    @Override
+//    public void start(Stage stage) throws Exception {
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Authentification/AuthentificationScreen.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+//        stage.setTitle("Hello!");
+//        stage.setScene(scene);
+//        stage.show();
+//
+//    }
 
     public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
 
@@ -35,18 +33,52 @@ public class Main extends Application {
 
         MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
 
-        Periode periode1 = new Periode(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 31));
-        Periode periode2 = new Periode(LocalDate.of(2024, 2, 16), LocalDate.of(2024, 2, 29));
-        try {
-            myDesktopPlanner.ajouterPeriode(periode1);
-            myDesktopPlanner.ajouterPeriode(periode2);
-        } catch (ExceptionCollisionPeriode e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Fin de programme .");
-
-
         //creer 2 hours
+        Creneau a = new Creneau(
+                LocalDateTime.of(2023, 07, 19, 22, 13 ),
+                LocalDateTime.of(2023, 07, 19, 23, 10)
+        );
+
+        //after crenau a with 2 hours another one with 2 hours
+        Creneau b = new Creneau(
+                LocalDateTime.of(2023, 07, 19, 23, 11 ),
+                LocalDateTime.of(2023, 07, 19, 23, 51)
+        );
+
+        //after crenau a with 1 minute another one with 40 minutes
+        Creneau c = new Creneau(
+                LocalDateTime.of(2023, 07, 20, 00, 10 ),
+                LocalDateTime.of(2023, 07, 20, 02, 10)
+        );
+
+        myDesktopPlanner.ajouterCreneau(a);
+        myDesktopPlanner.ajouterCreneau(b);
+        myDesktopPlanner.ajouterCreneau(c);
+
+        try {
+            myDesktopPlanner.ajouterTachePeriodique(
+                    new CreneauPeriodique(
+                            LocalDateTime.of(2023, 07, 19, 03, 10),
+                            LocalDateTime.of(2023, 07, 19, 05, 10),
+                            new TacheSimple("tache", Duration.ofHours(2), Priorite.HIGH, LocalDateTime.now().plusHours(5), Categorie.HEALTH, false)
+                    ),
+                    1,
+                    4
+            );
+        } catch (ExceptionCollisionHorairesCreneau e){
+            System.out.println("ERROR: " + e.getMessage());
+        }
+
+
+        System.out.println("BEFORE DELETION:   ------------------");
+        myDesktopPlanner.afficherCreneaux();
+
+//        myDesktopPlanner.supprimerTachesPeriodique(b);
+
+
+
+        System.out.println("AFTER DELETION:   ------------------");
+        myDesktopPlanner.afficherCreneaux();
 
 
 
