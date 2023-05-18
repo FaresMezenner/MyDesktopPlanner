@@ -192,6 +192,9 @@ this.periodes = new TreeMap<>();
         // Tu dois respecter les dates limites et la priorité , sinon tu informe l'utilisateur que c'est impossible
         // L'etat de la tache doit aussi changer en NOTREALIZED
         //TODO
+
+
+
     }
 
     public void dissocierTache(Creneau creneau){
