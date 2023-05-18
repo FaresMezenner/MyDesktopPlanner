@@ -196,6 +196,10 @@ public class Utilisateur {
     public void afficherCrenaux() {
         calendrier.afficherCrenaux();
     }
+
+    public void ajouterTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
+        calendrier.ajouterTachePeriodique(tache, nJours, nbFois);
+    }
 }
 
 

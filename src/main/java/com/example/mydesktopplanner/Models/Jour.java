@@ -39,15 +39,23 @@ public class Jour implements Serializable {
         if (!creneaux.isEmpty()) {
             while (it.hasNext()) {
                 Creneau creneauIt = (Creneau) it.next();
-                if (creneauIt.getFin().isBefore(creneau.getDebut())) {
-                    i++;
-                    if (it.hasNext() && testCrenauCollision((Creneau) it.next(), creneau)) {
-                        throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
-                    } else {
-                        creneaux.add(i, creneau);
-                        break;
+
+
+                if (!creneauIt.isColliding(creneau)) {
+                    if (creneauIt.getFin().isBefore(creneau.getDebut())) {
+                        i++;
+                        if (it.hasNext() && creneau.isColliding((Creneau) it.next())) {
+                            throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
+                        } else {
+                            creneaux.add(i, creneau);
+                            break;
+                        }
                     }
+                } else {
+                    throw new ExceptionCollisionHorairesCreneau("Le creneau est en collision avec un autre creneau");
                 }
+
+
                 i++;
             }
         } else {
@@ -58,23 +66,7 @@ public class Jour implements Serializable {
 
 
 
-    private boolean testCrenauCollision(Creneau creneauA, Creneau creneauB) {
 
-        if (
-                timeCollision(creneauA.getDebut(), creneauA.getFin(), creneauB.getDebut()) ||
-                        timeCollision(creneauA.getDebut(), creneauA.getFin(), creneauB.getFin()) ||
-                        timeCollision(creneauB.getDebut(), creneauB.getFin(), creneauA.getDebut()) ||
-                        timeCollision(creneauB.getDebut(), creneauB.getFin(), creneauA.getFin())
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    private boolean timeCollision(LocalDateTime startTime, LocalDateTime endTime, LocalDateTime currentTime) {
-        // Cette fonction retourne vrai si currentTime est compris entre startTime et endTime
-        return currentTime.isAfter(startTime) && currentTime.isBefore(endTime);
-    }
 
 
     public void afficherCrenaux() {

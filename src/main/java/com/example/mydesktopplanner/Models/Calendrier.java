@@ -50,4 +50,46 @@ public Calendrier() {
             jour.afficherCrenaux();
         }
     }
+
+    public void ajouterTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
+    //we will save the list of days in case we face an exception and we need the abort the operation
+    TreeMap<LocalDate, Jour> jours = this.jours;
+
+
+    CreneauPeriodique tachePeriodique = tache;
+
+    try {
+        for (int i = 0; i < nbFois; i++) {
+
+            CreneauPeriodique tmp;
+
+            ajouterCreneau(tachePeriodique);
+
+
+            tmp = new CreneauPeriodique(
+                    tachePeriodique.getDebut().plusDays(nJours),
+                    tachePeriodique.getFin().plusDays(nJours),
+                    (TacheSimple) tachePeriodique.getTache()
+            );
+
+            tachePeriodique.setSuivant(tmp);
+            tmp.setPrecedent(tachePeriodique);
+
+            tachePeriodique = tmp;
+
+        }
+    } catch (ExceptionDateInvalide e) {
+        this.jours = jours;
+        throw new ExceptionDateInvalide();
+    } catch (ExceptionCollisionHorairesCreneau e) {
+        this.jours = jours;
+        throw e;
+    } catch (ExceptionDureeInvalide e) {
+        this.jours = jours;
+        throw new RuntimeException(e);
+    }
+
+
+
+    }
 }

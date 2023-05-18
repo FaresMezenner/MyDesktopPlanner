@@ -14,17 +14,17 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 
-public class Main extends Application {
+public class Main {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Authentification/AuthentificationScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-
-    }
+//    @Override
+//    public void start(Stage stage) throws Exception {
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Authentification/AuthentificationScreen.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+//        stage.setTitle("Hello!");
+//        stage.setScene(scene);
+//        stage.show();
+//
+//    }
 
     public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
 
@@ -35,22 +35,39 @@ public class Main extends Application {
 
         //creer 2 hours
         Creneau a = new Creneau(
-                LocalDateTime.now().plusMinutes(3), LocalDateTime.now().plusHours(2)
+                LocalDateTime.of(2023, 07, 19, 22, 13 ),
+                LocalDateTime.of(2023, 07, 19, 23, 10)
         );
 
         //after crenau a with 2 hours another one with 2 hours
         Creneau b = new Creneau(
-                LocalDateTime.now().plusHours(3), LocalDateTime.now().plusHours(5)
+                LocalDateTime.of(2023, 07, 19, 23, 11 ),
+                LocalDateTime.of(2023, 07, 19, 23, 51)
         );
 
         //after crenau a with 1 minute another one with 40 minutes
         Creneau c = new Creneau(
-                LocalDateTime.now().plusMinutes(121), LocalDateTime.now().plusMinutes(161)
+                LocalDateTime.of(2023, 07, 20, 00, 10 ),
+                LocalDateTime.of(2023, 07, 20, 02, 10)
         );
 
         myDesktopPlanner.ajouterCreneau(a);
         myDesktopPlanner.ajouterCreneau(b);
         myDesktopPlanner.ajouterCreneau(c);
+
+        try {
+            myDesktopPlanner.ajouterTachePeriodique(
+                    new CreneauPeriodique(
+                            LocalDateTime.of(2023, 07, 19, 03, 10),
+                            LocalDateTime.of(2023, 07, 19, 05, 10),
+                            new TacheSimple("tache", Duration.ofHours(2), Priorite.HIGH, LocalDateTime.now().plusHours(5), Categorie.HEALTH, false)
+                    ),
+                    1,
+                    4
+            );
+        } catch (ExceptionCollisionHorairesCreneau e){
+            System.out.println("ERROR: " + e.getMessage());
+        }
 
         myDesktopPlanner.afficherCreneaux();
 

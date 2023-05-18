@@ -60,6 +60,10 @@ public class MyDesktopPlanner {
         utilisateur.ajouterTache(tache);
     }
 
+    public void ajouterTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
+        utilisateur.ajouterTachePeriodique(tache, nJours, nbFois);
+    }
+
     public void ajouterPeriode(){
         utilisateur.ajouterPeriode();
     }

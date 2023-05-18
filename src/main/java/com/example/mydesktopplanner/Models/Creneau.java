@@ -6,12 +6,13 @@ import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 // Cette classe contient les informations d'un creaneau
 // Cette classe n'est pas encore finie (il manque les méthodes)
 // TODO: Ajouter l'attribut IsBloque
-public class Creneau implements Decomposable<Void>, Serializable {
+public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Serializable {
 
 
 
@@ -89,8 +90,33 @@ public class Creneau implements Decomposable<Void>, Serializable {
     }
 
     public void afficherCreneau() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         System.out.println("\n\n\n ------- crenau affiche ------- ");
-        System.out.println("Debut : " + this.debut + " Fin : " + this.fin);
+        System.out.println("Debut : " + dtf.format(this.debut) + " Fin : " + dtf.format(this.fin) );
+    }
+
+
+    @Override
+    public boolean isColliding(Creneau creneau) {
+
+        if (
+                timeCollision(getDebut(), getFin(), creneau.getDebut()) ||
+                        timeCollision(getDebut(), getFin(), creneau.getFin()) ||
+                        timeCollision(creneau.getDebut(), creneau.getFin(), getDebut()) ||
+                        timeCollision(creneau.getDebut(), creneau.getFin(), getFin()) ||
+                        getDebut().isEqual(creneau.getDebut()) ||
+                        getFin().isEqual(creneau.getFin())
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean timeCollision(LocalDateTime startTime, LocalDateTime endTime, LocalDateTime currentTime) {
+        // Cette fonction retourne vrai si currentTime est compris entre startTime et endTime
+        return currentTime.isAfter(startTime) && currentTime.isBefore(endTime);
     }
 }
 
