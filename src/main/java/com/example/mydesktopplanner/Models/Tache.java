@@ -1,12 +1,13 @@
 package com.example.mydesktopplanner.Models;// Cette classe contiens les informations d'une tache
 // Cette classe n'est pas encore finie (il manque les méthodes)
 
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 
-public abstract class Tache implements Serializable {
+public abstract class Tache implements Serializable, Comparable<Tache> {
     private String nom;
     private Duration duree;
     private Priorite priorite;
@@ -89,8 +90,27 @@ public abstract class Tache implements Serializable {
         System.out.println("Catégorie : "+categorie);
         System.out.println("Etat : "+etat);
         System.out.println("Est décomposable : "+isDecomposable());
-    };
+    }
 
 
+    // Fonction qui permet de comparer deux taches
+    // la comparaison se fait en fonction de la priorité et de la date limite
+    // Si la priorité est la même , on compare les dates limites
+    @Override
+    public int compareTo(Tache o) {
+        if (this.priorite.ordinal() > o.priorite.ordinal()) {
+            return 1;
+        } else if (this.priorite.ordinal() < o.priorite.ordinal()) {
+            return -1;
+        } else {
+            if (dateLimite.isAfter(o.getDateLimite())) {
+                return 1;
+            } else if (dateLimite.isBefore(o.getDateLimite())) {
+                return -1;
+            } else {
+                return 0;
+            }
 
+        }
+    }
 }

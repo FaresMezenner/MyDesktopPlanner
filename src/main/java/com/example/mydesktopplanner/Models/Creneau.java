@@ -16,7 +16,7 @@ public class Creneau implements Decomposable<Void>, Serializable {
 
 
     private LocalDateTime debut,fin;
-    private boolean libre;
+    private boolean libre, blocked;
     private Tache tache;
 
 
@@ -35,6 +35,46 @@ public class Creneau implements Decomposable<Void>, Serializable {
         this.tache = null;
 
 
+    }
+
+    public LocalDateTime getDebut() {
+        return debut;
+    }
+
+    public void setDebut(LocalDateTime debut) {
+        this.debut = debut;
+    }
+
+    public LocalDateTime getFin() {
+        return fin;
+    }
+
+    public void setFin(LocalDateTime fin) {
+        this.fin = fin;
+    }
+
+    public boolean isLibre() {
+        return libre;
+    }
+
+    public void setLibre(boolean libre) {
+        this.libre = libre;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public Tache getTache() {
+        return tache;
+    }
+
+    public void setTache(Tache tache) {
+        this.tache = tache;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class Utilisateur {
     private Calendrier calendrier = new Calendrier();
     private int[] badges;
     private ArrayList<Projet> projets = new ArrayList<>();
-    private int nbMinimalTachesParJour;         // Pour l'attribution des badges (lire l'ennoncé)
+    private int nbMinimalTachesParJourBadgeGood = 5;         // Pour l'attribution des badges (lire l'ennoncé)
 
     public Utilisateur(String pseudo) {
         this.pseudo = pseudo;
@@ -118,15 +118,26 @@ public class Utilisateur {
     }
 
     public int getNbMinimalTachesParJour() {
-        return nbMinimalTachesParJour;
+        return nbMinimalTachesParJourBadgeGood;
     }
 
     public void setNbMinimalTachesParJour(int nbMinimalTachesParJour) {
-        this.nbMinimalTachesParJour = nbMinimalTachesParJour;
+        this.nbMinimalTachesParJourBadgeGood = nbMinimalTachesParJour;
     }
 
 
     public void ajouterTache(Tache tache) {
+        int i = 0;
+        for (Tache t : unscheduledTaches) {
+            if (t.compareTo(tache) > 0) {
+                unscheduledTaches.add(i, tache);
+                 break;
+            }
+            i++;
+        }
+        if (i == unscheduledTaches.size()) {
+            unscheduledTaches.add(tache);
+        }
     }
 }
 
