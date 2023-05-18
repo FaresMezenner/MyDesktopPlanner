@@ -104,9 +104,9 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
             return -1;
         } else {
             if (dateLimite.isAfter(o.getDateLimite())) {
-                return 1;
-            } else if (dateLimite.isBefore(o.getDateLimite())) {
                 return -1;
+            } else if (dateLimite.isBefore(o.getDateLimite())) {
+                return 1;
             } else {
                 return 0;
             }

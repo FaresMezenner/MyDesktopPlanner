@@ -12,7 +12,7 @@ public class Utilisateur {
     private int nbEncouragements;
     private Jour jourRentable;
     private LocalDateTime[] tempsCategories;
-    private Duration tempsMinCreneau;
+    private Duration tempsMinCreneau = Duration.ofMinutes(30);
 
     //TODO: tache periodique
     private LinkedList<Tache> unscheduledTaches = new LinkedList<>();
@@ -129,7 +129,7 @@ public class Utilisateur {
     public void ajouterTache(Tache tache) {
         int i = 0;
         for (Tache t : unscheduledTaches) {
-            if (t.compareTo(tache) > 0) {
+            if (t.compareTo(tache) <= 0) {
                 unscheduledTaches.add(i, tache);
                  break;
             }

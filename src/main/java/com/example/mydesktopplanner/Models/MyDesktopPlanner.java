@@ -14,8 +14,12 @@ public class MyDesktopPlanner {
     public static MyDesktopPlanner instance = null;
 
 
-    static void initiateInstance(Utilisateur utilisateur) {
-        instance = new MyDesktopPlanner(utilisateur);
+    public static MyDesktopPlanner initiateInstance(Utilisateur utilisateur) {
+        if (instance == null) {
+            instance = new MyDesktopPlanner(utilisateur);
+            return instance;
+        }
+        else return instance;
     }
 
     public static MyDesktopPlanner getInstance() {
@@ -52,6 +56,18 @@ public class MyDesktopPlanner {
 
     public void ajouterTache(Tache tache){
         utilisateur.ajouterTache(tache);
+    }
+
+    public void afficherTaches(){
+        for (Tache t : utilisateur.getUnscheduledTaches()) {
+            System.out.println("\n\n\n -------------- tache ---------------- \n\n");
+            System.out.println("Nom : " + t.getNom());
+            System.out.println("Duree : " + t.getDuree());
+            System.out.println("Priorite : " + t.getPriorite());
+            System.out.println("Duraion : " + t.getDuree());
+            System.out.println("Categorie: "+t.getCategorie());
+            System.out.println("Date Limite : " + t.getDateLimite());
+        }
     }
 
 }
