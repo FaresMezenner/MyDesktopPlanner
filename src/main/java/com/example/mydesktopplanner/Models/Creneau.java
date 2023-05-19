@@ -123,6 +123,62 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
         }
     }
 
+    public void ajouterTache(Tache tache){
+        this.tache = tache;
+        this.libre = false;
+
+        // On compare la durée de la tache avec la durée du creneau
+
+    }
+
+    public Duration getDuree(){
+        return Duration.between(this.debut,this.fin);
+    }
+
+    public Creneau decomposer(){
+        // Si la durée de la tache contenue dans le créneau est inférieure a la durée du créneau , ce créneau est décomposé
+        // en deux créneaux , un créneau contenant la tache et un créneau libre
+        if (this.tache == null){return null;}
+        // On teste si la durée de la tache est inférieure a celle du créneau
+        if (this.tache.getDuree().compareTo(this.getDuree()) < 0){
+
+            // Cette méthode change le temps de fin , et retourne le nouveau créneau (si decomplosable) sinon retourne null
+            // Elle se base sur la tache contenue dans le creneau pour déterminer la durée du nouveau creneau
+            // Le nouveau creneau est libre , et a la meme heure de fin que l'ancien
+
+
+            // On teste si la durée du nouveau créneau est supérieure a la durée minimale d'un créneau
+            if (Duration.between(this.getDebut().plus(this.tache.getDuree()),this.getFin()).compareTo(MyDesktopPlanner.getInstance().getTempsMinCreneau()) < 0){
+                System.out.println(" Ce creneau ne peux pas etre décomposé , il est laissé ");
+                return null;
+            }
+            LocalDateTime fin = this.getFin();
+            this.setFin(this.getDebut().plus(this.tache.getDuree()));
+            Creneau creneauLibre = null;
+            try {
+                creneauLibre = new Creneau(this.getFin().plusMinutes(1),fin);
+            } catch (ExceptionDureeInvalide e) {
+                // Cette exception est irréalisable théoriqiement car on a testé que la durée est bien correcte au début
+                throw new RuntimeException(e);
+            }
+            this.libre = false;
+            return creneauLibre;
+        } else {
+            return null;
+        }
+
+
+    }
+
+    public void afficher(){
+        System.out.println("Debut : " + this.debut + " Fin : " + this.fin);
+    }
+
+    public void supprimerTache(){
+        this.tache = null;
+        this.libre = true;
+    }
+
 
 
 }

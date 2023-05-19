@@ -8,6 +8,7 @@ import java.time.*;
 import java.time.LocalDateTime;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
@@ -122,6 +123,45 @@ public Calendrier() {
         }
     }
 
+    public void supprimerPeriode(Periode periode) throws ExceptionPeriodeInexistante{
+        if (periodes.containsKey(periode.getDebut())){
+            periodes.remove(periode.getDebut());
+        }
+        else{
+            throw new ExceptionPeriodeInexistante("La periode n'existe pas");
+        }
+    }
+
+    public HashMap<String,Object> ajouterTacheCreneau(Creneau creneau, Tache tache) throws ExceptionDureeInvalide{
+
+        HashMap<String,Object> map = new HashMap<>();
+        if (tache.isDecomposable()){
+
+            TacheDecomposable tacheDec = (TacheDecomposable) tache;
+            // Si la durée de la tache est plus grande que la durée du creneau
+            if (tache.getDuree().compareTo(creneau.getDuree()) > 0){
+                // On renvoie un HashMap contenant la tache restante
+                TacheDecomposable nouvelle_tache = tacheDec.decomposer(creneau.getDuree());
+                creneau.setTache(tacheDec);
+                map.put("tache",nouvelle_tache);
+            } else{
+                creneau.setTache(tache);
+                Creneau nouveau_creneau = creneau.decomposer();
+                map.put("creneau",nouveau_creneau);
+            }
+            return map;
+        }
+        else{
+            if (tache.getDuree().compareTo(creneau.getDuree()) > 0){
+                throw new ExceptionDureeInvalide("La durée de la tache est plus grande que la durée du creneau");
+            }
+            creneau.setTache(tache);
+            Creneau nouveau_creneau = creneau.decomposer();
+            map.put("creneau",nouveau_creneau);
+            return map;
+        }
+    }
+
 
 
 
@@ -153,4 +193,5 @@ public Calendrier() {
 
 
     }
+
 }

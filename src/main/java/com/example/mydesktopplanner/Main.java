@@ -35,8 +35,8 @@ public class Main {
 
         //creer 2 hours
         Creneau a = new Creneau(
-                LocalDateTime.of(2023, 07, 19, 22, 13 ),
-                LocalDateTime.of(2023, 07, 19, 23, 10)
+                LocalDateTime.of(2023, 07, 19, 22, 00 ),
+                LocalDateTime.of(2023, 07, 19, 23, 00)
         );
 
         //after crenau a with 2 hours another one with 2 hours
@@ -56,43 +56,19 @@ public class Main {
         myDesktopPlanner.ajouterCreneau(c);
 
         CreneauPeriodique creneauPeriodique = null;
-        try {
-            myDesktopPlanner.ajouterTachePeriodique(
-                    creneauPeriodique = new CreneauPeriodique(
-                            LocalDateTime.of(2023, 07, 19, 03, 10),
-                            LocalDateTime.of(2023, 07, 19, 05, 10),
-                            new TacheSimple("tache", Duration.ofHours(2), Priorite.HIGH, LocalDateTime.now().plusHours(5), Categorie.HEALTH, false)
-                    ),
-                    1,
-                    4
-            );
-        } catch (ExceptionCollisionHorairesCreneau e){
-            System.out.println("ERROR: " + e.getMessage());
-        }
+
+        TacheSimple tacheSimple1 = new TacheSimple("Walk",Duration.ofMinutes(20),Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 22, 00 ),Categorie.SPORT,false);
+        TacheSimple tacheSimple2 = new TacheSimple("Revision OPTOE",Duration.ofMinutes(60),Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 22, 00 ),Categorie.SPORT,false);
 
 
-        System.out.println("BEFORE DELETION:   ------------------");
-        myDesktopPlanner.afficherCreneaux();
-
-        myDesktopPlanner.supprimerTachesPeriodique(creneauPeriodique);
-
-
-
-        System.out.println("AFTER DELETION:   ------------------");
-        myDesktopPlanner.afficherCreneaux();
+        TacheDecomposable tacheDecomposable = new TacheDecomposable("Walk",Duration.ofMinutes(20),Priorite.HIGH,LocalDateTime.of(2024, 07, 19, 22, 00 ),Categorie.SPORT,null,1);
+        TacheDecomposable tacheDecomposable2 = new TacheDecomposable("Révision ANAL",Duration.ofMinutes(120),Priorite.HIGH,LocalDateTime.of(2024, 07, 19, 18, 13 ),Categorie.SPORT,null,1);
+        myDesktopPlanner.ajouterTache(tacheDecomposable);
+        myDesktopPlanner.ajouterTache(tacheDecomposable2);
+        myDesktopPlanner.ajouterTache(tacheSimple1);
+        myDesktopPlanner.ajouterTache(tacheSimple2);
 
 
-
-
-
-//        Tache tache2 = new TacheSimple("tache2", Duration.ofHours(2), Priorite.HIGH, LocalDateTime.now().plusHours(3), Categorie.HEALTH, false);
-//        Tache tache = new TacheSimple("tache", Duration.ofHours(2), Priorite.HIGH, LocalDateTime.now().plusHours(5), Categorie.HEALTH, false);
-//
-//        myDesktopPlanner.ajouterTache(tache);
-//        myDesktopPlanner.ajouterTache(tache2);
-//
-//        myDesktopPlanner.afficherTaches();
-
-
+        myDesktopPlanner.afficherHashmap(myDesktopPlanner.affecterTacheCreneau(tacheDecomposable2,a));
     }
 }

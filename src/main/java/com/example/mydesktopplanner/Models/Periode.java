@@ -11,7 +11,7 @@ import java.util.LinkedList;
 // Cette classe concerne les periodes que l'utilisateur pourra spécifier sur son calendrier
 // Cette classe peut etre supprimée
 // LocalDateTime debut LocalDateTime fin
-public class Periode implements Serializable , Collidable<Periode>{
+public class Periode implements Serializable , Collidable<Periode> , Comparable<Periode>{
 
     private LocalDate debut,fin;
 
@@ -75,6 +75,28 @@ public class Periode implements Serializable , Collidable<Periode>{
         System.out.println("Debut : " + debut + " Fin : " + fin);
     }
 
+    @Override
+    public int compareTo(Periode periode) {
+        // Teste si les deux periodes sont identiques
+        if (((this.getDebut().compareTo(periode.getDebut()) == 0) && (this.getFin().compareTo(periode.getFin())) == 0) || this == periode){
+            return 0;
+        }
+        else{
+            // Teste si la periode actuelle est avant la periode argument
+            if (this.getDebut().compareTo(periode.getDebut()) < 0){
+                return -1;
+            }
+            else if (this.getDebut().compareTo(periode.getDebut()) > 0){
+                return 1;
+            }
+            if (this.getFin().compareTo(periode.getFin()) < 0){
+                return -1;
+            }
+            else {
+                return 1;
+            }
+        }
+    }
 
 
 

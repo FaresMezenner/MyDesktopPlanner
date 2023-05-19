@@ -56,9 +56,34 @@ public class TacheDecomposable extends Tache implements Decomposable<Duration> {
         return numeroSousTache+1;
     }
     public TacheDecomposable decomposer(Duration duree) {
-        // Cette methode change juste le nom de la tache pour y ajouter le numéro de sous tache
-        this.setNom(this.getNom() + " "+  Integer.toString(getNumeroSousTache()));
-        return null;
+        // Cette methode change le nom pour y ajouter le numero de la sous-tache
+        // Elle crée une nouvelle tache avec le reste de la durée
+        // Elle retourne la nouvelle tache
+
+
+
+        // On vérifie si la durée de la tache est supérieure a duree
+        if (this.getDuree().compareTo(duree) <= 0) {
+            // Si c'est le cas on retourne null
+            return null;
+        }
+        // On crée une nouvelle tache avec le reste de la durée
+        System.out.println(this.getNumeroSousTache());
+        TacheDecomposable nouvelleTache = new TacheDecomposable(this.getNom() + " "+  Integer.toString(getNumeroSousTache() + 1), this.getDuree().minus(duree), this.getPriorite(), this.getDateLimite(), this.getCategorie(), this, this.incNumeroSousTache());
+        this.suivant = nouvelleTache;
+        System.out.println(nouvelleTache.getNumeroSousTache());
+        // Si la tache est la première sous-tache , on change son nom
+        if (this.getNumeroSousTache() == 1){this.setNom(this.getNom() + " 1");}
+        // On change la durée de la tache actuelle
+        this.setDuree(duree);
+        // On retourne la nouvelle tache
+        return nouvelleTache;
+    }
+
+    public void afficher(){
+        super.afficher();
+        System.out.println("Numero de sous-tache : " + this.getNumeroSousTache());
+
     }
 
 

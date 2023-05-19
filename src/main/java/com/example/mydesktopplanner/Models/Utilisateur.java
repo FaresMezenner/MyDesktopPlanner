@@ -1,14 +1,13 @@
 package com.example.mydesktopplanner.Models;
 
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionPeriode;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Utilisateur {
@@ -210,6 +209,23 @@ public class Utilisateur {
     public void supprimerTachesPeriodique(CreneauPeriodique b) {
         calendrier.supprimerTachesPeriodique(b);
     }
+
+    public void supprimerPeriode(Periode periode) throws ExceptionPeriodeInexistante {
+        calendrier.supprimerPeriode(periode);
+    }
+
+    public HashMap<String,Object> affecterTacheCreneau(Tache tache , Creneau creneau) throws ExceptionDureeInvalide {
+        for (Tache t : unscheduledTaches){
+            if (t.equals(tache)){
+                unscheduledTaches.remove(t);
+                return calendrier.ajouterTacheCreneau(creneau,t);
+            }
+        }
+        System.out.println("Tache non trouvée dans la liste des taches UNSCHEDULED");
+        return null;
+    }
+
+
 }
 
 

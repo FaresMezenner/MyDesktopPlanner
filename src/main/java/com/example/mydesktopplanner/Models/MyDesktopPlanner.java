@@ -1,13 +1,11 @@
 package com.example.mydesktopplanner.Models;
 
 
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionPeriode;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionSaisieInvalide;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 // Cette classe est la classe globale du DesktopPlanner
 // Cette classe n'est pas finie , il manque les methodes.
@@ -83,6 +81,28 @@ public class MyDesktopPlanner {
         for (Tache t : utilisateur.getUnscheduledTaches()) {
             t.afficher();
         }
+    }
+
+    public HashMap<String, Object> affecterTacheCreneau(Tache tache, Creneau creneau) throws ExceptionDureeInvalide {
+        return utilisateur.affecterTacheCreneau(tache, creneau);
+    }
+
+    public void afficherHashmap(HashMap<String, Object> map) {
+        System.out.println(map);
+        if (map == null || map.isEmpty()) {
+            System.out.println("MAP vide");
+            return;
+        }
+        if (map.get("creneau") != null){
+            Creneau creneau = (Creneau) map.get("creneau");
+            creneau.afficher();
+        }
+
+        if (map.get("tache") != null){
+            Tache tache = (Tache) map.get("tache");
+            tache.afficher();
+        }
+
     }
 
     public void afficherCreneaux(){

@@ -19,8 +19,8 @@ peut soit accepter la proposition soit la refuser.
 - Supprimer tache d'un projet                    DONE
 - Ajouter tache UNSCHEDULED                    DONE
 - Supprimer une tache UNSCHEDULED                    DONE
-- Ajouter une periode - Sofiane
-- Supprimer une periode - Sofiane
+- Ajouter une periode - Sofiane              DONE
+- Supprimer une periode - Sofiane            DONE
 - Plannifier une tache - Sofiane
 - Plannifier une liste de taches sur une periode - Sofiane
 - Ajouter un creneau - Fares
