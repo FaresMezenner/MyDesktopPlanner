@@ -154,8 +154,10 @@ public Calendrier() {
         }
     }
     public void supprimerTachesPeriodique(CreneauPeriodique c) {
-        while (c.getPrecedent() != null) {
-            c = c.getPrecedent();
+        CreneauPeriodique tmp = c.getPrecedent();
+        while (tmp.getPrecedent() != null) {
+            supprimerCreneau(tmp);
+            tmp = tmp.getPrecedent();
         }
 
         while (c.getSuivant() != null) {

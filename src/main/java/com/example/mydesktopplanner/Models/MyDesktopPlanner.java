@@ -125,6 +125,11 @@ public class MyDesktopPlanner {
     public void supprimerTachesPeriodique(CreneauPeriodique b) {
         utilisateur.supprimerTachesPeriodique(b);
     }
+
+
+    public void supprimerCreneau(Creneau creneau) {
+        utilisateur.suprimerCreneau(creneau);
+    }
 }
 
 
