@@ -55,6 +55,8 @@ public class TacheDecomposable extends Tache implements Decomposable<Duration> {
     public int incNumeroSousTache(){
         return numeroSousTache+1;
     }
+
+    @Override
     public TacheDecomposable decomposer(Duration duree) {
         // Cette methode change le nom pour y ajouter le numero de la sous-tache
         // Elle crée une nouvelle tache avec le reste de la durée

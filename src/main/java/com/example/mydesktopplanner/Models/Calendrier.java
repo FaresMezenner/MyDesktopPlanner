@@ -146,7 +146,7 @@ public Calendrier() {
                 map.put("tache",nouvelle_tache);
             } else{
                 creneau.setTache(tache);
-                Creneau nouveau_creneau = creneau.decomposer();
+                Creneau nouveau_creneau = creneau.decomposer(null);
                 map.put("creneau",nouveau_creneau);
             }
             return map;
@@ -156,7 +156,7 @@ public Calendrier() {
                 throw new ExceptionDureeInvalide("La durée de la tache est plus grande que la durée du creneau");
             }
             creneau.setTache(tache);
-            Creneau nouveau_creneau = creneau.decomposer();
+            Creneau nouveau_creneau = creneau.decomposer(null);
             map.put("creneau",nouveau_creneau);
             return map;
         }

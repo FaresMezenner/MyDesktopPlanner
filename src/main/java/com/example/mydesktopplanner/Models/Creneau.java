@@ -85,10 +85,6 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
         this.tache = tache;
     }
 
-    @Override
-    public Creneau decomposer(Void args) {
-        return null;
-    }
 
     public void afficherCreneau() {
 
@@ -135,7 +131,9 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
         return Duration.between(this.debut,this.fin);
     }
 
-    public Creneau decomposer(){
+
+    @Override
+    public Creneau decomposer(Void args) {
         // Si la durée de la tache contenue dans le créneau est inférieure a la durée du créneau , ce créneau est décomposé
         // en deux créneaux , un créneau contenant la tache et un créneau libre
         if (this.tache == null){return null;}
