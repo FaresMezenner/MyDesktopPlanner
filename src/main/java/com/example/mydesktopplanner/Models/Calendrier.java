@@ -7,10 +7,7 @@ import java.io.Serializable;
 import java.time.*;
 import java.time.LocalDateTime;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.TreeMap;
+import java.util.*;
 
 // Cette classe contiens les informations du calendrier
 // Cette classe n'est pas finie , il manque les methodes.
@@ -61,7 +58,7 @@ public Calendrier() {
         }
     }
 
-    public void ajouterTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
+    public void plannifierTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
     //we will save the list of days in case we face an exception and we need the abort the operation
     TreeMap<LocalDate, Jour> jours = this.jours;
 
@@ -134,32 +131,7 @@ public Calendrier() {
 
     public HashMap<String,Object> ajouterTacheCreneau(Creneau creneau, Tache tache) throws ExceptionDureeInvalide{
 
-        HashMap<String,Object> map = new HashMap<>();
-        if (tache.isDecomposable()){
-
-            TacheDecomposable tacheDec = (TacheDecomposable) tache;
-            // Si la durée de la tache est plus grande que la durée du creneau
-            if (tache.getDuree().compareTo(creneau.getDuree()) > 0){
-                // On renvoie un HashMap contenant la tache restante
-                TacheDecomposable nouvelle_tache = tacheDec.decomposer(creneau.getDuree());
-                creneau.setTache(tacheDec);
-                map.put("tache",nouvelle_tache);
-            } else{
-                creneau.setTache(tache);
-                Creneau nouveau_creneau = creneau.decomposer(null);
-                map.put("creneau",nouveau_creneau);
-            }
-            return map;
-        }
-        else{
-            if (tache.getDuree().compareTo(creneau.getDuree()) > 0){
-                throw new ExceptionDureeInvalide("La durée de la tache est plus grande que la durée du creneau");
-            }
-            creneau.setTache(tache);
-            Creneau nouveau_creneau = creneau.decomposer(null);
-            map.put("creneau",nouveau_creneau);
-            return map;
-        }
+        return jours.get(creneau.getDebut().toLocalDate()).ajouterTacheCreneau(tache, creneau);
     }
 
 
@@ -194,4 +166,54 @@ public Calendrier() {
 
     }
 
+    /**
+     * this function takes a list of an unscheduled tasks and a period and schedule the tasks in the period
+     * and returns the unscheduled tasks (since in some cases there will be no space to schedule all the tasks)
+     * @param taches
+     * @param periode
+     * @return
+     * @throws ExceptionDureeInvalide
+     * @throws ExceptionCollisionHorairesCreneau
+     */
+    public ArrayList<Tache> plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
+
+
+        //these are used to iterate through the days of the period
+        LocalDate date;
+        Jour jour;
+
+        //this is the task we'll be scheduling, it iterates through the tasks in the parameters
+        Tache tache;
+
+        ArrayList<Tache> unscheduledTaches = new ArrayList<>();
+        for (Tache t : taches) {
+            unscheduledTaches.add(t);
+        }
+
+
+
+        //we'll loop through the tasks and schedule them in the days of the period
+        //at each iteration we'll check if there is still tasks to schedule
+        while ( unscheduledTaches.size() != 0 ) {
+            tache = unscheduledTaches.get(0);
+            date = periode.getDebut();
+
+            while (date.isBefore(periode.getFin()) || date.isEqual(periode.getFin())){
+                jour = jours.get(date);
+
+                //we'll remove the task from unscheduledTasks and schedule it in the day
+                unscheduledTaches.remove(0);
+                if ((tache = jour.plannifierTache(tache)) != null) {
+                    //if scheduling the task returns another task, we'll add it to the unscheduledTasks
+                    //in place of the task we just removed, otherwise we'll keep the next one at the beginning of the list
+                    unscheduledTaches.add(0, tache);
+                } else {
+                    break;
+                }
+
+                date = date.plusDays(1);
+            }
+        }
+        return unscheduledTaches;
+    }
 }

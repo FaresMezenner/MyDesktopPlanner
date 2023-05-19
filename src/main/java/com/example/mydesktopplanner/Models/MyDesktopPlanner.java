@@ -4,8 +4,8 @@ package com.example.mydesktopplanner.Models;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 // Cette classe est la classe globale du DesktopPlanner
 // Cette classe n'est pas finie , il manque les methodes.
@@ -64,8 +64,8 @@ public class MyDesktopPlanner {
         utilisateur.suprimerCreneau(tache);
     }
 
-    public void ajouterTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
-        utilisateur.ajouterTachePeriodique(tache, nJours, nbFois);
+    public void plannifierTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
+        utilisateur.plannifierTachePeriodique(tache, nJours, nbFois);
     }
 
 
@@ -87,6 +87,11 @@ public class MyDesktopPlanner {
         return utilisateur.affecterTacheCreneau(tache, creneau);
     }
 
+    public void plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
+        utilisateur.plannifierTachesPeriode(taches, periode);
+    }
+
+
     public void afficherHashmap(HashMap<String, Object> map) {
         System.out.println(map);
         if (map == null || map.isEmpty()) {
@@ -103,6 +108,10 @@ public class MyDesktopPlanner {
             tache.afficher();
         }
 
+    }
+
+    public LinkedList<Tache> getUnscheduledTaches(){
+        return utilisateur.getUnscheduledTaches();
     }
 
     public void afficherCreneaux(){

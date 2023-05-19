@@ -98,7 +98,4 @@ public class Periode implements Serializable , Collidable<Periode> , Comparable<
         }
     }
 
-
-
-
 }

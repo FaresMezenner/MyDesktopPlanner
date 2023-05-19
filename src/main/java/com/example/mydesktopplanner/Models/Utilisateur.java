@@ -133,9 +133,9 @@ public class Utilisateur {
     public void ajouterTache(Tache tache) {
         int i = 0;
         for (Tache t : unscheduledTaches) {
-            if (t.compareTo(tache) <= 0) {
+            if (tache.compareTo(t) > 0) {
                 unscheduledTaches.add(i, tache);
-                 break;
+                break;
             }
             i++;
         }
@@ -198,8 +198,8 @@ public class Utilisateur {
         calendrier.afficherCrenaux();
     }
 
-    public void ajouterTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
-        calendrier.ajouterTachePeriodique(tache, nJours, nbFois);
+    public void plannifierTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
+        calendrier.plannifierTachePeriodique(tache, nJours, nbFois);
     }
 
     public void suprimerCreneau(Creneau tache) {
@@ -214,18 +214,42 @@ public class Utilisateur {
         calendrier.supprimerPeriode(periode);
     }
 
+
+    /**
+     * WARNING: THIS METHOD TAKES THE REAL INSTANCES OF THE tache, NOT COPIES
+     * @param tache
+     * @param creneau
+     */
     public HashMap<String,Object> affecterTacheCreneau(Tache tache , Creneau creneau) throws ExceptionDureeInvalide {
-        for (Tache t : unscheduledTaches){
-            if (t.equals(tache)){
-                unscheduledTaches.remove(t);
-                return calendrier.ajouterTacheCreneau(creneau,t);
-            }
-        }
-        System.out.println("Tache non trouvée dans la liste des taches UNSCHEDULED");
-        return null;
+        unscheduledTaches.remove(tache);
+        return calendrier.ajouterTacheCreneau(creneau,tache);
     }
 
 
+    public void plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
+
+        ArrayList<Tache> unscheduledTaches = calendrier.plannifierTachesPeriode(taches, periode);
+
+        for (Tache unscheduledTache : unscheduledTaches) {
+
+            // On ajoute les taches non planifiées à la liste des taches non planifiées de l'utilisateur
+            if (!this.unscheduledTaches.contains(unscheduledTache)) {
+                ajouterTache(unscheduledTache);
+            }
+
+
+        }
+
+
+        //on supprime les taches planifiées de la liste des taches non planifiées de l'utilisateur
+        for (Tache unscheduledTache : taches.stream().toList()) {
+            if (!unscheduledTaches.contains(unscheduledTache)) {
+                this.unscheduledTaches.remove(unscheduledTache);
+            }
+        }
+
+
+    }
 }
 
 

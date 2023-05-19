@@ -86,12 +86,6 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
     }
 
 
-    public void afficherCreneau() {
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        System.out.println("\n\n\n ------- crenau affiche ------- ");
-        System.out.println("Debut : " + dtf.format(this.debut) + " Fin : " + dtf.format(this.fin) );
-    }
 
 
     @Override
@@ -169,7 +163,11 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
     }
 
     public void afficher(){
-        System.out.println("Debut : " + this.debut + " Fin : " + this.fin);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        System.out.println("\n\n\n ------- crenau affiche ------- ");
+        System.out.println("Debut : " + dtf.format(this.debut) + " Fin : " + dtf.format(this.fin) + "Libre: " + isLibre() );
+        if (tache != null) tache.afficher();
     }
 
     public void supprimerTache(){

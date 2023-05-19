@@ -111,7 +111,7 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
             System.out.println("Nom : " + getNom());
             System.out.println("Duree : " + getDuree());
             System.out.println("Priorite : " + getPriorite());
-            System.out.println("Duraion : " + getDuree());
+            System.out.println("Etat : " + getEtat());
             System.out.println("Categorie: "+getCategorie());
             System.out.println("Date Limite : " + getDateLimite());
         
