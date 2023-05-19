@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class Main {
@@ -75,14 +76,30 @@ public class Main {
                 Categorie.SPORT,
                 false
         );
+        TacheSimple tacheSimple4 = new TacheSimple(
+                "Dying2",
+                Duration.ofMinutes(21),
+                Priorite.MEDIUM,LocalDateTime.of(2023, 07, 19, 22, 00 ),
+                Categorie.SPORT,
+                false
+        );
+        TacheSimple tacheSimple5 = new TacheSimple(
+                "Dying3",
+                Duration.ofMinutes(21),
+                Priorite.MEDIUM,LocalDateTime.of(2023, 07, 19, 22, 00 ),
+                Categorie.SPORT,
+                false
+        );
 
-        TacheDecomposable tacheDecomposable = new TacheDecomposable("Walk",Duration.ofMinutes(20),Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 22, 00 ),Categorie.SPORT,null,1);
+        TacheDecomposable tacheDecomposable = new TacheDecomposable("Walk",Duration.ofMinutes(80),Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 22, 00 ),Categorie.SPORT,null,1);
         TacheDecomposable tacheDecomposable2 = new TacheDecomposable("Révision ANAL",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 18, 13 ),Categorie.SPORT,null,1);
         myDesktopPlanner.ajouterTache(tacheDecomposable);
         myDesktopPlanner.ajouterTache(tacheDecomposable2);
         myDesktopPlanner.ajouterTache(tacheSimple1);
         myDesktopPlanner.ajouterTache(tacheSimple2);
         myDesktopPlanner.ajouterTache(tacheSimple3);
+        myDesktopPlanner.ajouterTache(tacheSimple4);
+        myDesktopPlanner.ajouterTache(tacheSimple5);
 
 
 //        System.out.println("\n\n -------- returned deco ------------");
@@ -96,9 +113,12 @@ public class Main {
                 );
 
 
+//        myDesktopPlanner.plannifierTachesPeriode(new LinkedList<>(List.of(new Tache[]{tacheDecomposable})),
+//                new Periode(LocalDate.of(2023, 07, 19 ),LocalDate.of(2023, 07, 20))
+//        );
         myDesktopPlanner.afficherCreneaux();
 
-        myDesktopPlanner.afficherTaches();
+//        myDesktopPlanner.afficherTaches();
 
 
 

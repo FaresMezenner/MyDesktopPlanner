@@ -71,9 +71,8 @@ public class Jour implements Serializable {
 
                 if (!creneauIt.isColliding(creneau)) {
                     if (creneauIt.compareTo(creneau) > 0) {
-                        i--;
                         creneaux.add(i, creneau);
-                        break;
+                        return;
 
                     }
                 } else {
@@ -177,7 +176,7 @@ public class Jour implements Serializable {
                     Creneau newCreneau = (Creneau) map.get("creneau");
                     ajouterCreneau(newCreneau);
                     return null;
-                } else if ( (t = (Tache) map.get("taches")) == null){
+                } else if ( (t = (Tache) map.get("tache")) == null){
                     return null;
                 }
             }

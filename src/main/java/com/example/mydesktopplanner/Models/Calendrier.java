@@ -191,31 +191,48 @@ public Calendrier() {
         for (Tache t : taches) {
             unscheduledTaches.add(t);
         }
+        ArrayList<Tache> secheduledTaches = new ArrayList<>();
 
 
 
         //we'll loop through the tasks and schedule them in the days of the period
         //at each iteration we'll check if there is still tasks to schedule
-        while ( unscheduledTaches.size() != 0 ) {
-            tache = unscheduledTaches.get(0);
+        int i = 0;
+        while ( i != unscheduledTaches.size() ) {
+
+            tache = unscheduledTaches.get(i);
             date = periode.getDebut();
 
             while (date.isBefore(periode.getFin()) || date.isEqual(periode.getFin())){
+                System.out.println("HEY");
                 jour = jours.get(date);
 
-                //we'll remove the task from unscheduledTasks and schedule it in the day
-                unscheduledTaches.remove(0);
-                if ((tache = jour.plannifierTache(tache)) != null) {
+                //we'll add the task to scheduledTasks and schedule it in the day
+
+                Tache old = tache;
+                tache = jour.plannifierTache(tache);
+                if (tache != null && tache != old) {
                     //if scheduling the task returns another task, we'll add it to the unscheduledTasks
-                    //in place of the task we just removed, otherwise we'll keep the next one at the beginning of the list
-                    unscheduledTaches.add(0, tache);
-                } else {
+                    //exactly after the task we were scheduling
+                    secheduledTaches.add(old);
+                    unscheduledTaches.add(i+1, tache);
+                    break;
+                } else if (tache == null) {
+
+                    secheduledTaches.add(old);
                     break;
                 }
 
                 date = date.plusDays(1);
             }
+            i++;
         }
+        for (Tache t : secheduledTaches) {
+            if (unscheduledTaches.contains(t)) {
+                unscheduledTaches.remove(t);
+            }
+        }
+
         return unscheduledTaches;
     }
 }

@@ -130,6 +130,10 @@ public class MyDesktopPlanner {
     public void supprimerCreneau(Creneau creneau) {
         utilisateur.suprimerCreneau(creneau);
     }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
 }
 
 

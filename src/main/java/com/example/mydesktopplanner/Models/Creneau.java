@@ -140,7 +140,7 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
 
 
             // On teste si la durée du nouveau créneau est supérieure a la durée minimale d'un créneau
-            if (Duration.between(this.getDebut().plus(this.tache.getDuree()),this.getFin()).compareTo(MyDesktopPlanner.getInstance().getTempsMinCreneau()) < 0){
+            if (Duration.between(this.getDebut().plus(this.tache.getDuree().plusMinutes(1)),this.getFin()).compareTo(MyDesktopPlanner.getInstance().getTempsMinCreneau()) < 0){
                 System.out.println(" Ce creneau ne peux pas etre décomposé , il est laissé ");
                 return null;
             }
@@ -151,7 +151,7 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
                 creneauLibre = new Creneau(this.getFin().plusMinutes(1),fin);
             } catch (ExceptionDureeInvalide e) {
                 // Cette exception est irréalisable théoriqiement car on a testé que la durée est bien correcte au début
-                throw new RuntimeException(e);
+                throw new RuntimeException("Erreur lors de la décomposition du creneau");
             }
             this.libre = false;
             return creneauLibre;

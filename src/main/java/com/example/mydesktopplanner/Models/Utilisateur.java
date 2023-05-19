@@ -230,7 +230,9 @@ public class Utilisateur {
 
         ArrayList<Tache> unscheduledTaches = calendrier.plannifierTachesPeriode(taches, periode);
 
+
         for (Tache unscheduledTache : unscheduledTaches) {
+
 
             // On ajoute les taches non planifiées à la liste des taches non planifiées de l'utilisateur
             if (!this.unscheduledTaches.contains(unscheduledTache)) {

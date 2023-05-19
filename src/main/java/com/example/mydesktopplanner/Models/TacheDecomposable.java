@@ -71,7 +71,7 @@ public class TacheDecomposable extends Tache implements Decomposable<Duration> {
         }
         // On crée une nouvelle tache avec le reste de la durée
         System.out.println(this.getNumeroSousTache());
-        TacheDecomposable nouvelleTache = new TacheDecomposable(this.getNom() + " "+  Integer.toString(getNumeroSousTache() + 1), this.getDuree().minus(duree), this.getPriorite(), this.getDateLimite(), this.getCategorie(), this, this.incNumeroSousTache());
+        TacheDecomposable nouvelleTache = new TacheDecomposable(this.getNom() + " "+  Integer.toString(getNumeroSousTache() + 1), this.getDuree().minus(duree).minusMinutes(1), this.getPriorite(), this.getDateLimite(), this.getCategorie(), this, this.incNumeroSousTache());
         this.suivant = nouvelleTache;
         System.out.println(nouvelleTache.getNumeroSousTache());
         // Si la tache est la première sous-tache , on change son nom
