@@ -116,6 +116,7 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
 
     public void ajouterTache(Tache tache){
         this.tache = tache;
+        this.tache.setEtat(Etat.NOTREALIZED);
         this.libre = false;
 
         // On compare la durée de la tache avec la durée du creneau
@@ -179,6 +180,15 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
     public LocalDate getDate(){
         return this.getDebut().toLocalDate();
     }
+
+    public Tache dissocierTache(){
+        Tache tache = this.tache;
+        tache.setEtat(Etat.UNSCHEDULED);
+        this.tache = null;
+        this.libre = true;
+        return tache;
+    }
+
 
 
 

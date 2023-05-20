@@ -28,9 +28,6 @@ public class MyDesktopPlanner {
         return instance;
     }
 
-
-
-
     private  Utilisateur utilisateur;
 
 
@@ -38,8 +35,6 @@ public class MyDesktopPlanner {
     private MyDesktopPlanner(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
-
-
 
     public static boolean isAlphaNumeric(String string) {
         // Renvoies vrai si string est alphanumérique
@@ -68,7 +63,6 @@ public class MyDesktopPlanner {
         utilisateur.plannifierTachePeriodique(tache, nJours, nbFois);
     }
 
-
     public void ajouterPeriode(Periode periode) throws ExceptionDateInvalide , ExceptionCollisionPeriode {
         utilisateur.ajouterPeriode(periode);
     }
@@ -83,8 +77,8 @@ public class MyDesktopPlanner {
         }
     }
 
-    public HashMap<String, Object> affecterTacheCreneau(Tache tache, Creneau creneau) throws ExceptionDureeInvalide {
-        return utilisateur.affecterTacheCreneau(tache, creneau);
+    public void affecterTacheCreneau(Tache tache, Creneau creneau) throws ExceptionDureeInvalide {
+        utilisateur.affecterTacheCreneau(tache, creneau);
     }
 
     public void plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
@@ -146,6 +140,38 @@ public class MyDesktopPlanner {
     public int attribuerFelicitationsBadges(Creneau creneau){
         return utilisateur.attribuerFelicitationsBadges(creneau);
     }
+
+    public void supprimerTacheProjet(Projet projet , Creneau creneau , Tache tache){
+        utilisateur.supprimerTacheProjet(projet,creneau,tache);
+    }
+
+    public void ajouterProjet(Projet projet){
+        utilisateur.ajouterProjet(projet);
+    }
+
+    public void supprimerProjet(Projet projet){
+        utilisateur.supprimerProjet(projet);
+    }
+
+    public void dissocierTacheCreneau(Creneau creneau){
+        utilisateur.dissocierTacheCreneau(creneau);
+    }
+
+    public void supprimerPeriode(Periode periode) throws ExceptionPeriodeInexistante{
+        utilisateur.supprimerPeriode(periode);
+    }
+
+    public void supprimerTacheUnscheduled(Tache tache){
+        utilisateur.supprimerTacheUnscheduled(tache);
+    }
+
+
+
+
+
+
+
+
 }
 
 

@@ -64,14 +64,18 @@ public class Main {
                 LocalDateTime.of(2023, 07, 5, 13, 10)
         );
 
+        Creneau f = new Creneau(
+                LocalDateTime.of(2023, 8, 5, 12, 10 ),
+                LocalDateTime.of(2023, 8, 5, 13, 10)
+        );
+
 
         myDesktopPlanner.ajouterCreneau(a);
         myDesktopPlanner.ajouterCreneau(b);
         myDesktopPlanner.ajouterCreneau(c);
         myDesktopPlanner.ajouterCreneau(d);
         myDesktopPlanner.ajouterCreneau(e);
-
-
+        myDesktopPlanner.ajouterCreneau(f);
 
 
 
@@ -83,6 +87,7 @@ public class Main {
         Tache tacheSimple3 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
         Tache tacheSimple4 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
         Tache tacheSimple5 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple6 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
 
 
         myDesktopPlanner.ajouterTache(tacheSimple1);
@@ -90,13 +95,15 @@ public class Main {
         myDesktopPlanner.ajouterTache(tacheSimple3);
         myDesktopPlanner.ajouterTache(tacheSimple4);
         myDesktopPlanner.ajouterTache(tacheSimple5);
+        myDesktopPlanner.ajouterTache(tacheSimple6);
 
 
         myDesktopPlanner.affecterTacheCreneau(tacheSimple1,a);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,b);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,c);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,d);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,e);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple2,b);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple3,c);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple4,d);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple5,e);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple6,f);
 
         myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
         myDesktopPlanner.attribuerFelicitationsBadges(a);
@@ -112,6 +119,9 @@ public class Main {
 
         myDesktopPlanner.changerEtatTache(e,Etat.COMPLETED);
         myDesktopPlanner.attribuerFelicitationsBadges(e);
+
+        myDesktopPlanner.changerEtatTache(f,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(f);
 
 
 

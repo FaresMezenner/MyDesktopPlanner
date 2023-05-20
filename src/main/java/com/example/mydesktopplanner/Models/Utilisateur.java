@@ -21,7 +21,7 @@ public class Utilisateur {
     //TODO: tache periodique
     private LinkedList<Tache> unscheduledTaches = new LinkedList<>();
     private Calendrier calendrier = new Calendrier();
-    private int[] badges = new int[3];
+    private int[] badges = {0,0,0};
     private ArrayList<Projet> projets = new ArrayList<>();
     private int nbMinimalTachesParJourBadgeGood = 5;         // Pour l'attribution des badges (lire l'ennoncé)
 
@@ -157,11 +157,6 @@ public class Utilisateur {
 
     }
 
-    public void ajouterTacheProjet(Tache tache, Projet projet) {
-        unscheduledTaches.add(tache);
-        projet.ajouterTache(tache);
-
-    }
 
     public void ajouterProjet(Projet projet) {
         projets.add(projet);
@@ -169,6 +164,14 @@ public class Utilisateur {
 
     public void supprimerProjet(Projet projet) {
         projets.remove(projet);
+    }
+
+    public void dissocierTacheCreneau(Creneau creneau) {
+        // Dissocie la tache d'un créneau et la rend UNSCHEDULED
+        if (creneau == null || creneau.getTache() == null) {
+            return;
+        }
+        ajouterTache(creneau.dissocierTache());
     }
 
     public void afficher(){
@@ -215,9 +218,28 @@ public class Utilisateur {
      * @param tache
      * @param creneau
      */
-    public HashMap<String,Object> affecterTacheCreneau(Tache tache , Creneau creneau) throws ExceptionDureeInvalide {
+    public void affecterTacheCreneau(Tache tache , Creneau creneau) throws ExceptionDureeInvalide {
+        // Affecte une tâche à un créneau et la retire des taches non planifiées
+        // Affecte le créneau restant (si il existe) a la liste des créneaux et affecte la tache décomposée (si elle existe) dans la liste des taches
         unscheduledTaches.remove(tache);
-        return calendrier.ajouterTacheCreneau(creneau,tache);
+        HashMap<String,Object> map = calendrier.ajouterTacheCreneau(creneau,tache);
+
+        Tache nouvelle_tache = (Tache) map.get("tache");
+        Creneau nouveau_creneau = (Creneau) map.get("creneau");
+
+        if (nouvelle_tache != null) {
+            unscheduledTaches.add(nouvelle_tache);
+        }
+        if (nouveau_creneau != null) {
+            try {
+                calendrier.ajouterCreneau(nouveau_creneau);
+                // Les exceptions suivantes sont théoriquement impossibles.
+            } catch (ExceptionDateInvalide e) {
+                throw new RuntimeException(e);
+            } catch (ExceptionCollisionHorairesCreneau e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 
@@ -233,7 +255,6 @@ public class Utilisateur {
             if (!this.unscheduledTaches.contains(unscheduledTache)) {
                 ajouterTache(unscheduledTache);
             }
-
 
         }
 
@@ -256,14 +277,6 @@ public class Utilisateur {
     public void supprimerTacheProjet(Projet projet , Creneau creneau , Tache tache){
         // Supprimer tache Projet
         projet.supprimerTache(tache);
-        unscheduledTaches.remove(tache);
-        if (creneau != null){
-            creneau.setTache(null);
-            creneau.setLibre(true);
-        }
-    }
-
-    public void supprimerTache(Tache tache , Creneau creneau){
         unscheduledTaches.remove(tache);
         if (creneau != null){
             creneau.setTache(null);
