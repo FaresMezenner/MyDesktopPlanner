@@ -4,6 +4,7 @@ package com.example.mydesktopplanner.Models;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -129,7 +130,7 @@ public class MyDesktopPlanner {
         return utilisateur;
     }
 
-    public void ajouterTacheProjet(Projet projet , Tache tache){
+    public void ajouterTacheProjet(Projet projet , Creneau tache){
         utilisateur.ajouterTacheProjet(projet,tache);
     }
 
@@ -170,7 +171,7 @@ public class MyDesktopPlanner {
     }
 
     public void plannifierTacheAutomatiquement(Tache tache) throws ExceptionPlannificationImpossible {
-        utilisateur.plannifierTacheAutomatiquement(tache);
+        utilisateur.plannifierTacheAutomatiquement(tache, LocalDate.now());
     }
 
 

@@ -1,14 +1,18 @@
 package com.example.mydesktopplanner.Models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.TreeMap;
+
 // Cette classe contiens les informations d'un projet
 // Cette classe n'est pas finie , il manque les methodes.
 public class Projet implements Serializable {
     private String nom,description;
-    private ArrayList<Tache> taches;
+    private TreeMap<LocalDateTime,Creneau> taches;
 
-    public Projet(String nom, String description, ArrayList<Tache> taches) {
+    public Projet(String nom, String description, TreeMap<LocalDateTime,Creneau> taches) {
         this.nom = nom;
         this.description = description;
         this.taches = taches;
@@ -31,18 +35,18 @@ public class Projet implements Serializable {
         this.description = description;
     }
 
-    public ArrayList<Tache> getTaches() {
+    public TreeMap<LocalDateTime,Creneau> getTaches() {
         return taches;
     }
 
-    public void setTaches(ArrayList<Tache> taches) {
+    public void setTaches(TreeMap<LocalDateTime,Creneau> taches) {
         this.taches = taches;
     }
 
     // -------------------------------------- Delimitation Setters/Getters --------------------------------------
 
-    public void ajouterTache(Tache tache) {
-        taches.add(tache);
+    public void ajouterTache(Creneau tache) {
+        taches.put(tache.getDebut(),tache);
     }
 
 
@@ -55,8 +59,8 @@ public class Projet implements Serializable {
         System.out.println("Nom : "+nom);
         System.out.println("Description : "+description);
         System.out.println("Taches : ");
-        for(Tache tache : taches){
-            System.out.println(tache.getNom());
+        for(Creneau tache : taches.values()){
+            System.out.println(tache.getTache().getNom());
         }
     }
 

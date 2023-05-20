@@ -275,8 +275,7 @@ public class Utilisateur {
 
     }
 
-    public void ajouterTacheProjet(Projet projet , Tache tache){
-        ajouterTache(tache);
+    public void ajouterTacheProjet(Projet projet , Creneau tache){
         projet.ajouterTache(tache);
     }
 
@@ -391,8 +390,8 @@ public class Utilisateur {
     calendrier.updateEtatTaches();
     }
 
-    public void plannifierTacheAutomatiquement(Tache tache) throws ExceptionPlannificationImpossible {
-        ArrayList<Creneau> creneaux = calendrier.getCreneauxIntervalle(LocalDate.now(), calendrier.getDernierJour().getDate());
+    public void plannifierTacheAutomatiquement(Tache tache,LocalDate date) throws ExceptionPlannificationImpossible {
+        ArrayList<Creneau> creneaux = calendrier.getCreneauxIntervalle(date, calendrier.getDernierJour().getDate());
 
         // On filtre les creneaux pour obtenir que ceux qui sont libres , pour ne pas tout parcourir
         List<Creneau> creneauxLibres = creneaux.stream().filter(Creneau::isLibre).collect(Collectors.toList());
