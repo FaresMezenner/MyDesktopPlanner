@@ -2,6 +2,8 @@ package com.example.mydesktopplanner.Models;// Cette classe contiens les informa
 // Cette classe n'est pas encore finie (il manque les méthodes)
 
 
+import javafx.scene.control.skin.TableColumnHeader;
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -134,4 +136,7 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
     		this.etat = Etat.NOTREALIZED;
     	}
     }
+
+    // Cette méthode permet de sauvegarder une tache dans une nouvelle tache
+
 }

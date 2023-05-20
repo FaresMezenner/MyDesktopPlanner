@@ -275,6 +275,63 @@ public Calendrier() {
         Tache.setLastUpdateTime(LocalDateTime.now());
     }
 
+    //cette fonction prend une periode et re-planifie tout les tach non blockées dans cette periode
+    // et renvoie la liste des taches qui n'ont pas été planifiées
+    public ArrayList<Tache> rePlanifier(Periode periode, boolean aleatoir) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
+
+
+
+
+        ArrayList<Tache> unscheduledTaches = new ArrayList<>();
+
+        LocalDate date = periode.getDebut();
+
+        Jour jour = jours.get(date);
+        Tache tache;
+        //we'll unschedule all the tasks in the period
+        while (date.isBefore(periode.getFin()) || date.isEqual(periode.getFin())){
+
+            for (Creneau c : jour.getCreneaux()){
+                //if the creneau is not blocked and not free, we'll unschedule its task and free it
+                if (!c.isLibre() && !c.isBlocked()){
+                    tache = c.getTache();
+                    ajouterTache(tache, unscheduledTaches);
+                    tache.setEtat(Etat.UNSCHEDULED);
+
+                    c.setLibre(true);
+                    c.setTache(null);
+                }
+            }
+
+            date.plusDays(1);
+        }
+
+        //we'll schedule the unscheduled tasks
+
+        if (!aleatoir) return plannifierTachesPeriode(new LinkedList<>(unscheduledTaches), periode);
+        else {
+            Collections.shuffle(unscheduledTaches);
+            unscheduledTaches = plannifierTachesPeriode(new LinkedList<>(unscheduledTaches), periode);
+            return unscheduledTaches;
+        }
+    }
+
+
+
+    private void ajouterTache(Tache tache, ArrayList<Tache> unscheduledTaches) {
+        int i = 0;
+        for (Tache t : unscheduledTaches) {
+            if (tache.compareTo(t) > 0) {
+                unscheduledTaches.add(i, tache);
+                break;
+            }
+            i++;
+        }
+        if (i == unscheduledTaches.size()) {
+            unscheduledTaches.add(tache);
+        }
+    }
+
 
 
 

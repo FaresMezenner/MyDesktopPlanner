@@ -6,7 +6,14 @@ import java.time.LocalDateTime;
 public class TacheDecomposable extends Tache implements Decomposable<Duration> {
 
     private int numeroSousTache = 1;
-    private TacheDecomposable precedent,suivant;
+    private TacheDecomposable precedent = null,suivant = null;
+
+    public TacheDecomposable(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie, TacheDecomposable precedent, TacheDecomposable suivant, int numeroSousTache) {
+        super(nom, duree, priorite, dateLimite, categorie);
+        this.numeroSousTache = numeroSousTache;
+        this.precedent = precedent;
+        this.suivant = suivant;
+    }
 
     public TacheDecomposable(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie, TacheDecomposable precedent, int numeroSousTache) {
         super(nom, duree, priorite, dateLimite, categorie);
@@ -71,7 +78,7 @@ public class TacheDecomposable extends Tache implements Decomposable<Duration> {
         }
         // On crée une nouvelle tache avec le reste de la durée
         System.out.println(this.getNumeroSousTache());
-        TacheDecomposable nouvelleTache = new TacheDecomposable(this.getNom() + " "+  Integer.toString(getNumeroSousTache() + 1), this.getDuree().minus(duree).minusMinutes(1), this.getPriorite(), this.getDateLimite(), this.getCategorie(), this, this.incNumeroSousTache());
+        TacheDecomposable nouvelleTache = new TacheDecomposable(this.getNom() + " "+  Integer.toString(getNumeroSousTache() + 1), this.getDuree().minus(duree).minusMinutes(1), this.getPriorite(), this.getDateLimite(), this.getCategorie(), this,this.suivant, this.incNumeroSousTache());
         this.suivant = nouvelleTache;
         System.out.println(nouvelleTache.getNumeroSousTache());
         // Si la tache est la première sous-tache , on change son nom
@@ -87,7 +94,6 @@ public class TacheDecomposable extends Tache implements Decomposable<Duration> {
         System.out.println("Numero de sous-tache : " + this.getNumeroSousTache());
 
     }
-
 
 
 }

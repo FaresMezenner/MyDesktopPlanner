@@ -2,13 +2,14 @@ package com.example.mydesktopplanner.Models;
 
 import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Utilisateur {
+public class Utilisateur implements Serializable {
     private String pseudo;
     private float rendementJournalier , rendementPeriode;
     private int nbEncouragements;
@@ -412,10 +413,5 @@ public class Utilisateur {
     }
         throw new ExceptionPlannificationImpossible("Aucun creneau disponible");
     }
-
-
-
-
-
 
 }
