@@ -16,6 +16,10 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
 
     private Etat etat = Etat.UNSCHEDULED;
 
+
+    // When running the app for the first time , the lastUpdateTime is set to 2000-01-01 00:00
+    private static LocalDateTime lastUpdateTime = LocalDateTime.of(2000,1,1,0,0);    // Cette variable sert a modifier l'etat des taches , (In progress -> Not realized)
+
     public Tache(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie) {
         this.nom = nom;
         this.duree = duree;
@@ -75,6 +79,15 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+
+    public static LocalDateTime getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public static void setLastUpdateTime(LocalDateTime lastUpdateTime) {
+        Tache.lastUpdateTime = lastUpdateTime;
+    }
+
     // -------------------------------------- Delimitation Setters/Getters --------------------------------------
 
     abstract boolean isDecomposable();  // Retourne vrai si la tache est décomposable , faux sinon
@@ -113,5 +126,12 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
             System.out.println("Categorie: "+getCategorie());
             System.out.println("Date Limite : " + getDateLimite());
         
+    }
+
+    public void syncEtat() {
+        // Permets de mettre a jour l'etat des taches in progress quand leur deadline est dépassée
+    	if (this.etat == Etat.INPROGRESS && this.dateLimite.isBefore(LocalDateTime.now())) {
+    		this.etat = Etat.NOTREALIZED;
+    	}
     }
 }

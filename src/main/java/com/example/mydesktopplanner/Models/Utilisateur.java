@@ -5,10 +5,8 @@ import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Utilisateur {
     private String pseudo;
@@ -218,9 +216,16 @@ public class Utilisateur {
      * @param tache
      * @param creneau
      */
-    public void affecterTacheCreneau(Tache tache , Creneau creneau) throws ExceptionDureeInvalide {
+    public void affecterTacheCreneau( Creneau creneau,Tache tache ) throws ExceptionDureeInvalide, ExceptionCreneauNonLibre {
         // Affecte une tâche à un créneau et la retire des taches non planifiées
         // Affecte le créneau restant (si il existe) a la liste des créneaux et affecte la tache décomposée (si elle existe) dans la liste des taches
+        if (tache == null || creneau == null) {
+            return;
+        }
+        if (!creneau.isLibre()){
+            throw new ExceptionCreneauNonLibre("Le créneau n'est pas libre , Dissociez la tache avant");
+        }
+
         unscheduledTaches.remove(tache);
         HashMap<String,Object> map = calendrier.ajouterTacheCreneau(creneau,tache);
 
@@ -229,6 +234,7 @@ public class Utilisateur {
 
         if (nouvelle_tache != null) {
             unscheduledTaches.add(nouvelle_tache);
+            return;
         }
         if (nouveau_creneau != null) {
             try {
@@ -379,6 +385,33 @@ public class Utilisateur {
         } catch (ExceptionDateInvalide e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateEtatTaches(){
+    calendrier.updateEtatTaches();
+    }
+
+    public void plannifierTacheAutomatiquement(Tache tache) throws ExceptionPlannificationImpossible {
+        ArrayList<Creneau> creneaux = calendrier.getCreneauxIntervalle(LocalDate.now(), calendrier.getDernierJour().getDate());
+
+        // On filtre les creneaux pour obtenir que ceux qui sont libres , pour ne pas tout parcourir
+        List<Creneau> creneauxLibres = creneaux.stream().filter(Creneau::isLibre).collect(Collectors.toList());
+        if (!creneauxLibres.isEmpty() && !(creneauxLibres == null)){
+            for (Creneau creneau : creneauxLibres) {
+                    try {
+                        try {
+                            affecterTacheCreneau(creneau, tache);
+                            return;
+                        } catch (ExceptionCreneauNonLibre e) {
+                        // On essaye de plannifier une atche dans un creneau deja occupe , on ne fait rien
+                        }
+                        } catch (ExceptionDureeInvalide e) {
+                        // On essaye de plannifier une tache simple dans un créneau plus petit , on ne fait rien
+                        }
+
+        }
+    }
+        throw new ExceptionPlannificationImpossible("Aucun creneau disponible");
     }
 
 

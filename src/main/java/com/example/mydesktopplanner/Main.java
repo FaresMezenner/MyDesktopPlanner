@@ -2,6 +2,7 @@ package com.example.mydesktopplanner;
 
 import com.example.mydesktopplanner.Models.*;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCreneauNonLibre;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInvalide;
 import javafx.application.Application;
@@ -98,13 +99,17 @@ public class Main {
         myDesktopPlanner.ajouterTache(tacheSimple6);
 
 
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,a);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple2,b);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple3,c);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple4,d);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple5,e);
-        myDesktopPlanner.affecterTacheCreneau(tacheSimple6,f);
 
+        try {
+        myDesktopPlanner.affecterTacheCreneau(a, tacheSimple1);
+        myDesktopPlanner.affecterTacheCreneau(b, tacheSimple2);
+        myDesktopPlanner.affecterTacheCreneau(c, tacheSimple3);
+        myDesktopPlanner.affecterTacheCreneau(d, tacheSimple4);
+        myDesktopPlanner.affecterTacheCreneau(e, tacheSimple5);
+        myDesktopPlanner.affecterTacheCreneau(f, tacheSimple6);
+        } catch (ExceptionCreneauNonLibre ex) {
+            throw new RuntimeException(ex);
+        }
         myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
         myDesktopPlanner.attribuerFelicitationsBadges(a);
 
@@ -124,6 +129,10 @@ public class Main {
         myDesktopPlanner.attribuerFelicitationsBadges(f);
 
 
+
+        myDesktopPlanner.updateEtatTaches();
+
+        System.out.println(Tache.getLastUpdateTime());
 
 
     }

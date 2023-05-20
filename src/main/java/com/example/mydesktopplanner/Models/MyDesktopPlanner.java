@@ -77,8 +77,8 @@ public class MyDesktopPlanner {
         }
     }
 
-    public void affecterTacheCreneau(Tache tache, Creneau creneau) throws ExceptionDureeInvalide {
-        utilisateur.affecterTacheCreneau(tache, creneau);
+    public void affecterTacheCreneau(Creneau creneau,Tache tache) throws ExceptionDureeInvalide, ExceptionCreneauNonLibre {
+        utilisateur.affecterTacheCreneau(creneau, tache);
     }
 
     public void plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
@@ -163,6 +163,14 @@ public class MyDesktopPlanner {
 
     public void supprimerTacheUnscheduled(Tache tache){
         utilisateur.supprimerTacheUnscheduled(tache);
+    }
+
+    public void updateEtatTaches(){
+        utilisateur.updateEtatTaches();
+    }
+
+    public void plannifierTacheAutomatiquement(Tache tache) throws ExceptionPlannificationImpossible {
+        utilisateur.plannifierTacheAutomatiquement(tache);
     }
 
 

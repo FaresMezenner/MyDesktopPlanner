@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 // Cette classe contient les informations d'un creaneau
@@ -116,7 +117,7 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
 
     public void ajouterTache(Tache tache){
         this.tache = tache;
-        this.tache.setEtat(Etat.NOTREALIZED);
+        this.tache.setEtat(Etat.INPROGRESS);
         this.libre = false;
 
         // On compare la durée de la tache avec la durée du creneau
@@ -188,6 +189,8 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
         this.libre = true;
         return tache;
     }
+
+
 
 
 

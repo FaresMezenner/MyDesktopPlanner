@@ -241,6 +241,40 @@ public Calendrier() {
     }
 
 
+    public ArrayList<Creneau> getCreneauxIntervalle(LocalDate debut , LocalDate fin){
+        // Cette méthode renvoie la liste des creneaux de l'intervalle donné
+        ArrayList<Creneau> creneaux = new ArrayList<>();
+        getJoursIntervalle(debut,fin);
+        for (Jour jour : getJoursIntervalle(debut,fin)) {
+            creneaux.addAll(jour.getCreneaux());
+        }
+        return creneaux;
+    }
+
+
+    public Jour getDernierJour(){
+        // Cette méthode renvoie le dernier jour du calendrier
+        return jours.lastEntry().getValue();
+    }
+    public void updateEtatTaches(){
+        // Extraire le jour avec la date la plus grande :
+        Jour dernierJour = getDernierJour();
+
+        LocalDateTime lastUpdateTime = Tache.getLastUpdateTime();
+
+        ArrayList<Creneau> creneaux= getCreneauxIntervalle(lastUpdateTime.toLocalDate(), dernierJour.getDate());
+
+        for (Creneau creneau : creneaux) {
+            Tache tache = creneau.getTache();
+            if (tache != null) {
+                tache.syncEtat();
+            }
+        }
+
+        Tache.setLastUpdateTime(LocalDateTime.now());
+    }
+
+
 
 
 
