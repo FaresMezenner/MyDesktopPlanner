@@ -5,6 +5,7 @@ import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.io.Serializable;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -173,6 +174,10 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
     public void supprimerTache(){
         this.tache = null;
         this.libre = true;
+    }
+
+    public LocalDate getDate(){
+        return this.getDebut().toLocalDate();
     }
 
 

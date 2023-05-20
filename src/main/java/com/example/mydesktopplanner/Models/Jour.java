@@ -22,6 +22,8 @@ public class Jour implements Serializable {
     private int nbTachesAccomplies = 0;
     private boolean felicitations = false;
 
+    private boolean badgeObtenu = false;
+
 
     public Jour(LocalDate date) throws ExceptionDateInvalide{
         if (date == null || date.isBefore(LocalDateTime.now().toLocalDate())){
@@ -52,12 +54,20 @@ public class Jour implements Serializable {
         this.nbTachesAccomplies = nbTachesAccomplies;
     }
 
-    public boolean isFelicitations() {
+    public boolean getFelicitations() {
         return felicitations;
     }
 
     public void setFelicitations(boolean felicitations) {
         this.felicitations = felicitations;
+    }
+
+    public boolean getBadgeObtenu() {
+        return badgeObtenu;
+    }
+
+    public void setBadgeObtenu(boolean badgeObtenu) {
+        this.badgeObtenu = badgeObtenu;
     }
 
     public void ajouterCreneau(Creneau creneau) throws ExceptionCollisionHorairesCreneau {

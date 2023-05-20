@@ -14,8 +14,6 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
     private LocalDateTime dateLimite;   // Dans ce projet , la limite est une date et non une heure
     private Categorie categorie;
 
-    private LocalDateTime changementEtat; // Sauvegarde la derniére fois que l'etat de la tache a ete modifié
-                                      // C'est fait pour faciliter le calcul des statistiques et l'historique.
     private Etat etat = Etat.UNSCHEDULED;
 
     public Tache(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie) {

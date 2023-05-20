@@ -21,7 +21,7 @@ public class Utilisateur {
     //TODO: tache periodique
     private LinkedList<Tache> unscheduledTaches = new LinkedList<>();
     private Calendrier calendrier = new Calendrier();
-    private int[] badges;
+    private int[] badges = new int[3];
     private ArrayList<Projet> projets = new ArrayList<>();
     private int nbMinimalTachesParJourBadgeGood = 5;         // Pour l'attribution des badges (lire l'ennoncé)
 
@@ -144,7 +144,7 @@ public class Utilisateur {
         }
     }
 
-    public void supprimerTache(Tache tache) {
+    public void supprimerTacheUnscheduled(Tache tache) {
         unscheduledTaches.remove(tache);
     }
 
@@ -161,11 +161,6 @@ public class Utilisateur {
         unscheduledTaches.add(tache);
         projet.ajouterTache(tache);
 
-    }
-
-    public void supprimerTacheProjet(Tache tache, Projet projet) {
-        unscheduledTaches.remove(tache);
-        projet.supprimerTache(tache);
     }
 
     public void ajouterProjet(Projet projet) {
@@ -252,9 +247,130 @@ public class Utilisateur {
 
 
     }
+
+    public void ajouterTacheProjet(Projet projet , Tache tache){
+        ajouterTache(tache);
+        projet.ajouterTache(tache);
+    }
+
+    public void supprimerTacheProjet(Projet projet , Creneau creneau , Tache tache){
+        // Supprimer tache Projet
+        projet.supprimerTache(tache);
+        unscheduledTaches.remove(tache);
+        if (creneau != null){
+            creneau.setTache(null);
+            creneau.setLibre(true);
+        }
+    }
+
+    public void supprimerTache(Tache tache , Creneau creneau){
+        unscheduledTaches.remove(tache);
+        if (creneau != null){
+            creneau.setTache(null);
+            creneau.setLibre(true);
+        }
+    }
+
+
+    public void changerEtatTache(Creneau creneau, Etat etat){
+        if (creneau == null || etat == null){return;}
+        if (!creneau.isLibre()) {
+            Tache tache = creneau.getTache();
+            tache.setEtat(etat);
+            // Always remember to check for greetings when calling this function}
+        }
+        }
+
+
+    public void ajouterBadge(Badge badge){
+        // Cette méthode ajoute un badge à l'utilisateur
+        switch(badge){
+            case GOOD:
+                this.badges[0]++;
+            case VERYGOOD:
+                this.badges[1]++;
+                break;
+            case EXCELLENT:
+                this.badges[2]++;
+                break;
+                default:
+                System.out.println("Choix incorrect");
+                break;
+        }
+    }
+
+    // This method only gets the creneau of the task as a parameter
+    public int attribuerFelicitationsBadges(Creneau creneau){
+        // Cette fonction renvoies 0 si l'utilisateur n'a rien eu
+        // Elle renvoies 1 si l'utilisateur recoit des félicitations
+        // Elle renvoies 2 si l'utilisateur recoit un badge GOOD
+        // Elle renvoie 3 si l'utilisateur recoit un badge VERYGOOD
+        // Elle renvoie 4 si l'utilisateur recoit un badge EXCELLENT
+        Jour jour = calendrier.getJourDate(creneau.getDate());
+        Tache tache = creneau.getTache();
+        Etat etat = tache.getEtat();
+        // On vérifie si l'utilisateur a deja ete félicité
+        if (jour.getFelicitations() || !(etat.equals(Etat.COMPLETED))){return 0;}
+        try {
+            int nbTachesAccomplies= 0;
+            LinkedList<Creneau> creneaux = calendrier.getCreneauxJour(creneau.getDate());
+
+
+            for (Creneau c : creneaux){
+                Tache tacheCreneau = c.getTache();
+                if (tacheCreneau != null){
+                    if (tache.getEtat().equals(Etat.COMPLETED)){
+                        nbTachesAccomplies++;
+                    }
+                }
+            }
+
+            if (nbTachesAccomplies >= getNbMinimalTachesParJour()){
+                // Si on arrive a cette condition , on félicite l'utilisteur
+                jour.setFelicitations(true);
+
+                ArrayList<Jour> jours = calendrier.getJoursIntervalle(creneau.getDate().minusDays(4),creneau.getDate());
+                int felicitation_consecutives = 0;
+                for (Jour jour_felicite : jours){
+                    if (jour_felicite.getFelicitations() == true){ felicitation_consecutives++;}
+                }
+
+                if (felicitation_consecutives == 5){
+                    for (Jour jour_felicite : jours){
+                        jour_felicite.setBadgeObtenu(true);
+                    }
+                    ajouterBadge(Badge.GOOD);
+
+                // On teste pour les badges VERYGOOD et EXCELLENT
+                int[] badges = getBadges();
+                int verygood = badges[0] % 3;
+                int excellent = verygood % 3;
+                // On teste pour le badge VERYGOOD
+
+                if (badges[1] != verygood){
+                    badges[1] = verygood;
+                    setBadges(badges);
+                    if (badges[2] != excellent){
+                        badges[2] = excellent;
+                        setBadges(badges);
+                        System.out.println("Excellent !");
+                        return 4;
+                    }System.out.println("Very GOOD !");
+                    return 3;
+                }System.out.println("GOOD !");
+                return 2;
+            }System.out.println("Felicitations !");
+                return 1;
+        }System.out.println("Rien");
+            return 0;
+        } catch (ExceptionDateInvalide e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
 }
-
-
-
-
-

@@ -235,4 +235,13 @@ public Calendrier() {
 
         return unscheduledTaches;
     }
+
+    public Jour getJourDate(LocalDate date){
+        return jours.get(date);
+    }
+
+
+
+
+
 }

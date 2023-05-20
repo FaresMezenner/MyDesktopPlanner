@@ -45,6 +45,8 @@ public class Projet implements Serializable {
         taches.add(tache);
     }
 
+
+
     public void supprimerTache(Tache tache) {
         taches.remove(tache);
     }

@@ -134,6 +134,18 @@ public class MyDesktopPlanner {
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
+
+    public void ajouterTacheProjet(Projet projet , Tache tache){
+        utilisateur.ajouterTacheProjet(projet,tache);
+    }
+
+    public void changerEtatTache(Creneau creneau , Etat etat){
+        utilisateur.changerEtatTache(creneau,etat);
+    }
+
+    public int attribuerFelicitationsBadges(Creneau creneau){
+        return utilisateur.attribuerFelicitationsBadges(creneau);
+    }
 }
 
 

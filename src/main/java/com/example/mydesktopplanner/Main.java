@@ -36,65 +36,55 @@ public class Main {
 
         MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
 
+        utilisateur.setNbMinimalTachesParJour(1);
+
+
+
         Creneau a = new Creneau(
-                LocalDateTime.of(2023, 07, 19, 22, 00 ),
-                LocalDateTime.of(2023, 07, 19, 23, 10)
+                LocalDateTime.of(2023, 07, 1, 12, 00 ),
+                LocalDateTime.of(2023, 07, 1, 13, 10)
         );
 
         Creneau b = new Creneau(
-                LocalDateTime.of(2023, 07, 19, 23, 11 ),
-                LocalDateTime.of(2023, 07, 19, 23, 51)
+                LocalDateTime.of(2023, 07, 2, 12, 00 ),
+                LocalDateTime.of(2023, 07, 2, 13, 51)
         );
 
         Creneau c = new Creneau(
-                LocalDateTime.of(2023, 07, 20, 00, 10 ),
-                LocalDateTime.of(2023, 07, 20, 02, 10)
+                LocalDateTime.of(2023, 07, 3, 12, 10 ),
+                LocalDateTime.of(2023, 07, 3, 13, 10)
         );
+        Creneau d = new Creneau(
+                LocalDateTime.of(2023, 07, 4, 12, 11 ),
+                LocalDateTime.of(2023, 07, 4, 13, 51)
+        );
+
+        Creneau e = new Creneau(
+                LocalDateTime.of(2023, 07, 5, 12, 10 ),
+                LocalDateTime.of(2023, 07, 5, 13, 10)
+        );
+
 
         myDesktopPlanner.ajouterCreneau(a);
         myDesktopPlanner.ajouterCreneau(b);
         myDesktopPlanner.ajouterCreneau(c);
-
-//        myDesktopPlanner.afficherCreneaux();
-
-        CreneauPeriodique creneauPeriodique = null;
-
-        TacheSimple tacheSimple1 = new TacheSimple(
-                "Walk",
-                Duration.ofMinutes(21),
-                Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 22, 00 ),
-                Categorie.SPORT,
-                false
-        );
-        TacheSimple tacheSimple2 = new TacheSimple("Revision OPTOE",Duration.ofMinutes(60),Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 22, 00 ),Categorie.SPORT,false);
+        myDesktopPlanner.ajouterCreneau(d);
+        myDesktopPlanner.ajouterCreneau(e);
 
 
-        TacheSimple tacheSimple3 = new TacheSimple(
-                "Dying",
-                Duration.ofMinutes(21),
-                Priorite.MEDIUM,LocalDateTime.of(2023, 07, 19, 22, 00 ),
-                Categorie.SPORT,
-                false
-        );
-        TacheSimple tacheSimple4 = new TacheSimple(
-                "Dying2",
-                Duration.ofMinutes(21),
-                Priorite.MEDIUM,LocalDateTime.of(2023, 07, 19, 22, 00 ),
-                Categorie.SPORT,
-                false
-        );
-        TacheSimple tacheSimple5 = new TacheSimple(
-                "Dying3",
-                Duration.ofMinutes(21),
-                Priorite.MEDIUM,LocalDateTime.of(2023, 07, 19, 22, 00 ),
-                Categorie.SPORT,
-                false
-        );
 
-        TacheDecomposable tacheDecomposable = new TacheDecomposable("Walk",Duration.ofMinutes(80),Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 22, 00 ),Categorie.SPORT,null,1);
-        TacheDecomposable tacheDecomposable2 = new TacheDecomposable("Révision ANAL",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2023, 07, 19, 18, 13 ),Categorie.SPORT,null,1);
-        myDesktopPlanner.ajouterTache(tacheDecomposable);
-        myDesktopPlanner.ajouterTache(tacheDecomposable2);
+
+
+
+
+
+        Tache tacheSimple1 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple2 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple3 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple4 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple5 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+
+
         myDesktopPlanner.ajouterTache(tacheSimple1);
         myDesktopPlanner.ajouterTache(tacheSimple2);
         myDesktopPlanner.ajouterTache(tacheSimple3);
@@ -102,23 +92,26 @@ public class Main {
         myDesktopPlanner.ajouterTache(tacheSimple5);
 
 
-//        System.out.println("\n\n -------- returned deco ------------");
-//        myDesktopPlanner.afficherHashmap(myDesktopPlanner.affecterTacheCreneau(tacheDecomposable2,a));
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,a);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,b);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,c);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,d);
+        myDesktopPlanner.affecterTacheCreneau(tacheSimple1,e);
 
+        myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(a);
 
-//        myDesktopPlanner.afficherCreneaux();
+        myDesktopPlanner.changerEtatTache(b,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(b);
 
-        myDesktopPlanner.plannifierTachesPeriode(myDesktopPlanner.getUnscheduledTaches(),
-                new Periode(LocalDate.of(2023, 07, 19 ),LocalDate.of(2023, 07, 20))
-                );
+        myDesktopPlanner.changerEtatTache(c,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(c);
 
+        myDesktopPlanner.changerEtatTache(d,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(d);
 
-//        myDesktopPlanner.plannifierTachesPeriode(new LinkedList<>(List.of(new Tache[]{tacheDecomposable})),
-//                new Periode(LocalDate.of(2023, 07, 19 ),LocalDate.of(2023, 07, 20))
-//        );
-        myDesktopPlanner.afficherCreneaux();
-
-//        myDesktopPlanner.afficherTaches();
+        myDesktopPlanner.changerEtatTache(e,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(e);
 
 
 
