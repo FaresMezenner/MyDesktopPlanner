@@ -416,7 +416,9 @@ public class Utilisateur implements Serializable {
     }
 
     public void updateEtatTaches(){
-    calendrier.updateEtatTaches(this.lastUpdateTachesTime);
+
+        calendrier.updateEtatTaches(this.lastUpdateTachesTime);
+        setLastUpdateTachesTime(LocalDateTime.now());
     }
 
     public void plannifierTacheAutomatiquement(Tache tache,LocalDate date) throws ExceptionPlannificationImpossible {

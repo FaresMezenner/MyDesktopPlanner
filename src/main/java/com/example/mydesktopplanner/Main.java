@@ -39,104 +39,104 @@ public class Main extends Application{
 
         Utilisateur utilisateur = new Utilisateur("user");
 
-        MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
-//
-//        utilisateur.setNbMinimalTachesParJour(1);
-//
-//
-//
-//        Creneau a = new Creneau(
-//                LocalDateTime.of(2023, 07, 1, 12, 00 ),
-//                LocalDateTime.of(2023, 07, 1, 13, 10)
-//        );
-//
-//        Creneau b = new Creneau(
-//                LocalDateTime.of(2023, 07, 2, 12, 00 ),
-//                LocalDateTime.of(2023, 07, 2, 13, 51)
-//        );
-//
-//        Creneau c = new Creneau(
-//                LocalDateTime.of(2023, 07, 3, 12, 10 ),
-//                LocalDateTime.of(2023, 07, 3, 13, 10)
-//        );
-//        Creneau d = new Creneau(
-//                LocalDateTime.of(2023, 07, 4, 12, 11 ),
-//                LocalDateTime.of(2023, 07, 4, 13, 51)
-//        );
-//
-//        Creneau e = new Creneau(
-//                LocalDateTime.of(2023, 07, 5, 12, 10 ),
-//                LocalDateTime.of(2023, 07, 5, 13, 10)
-//        );
-//
-//        Creneau f = new Creneau(
-//                LocalDateTime.of(2023, 8, 5, 12, 10 ),
-//                LocalDateTime.of(2023, 8, 5, 13, 10)
-//        );
-//
-//
-//        myDesktopPlanner.ajouterCreneau(a);
-//        myDesktopPlanner.ajouterCreneau(b);
-//        myDesktopPlanner.ajouterCreneau(c);
-//        myDesktopPlanner.ajouterCreneau(d);
-//        myDesktopPlanner.ajouterCreneau(e);
-//        myDesktopPlanner.ajouterCreneau(f);
-//
-//
-//
-//
-//
-//
-//        Tache tacheSimple1 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-//        Tache tacheSimple2 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-//        Tache tacheSimple3 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-//        Tache tacheSimple4 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-//        Tache tacheSimple5 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-//        Tache tacheSimple6 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-//
-//
-//        myDesktopPlanner.ajouterTache(tacheSimple1);
-//        myDesktopPlanner.ajouterTache(tacheSimple2);
-//        myDesktopPlanner.ajouterTache(tacheSimple3);
-//        myDesktopPlanner.ajouterTache(tacheSimple4);
-//        myDesktopPlanner.ajouterTache(tacheSimple5);
-//        myDesktopPlanner.ajouterTache(tacheSimple6);
-//
-//
-//
-//        try {
-//        myDesktopPlanner.affecterTacheCreneau(a, tacheSimple1);
-//        myDesktopPlanner.affecterTacheCreneau(b, tacheSimple2);
-//        myDesktopPlanner.affecterTacheCreneau(c, tacheSimple3);
-//        myDesktopPlanner.affecterTacheCreneau(d, tacheSimple4);
-//        myDesktopPlanner.affecterTacheCreneau(e, tacheSimple5);
-//        myDesktopPlanner.affecterTacheCreneau(f, tacheSimple6);
-//        } catch (ExceptionCreneauNonLibre ex) {
-//            throw new RuntimeException(ex);
-//        }
-//        myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
-//        myDesktopPlanner.attribuerFelicitationsBadges(a);
-//
-//        myDesktopPlanner.changerEtatTache(b,Etat.COMPLETED);
-//        myDesktopPlanner.attribuerFelicitationsBadges(b);
-//
-//        myDesktopPlanner.changerEtatTache(c,Etat.COMPLETED);
-//        myDesktopPlanner.attribuerFelicitationsBadges(c);
-//
-//        myDesktopPlanner.changerEtatTache(d,Etat.COMPLETED);
-//        myDesktopPlanner.attribuerFelicitationsBadges(d);
-//
-//        myDesktopPlanner.changerEtatTache(e,Etat.COMPLETED);
-//        myDesktopPlanner.attribuerFelicitationsBadges(e);
-//
-//        myDesktopPlanner.changerEtatTache(f,Etat.COMPLETED);
-//        myDesktopPlanner.attribuerFelicitationsBadges(f);
-//
-//
-//
-//        myDesktopPlanner.updateEtatTaches();
-//
-//        System.out.println(Tache.getLastUpdateTime());
+       MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
+
+        utilisateur.setNbMinimalTachesParJour(1);
+
+
+
+        Creneau a = new Creneau(
+                LocalDateTime.of(2023, 07, 1, 12, 00 ),
+                LocalDateTime.of(2023, 07, 1, 13, 10)
+        );
+
+        Creneau b = new Creneau(
+                LocalDateTime.of(2023, 07, 2, 12, 00 ),
+                LocalDateTime.of(2023, 07, 2, 13, 51)
+        );
+
+        Creneau c = new Creneau(
+                LocalDateTime.of(2023, 07, 3, 12, 10 ),
+                LocalDateTime.of(2023, 07, 3, 13, 10)
+        );
+        Creneau d = new Creneau(
+                LocalDateTime.of(2023, 07, 4, 12, 11 ),
+                LocalDateTime.of(2023, 07, 4, 13, 51)
+        );
+
+        Creneau e = new Creneau(
+                LocalDateTime.of(2023, 07, 5, 12, 10 ),
+                LocalDateTime.of(2023, 07, 5, 13, 10)
+        );
+
+        Creneau f = new Creneau(
+                LocalDateTime.of(2023, 8, 5, 12, 10 ),
+                LocalDateTime.of(2023, 8, 5, 13, 10)
+        );
+
+
+        myDesktopPlanner.ajouterCreneau(a);
+        myDesktopPlanner.ajouterCreneau(b);
+        myDesktopPlanner.ajouterCreneau(c);
+        myDesktopPlanner.ajouterCreneau(d);
+        myDesktopPlanner.ajouterCreneau(e);
+        myDesktopPlanner.ajouterCreneau(f);
+
+
+
+
+
+
+        Tache tacheSimple1 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple2 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple3 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple4 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple5 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple6 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+
+
+        myDesktopPlanner.ajouterTache(tacheSimple1);
+        myDesktopPlanner.ajouterTache(tacheSimple2);
+        myDesktopPlanner.ajouterTache(tacheSimple3);
+        myDesktopPlanner.ajouterTache(tacheSimple4);
+        myDesktopPlanner.ajouterTache(tacheSimple5);
+        myDesktopPlanner.ajouterTache(tacheSimple6);
+
+
+
+        try {
+        myDesktopPlanner.affecterTacheCreneau(a, tacheSimple1);
+        myDesktopPlanner.affecterTacheCreneau(b, tacheSimple2);
+        myDesktopPlanner.affecterTacheCreneau(c, tacheSimple3);
+        myDesktopPlanner.affecterTacheCreneau(d, tacheSimple4);
+        myDesktopPlanner.affecterTacheCreneau(e, tacheSimple5);
+        myDesktopPlanner.affecterTacheCreneau(f, tacheSimple6);
+        } catch (ExceptionCreneauNonLibre ex) {
+            throw new RuntimeException(ex);
+        }
+        myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(a);
+
+        myDesktopPlanner.changerEtatTache(b,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(b);
+
+        myDesktopPlanner.changerEtatTache(c,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(c);
+
+        myDesktopPlanner.changerEtatTache(d,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(d);
+
+        myDesktopPlanner.changerEtatTache(e,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(e);
+
+        myDesktopPlanner.changerEtatTache(f,Etat.COMPLETED);
+        myDesktopPlanner.attribuerFelicitationsBadges(f);
+
+
+
+       myDesktopPlanner.updateEtatTaches();
+
+        System.out.println(utilisateur.getLastUpdateTachesTime());
 
 
 //        TacheSimple test = new TacheSimple("test", Duration.ofMinutes(30), Priorite.HIGH, LocalDateTime.of(2021, 7, 1, 12, 00), Categorie.HEALTH, false);
@@ -170,7 +170,7 @@ public class Main extends Application{
 //        System.out.println(utilisateurTest.getUnscheduledTaches().get(0));
 //        System.out.println(utilisateurTest.getProjets().get(0).getTaches().get(0));
 
-
+/**
         Object a = new Object();
         Object b = new Object();
         Object c = new Object();
@@ -191,7 +191,7 @@ public class Main extends Application{
         for (Object o : testLinkedList) {
             System.out.println(o);
         }
-
+**/
 
 
 
