@@ -174,6 +174,10 @@ public class MyDesktopPlanner {
         utilisateur.plannifierTacheAutomatiquement(tache, LocalDate.now());
     }
 
+    public float getRendementPeriode(Periode periode) throws ExceptionPeriodeInexistante{
+       return utilisateur.getRendementPeriode(periode);
+    }
+
 
 
 

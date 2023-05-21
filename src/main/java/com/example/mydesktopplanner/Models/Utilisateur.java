@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 
 public class Utilisateur implements Serializable {
     private String pseudo;
-    private float rendementJournalier , rendementPeriode;
-    private int nbEncouragements;
-    private Jour jourRentable;
-    private LocalDateTime[] tempsCategories;
+    private int[] rendementJournalierArray = {0,0};
+
+    private int nbEncouragements = 0;
+    private Jour jourRentable = null;
+    private LocalDateTime[] tempsCategories = new LocalDateTime[6];
     private Duration tempsMinCreneau = Duration.ofMinutes(30);
 
-    //TODO: tache periodique
     private LinkedList<Tache> unscheduledTaches = new LinkedList<>();
     private Calendrier calendrier = new Calendrier();
     private int[] badges = {0,0,0};
@@ -44,20 +44,19 @@ public class Utilisateur implements Serializable {
     }
 
     public float getRendementJournalier() {
-        return rendementJournalier;
+       if (rendementJournalierArray[1] == 0) {return 0;}
+         return rendementJournalierArray[0] / rendementJournalierArray[1];
     }
 
-    public void setRendementJournalier(float rendementJournalier) {
-        this.rendementJournalier = rendementJournalier;
+    public int[] getRendementJournalierArray() {
+        return rendementJournalierArray;
     }
 
-    public float getRendementPeriode() {
-        return rendementPeriode;
+    public void rendementJournalierArray(int[] rendementJournalier) {
+        this.rendementJournalierArray = rendementJournalier;
     }
 
-    public void setRendementPeriode(float rendementPeriode) {
-        this.rendementPeriode = rendementPeriode;
-    }
+
 
     public int getNbEncouragements() {
         return nbEncouragements;
@@ -157,6 +156,10 @@ public class Utilisateur implements Serializable {
 
     // ----------------------------- Delimitation Gettes / Setters ----------------------------------
 
+    public float getRendementPeriode(Periode periode) throws ExceptionPeriodeInexistante{
+        return calendrier.getRendementPeriode(periode);
+    }
+
     public void ajouterTache(Tache tache) {
         int i = 0;
         for (Tache t : unscheduledTaches) {
@@ -203,8 +206,7 @@ public class Utilisateur implements Serializable {
 
     public void afficher(){
         System.out.println("Pseudo : " + pseudo);
-        System.out.println("Rendement journalier : " + rendementJournalier);
-        System.out.println("Rendement période : " + rendementPeriode);
+        System.out.println("Rendement journalier : " + getRendementJournalier());
         System.out.println("Nombre d'encouragements : " + nbEncouragements);
         System.out.println("Jour rentable : " + jourRentable);
         System.out.println("Temps par catégories : " + tempsCategories);
@@ -346,6 +348,10 @@ public class Utilisateur implements Serializable {
         }
     }
 
+    public void incNbEncouragements(){
+        this.nbEncouragements++;
+    }
+
     // This method only gets the creneau of the task as a parameter
     public int attribuerFelicitationsBadges(Creneau creneau){
         // Cette fonction renvoies 0 si l'utilisateur n'a rien eu
@@ -375,31 +381,32 @@ public class Utilisateur implements Serializable {
             if (nbTachesAccomplies >= getNbMinimalTachesParJour()){
                 // Si on arrive a cette condition , on félicite l'utilisteur
                 jour.setFelicitations(true);
+                incNbEncouragements();
 
                 ArrayList<Jour> jours = calendrier.getJoursIntervalle(creneau.getDate().minusDays(4),creneau.getDate());
                 int felicitation_consecutives = 0;
                 for (Jour jour_felicite : jours){
-                    if (jour_felicite.getFelicitations() == true){ felicitation_consecutives++;}
+                    if ((jour_felicite.getFelicitations() == true) && !(jour_felicite.getBadgeObtenu())){
+                        felicitation_consecutives++;}
                 }
 
-                if (felicitation_consecutives == 5){
+                if (felicitation_consecutives == 5 ){
                     for (Jour jour_felicite : jours){
                         jour_felicite.setBadgeObtenu(true);
                     }
-                    ajouterBadge(Badge.GOOD);
+                    badges[0] = badges[0] + 1;
 
                 // On teste pour les badges VERYGOOD et EXCELLENT
-                int[] badges = getBadges();
-                int verygood = badges[0] % 3;
-                int excellent = verygood % 3;
+                int verygood = badges[0] / 3;
+                int excellent = verygood / 3;
+
+
                 // On teste pour le badge VERYGOOD
 
                 if (badges[1] != verygood){
                     badges[1] = verygood;
-                    setBadges(badges);
                     if (badges[2] != excellent){
                         badges[2] = excellent;
-                        setBadges(badges);
                         System.out.println("Excellent !");
                         return 4;
                     }System.out.println("Very GOOD !");
@@ -417,8 +424,20 @@ public class Utilisateur implements Serializable {
 
     public void updateEtatTaches(){
 
+        // Update l'etat des taches planifiées
         calendrier.updateEtatTaches(this.lastUpdateTachesTime);
+        // Update l'etat des taches UNSCHEDULED
+        for (Tache tache : unscheduledTaches){
+            if (tache.getDateLimite().isBefore(LocalDate.now().atStartOfDay())){
+                tache.setEtat(Etat.NOTREALIZED);
+            }
+        }
         setLastUpdateTachesTime(LocalDateTime.now());
+    }
+
+
+    public void updateStatistiques(){
+
     }
 
     public void plannifierTacheAutomatiquement(Tache tache,LocalDate date) throws ExceptionPlannificationImpossible {
@@ -443,5 +462,8 @@ public class Utilisateur implements Serializable {
     }
         throw new ExceptionPlannificationImpossible("Aucun creneau disponible");
     }
+
+
+
 
 }

@@ -330,7 +330,26 @@ public Calendrier() {
     }
 
 
+    public float getRendementPeriode(Periode periode)throws ExceptionPeriodeInexistante{
+        if (periode == null){throw new ExceptionPeriodeInexistante("Erreur : La periode entrée n'existe pas");}
 
+        ArrayList<Creneau> creneaux = getCreneauxIntervalle(periode.getDebut(),periode.getFin());
+
+        int totalTaches = 0;
+        int totalTachesRealises = 0;
+        for (Creneau creneau : creneaux) {
+            if (creneau.getTache() != null) {
+                totalTaches++;
+                if (creneau.getTache() != null) {
+                    if (creneau.getTache().getEtat().equals(Etat.COMPLETED)) {
+                        totalTachesRealises++;
+                    }
+                }
+            }
+        }
+        if (totalTaches == 0){return 0;}
+        return totalTachesRealises / totalTaches;
+    }
 
 
 
