@@ -270,9 +270,6 @@ public Calendrier() {
                 tache.syncEtat();
             }
         }
-
-
-        lastUpdateTime = LocalDateTime.now();
     }
 
     //cette fonction prend une periode et re-planifie tout les tach non blockées dans cette periode
