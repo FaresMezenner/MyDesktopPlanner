@@ -256,6 +256,7 @@ public Calendrier() {
         // Cette méthode renvoie le dernier jour du calendrier
         return jours.lastEntry().getValue();
     }
+
     public void updateEtatTaches(){
         // Extraire le jour avec la date la plus grande :
         Jour dernierJour = getDernierJour();
