@@ -14,5 +14,6 @@ module com.example.mydesktopplanner {
     opens com.example.mydesktopplanner.Authentification to javafx.fxml;
     exports com.example.mydesktopplanner;
     exports com.example.mydesktopplanner.Models;
+    exports com.example.mydesktopplanner.Control;
 
 }

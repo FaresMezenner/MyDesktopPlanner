@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="650.0" maxWidth="1000.0" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox>
+         <children>
+            <AnchorPane prefHeight="650.0" prefWidth="143.0">
+               <children>
+                  <AnchorPane layoutY="150.0">
+                     <children>
+                        <ScrollPane fx:id="c10" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <Label fx:id="v1" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="d10" layoutX="29.5" layoutY="19.0" text="21. Mai">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="27.1" layoutY="61.0" text="Dimanche">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="500.0" prefWidth="143.0">
+               <children>
+                  <AnchorPane layoutY="150.0">
+                     <children>
+                        <ScrollPane fx:id="c11" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <Label fx:id="v11" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="d11" layoutX="29.5" layoutY="19.0" text="22. Mai">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="47.1" layoutY="61.0" text="Lundi">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="500.0" prefWidth="143.0">
+               <children>
+                  <AnchorPane layoutY="150.0">
+                     <children>
+                        <ScrollPane fx:id="c12" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <Label fx:id="v12" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="d12" layoutX="29.5" layoutY="19.0" text="23. Mai">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="45.5" layoutY="61.0" text="Mardi">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="500.0" prefWidth="143.0">
+               <children>
+                  <AnchorPane layoutY="150.0">
+                     <children>
+                        <ScrollPane fx:id="c13" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <Label fx:id="v13" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="d13" layoutX="29.5" layoutY="19.0" text="24. Mai">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="31.9" layoutY="61.0" text="Mercredi">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="500.0" prefWidth="143.0">
+               <children>
+                  <AnchorPane layoutY="150.0">
+                     <children>
+                        <ScrollPane fx:id="c14" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <Label fx:id="v14" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="d14" layoutX="29.5" layoutY="19.0" text="25. Mai">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="48.7" layoutY="61.0" text="Jeudi">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="500.0" prefWidth="143.0">
+               <children>
+                  <AnchorPane layoutY="150.0">
+                     <children>
+                        <ScrollPane fx:id="c15" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <Label fx:id="v15" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="d15" layoutX="29.5" layoutY="19.0" text="26. Mai">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="31.1" layoutY="61.0" text="Vendredi">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="500.0" prefWidth="143.0">
+               <children>
+                  <AnchorPane layoutY="150.0">
+                     <children>
+                        <ScrollPane fx:id="c16" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <Label fx:id="v16" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="d16" layoutX="29.5" layoutY="19.0" text="27. Mai">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="38.7" layoutY="61.0" text="Samedi">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

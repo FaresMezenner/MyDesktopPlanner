@@ -8,6 +8,7 @@ public class UserManager {
 
 
     private static UserManager instance = new UserManager();
+    private ObjectInputStream in;
 
 
     public static UserManager getInstance() {
@@ -39,8 +40,11 @@ public class UserManager {
             //sinon, on va lire les information de l'utilisateur
             try {
                 FileInputStream fIn = new FileInputStream(file.getPath());
-                ObjectInputStream in = new ObjectInputStream(fIn);
-                return (Utilisateur) in.readObject();
+                in = new ObjectInputStream(fIn);
+                Utilisateur utilisateur = (Utilisateur) in.readObject();
+                fIn.close();
+                in.close();
+                return utilisateur;
             } catch (FileNotFoundException e) {
                 //s'il n'exist pas
                 throw new ExceptionUserDoesNotExist();
@@ -69,6 +73,12 @@ public class UserManager {
             FileOutputStream fOut = new FileOutputStream(FOLDER_PATH + user.getPseudo());
             ObjectOutputStream out = new ObjectOutputStream(fOut);
             out.writeObject(user);
+
+            fOut.flush();
+            out.flush();
+            fOut.close();
+            out.close();
+
         } catch (FileNotFoundException e) {
             throw new ExceptionUserDoesNotExist();
         } catch (IOException e) {

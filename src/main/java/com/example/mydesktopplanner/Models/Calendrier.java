@@ -74,8 +74,8 @@ public Calendrier() {
 
 
             tmp = new CreneauPeriodique(
-                    tachePeriodique.getDebut().plusDays(nJours),
-                    tachePeriodique.getFin().plusDays(nJours),
+                    tachePeriodique.getDebut().plusDays((long) i *nJours),
+                    tachePeriodique.getFin().plusDays((long) i *nJours),
                     (TacheSimple) tachePeriodique.getTache()
             );
 
@@ -300,7 +300,7 @@ public Calendrier() {
                 }
             }
 
-            date.plusDays(1);
+            date = date.plusDays(1);
         }
 
         //we'll schedule the unscheduled tasks

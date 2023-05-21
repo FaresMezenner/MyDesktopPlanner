@@ -50,14 +50,14 @@
                <left>
                   <AnchorPane prefHeight="500.0" prefWidth="400.0" stylesheets="@design-classes.css" BorderPane.alignment="CENTER">
                      <children>
-                        <Button contentDisplay="CENTER" layoutX="95.0" layoutY="308.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Se connecter" textFill="WHITE" textOverrun="CLIP">
+                        <Button fx:id="btn" contentDisplay="CENTER" layoutX="95.0" layoutY="308.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="210.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Se connecter" textFill="WHITE" textOverrun="CLIP">
                            <effect>
                               <ColorAdjust />
                            </effect>
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font></Button>
-                        <TextField alignment="CENTER" layoutX="95.0" layoutY="250.0" prefHeight="26.0" prefWidth="210.0" promptText="Pseudo" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #000000; -fx-background-color: #ffffff;">
+                        <TextField fx:id="pseudo" alignment="CENTER" layoutX="95.0" layoutY="250.0" prefHeight="26.0" prefWidth="210.0" promptText="Pseudo" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #000000; -fx-background-color: #ffffff;">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -72,6 +72,7 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
+                        <AnchorPane fx:id="testA" layoutX="-35.0" layoutY="3.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
                </left>
