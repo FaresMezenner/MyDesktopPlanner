@@ -257,11 +257,10 @@ public Calendrier() {
         return jours.lastEntry().getValue();
     }
 
-    public void updateEtatTaches(){
+    public void updateEtatTaches(LocalDateTime lastUpdateTime){
         // Extraire le jour avec la date la plus grande :
         Jour dernierJour = getDernierJour();
 
-        LocalDateTime lastUpdateTime = Tache.getLastUpdateTime();
 
         ArrayList<Creneau> creneaux= getCreneauxIntervalle(lastUpdateTime.toLocalDate(), dernierJour.getDate());
 
@@ -273,7 +272,7 @@ public Calendrier() {
         }
 
 
-        Tache.setLastUpdateTime(LocalDateTime.now());
+        lastUpdateTime = LocalDateTime.now();
     }
 
     //cette fonction prend une periode et re-planifie tout les tach non blockées dans cette periode

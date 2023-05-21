@@ -24,6 +24,9 @@ public class Utilisateur implements Serializable {
     private ArrayList<Projet> projets = new ArrayList<>();
     private int nbMinimalTachesParJourBadgeGood = 5;         // Pour l'attribution des badges (lire l'ennoncé)
 
+    private  LocalDateTime lastUpdateTachesTime = LocalDateTime.of(2000,1,1,0,0);    // Cette variable sert a modifier l'etat des taches , (In progress -> Not realized)
+
+    private LocalDateTime lastUpdateStatisticsTime = LocalDateTime.of(2000,1,1,0,0);    // Cette variable sert a modifier statistiques
     public Utilisateur(String pseudo) {
         this.pseudo = pseudo;
     }
@@ -127,6 +130,31 @@ public class Utilisateur implements Serializable {
     public void setNbMinimalTachesParJour(int nbMinimalTachesParJour) {
         this.nbMinimalTachesParJourBadgeGood = nbMinimalTachesParJour;
     }
+
+    public int getNbMinimalTachesParJourBadgeGood() {
+        return nbMinimalTachesParJourBadgeGood;
+    }
+
+    public void setNbMinimalTachesParJourBadgeGood(int nbMinimalTachesParJourBadgeGood) {
+        this.nbMinimalTachesParJourBadgeGood = nbMinimalTachesParJourBadgeGood;
+    }
+
+    public LocalDateTime getLastUpdateTachesTime() {
+        return lastUpdateTachesTime;
+    }
+
+    public void setLastUpdateTachesTime(LocalDateTime lastUpdateTachesTime) {
+        this.lastUpdateTachesTime = lastUpdateTachesTime;
+    }
+
+    public LocalDateTime getLastUpdateStatisticsTime() {
+        return lastUpdateStatisticsTime;
+    }
+
+    public void setLastUpdateStatisticsTime(LocalDateTime lastUpdateStatisticsTime) {
+        this.lastUpdateStatisticsTime = lastUpdateStatisticsTime;
+    }
+
     // ----------------------------- Delimitation Gettes / Setters ----------------------------------
 
     public void ajouterTache(Tache tache) {
@@ -388,7 +416,7 @@ public class Utilisateur implements Serializable {
     }
 
     public void updateEtatTaches(){
-    calendrier.updateEtatTaches();
+    calendrier.updateEtatTaches(this.lastUpdateTachesTime);
     }
 
     public void plannifierTacheAutomatiquement(Tache tache,LocalDate date) throws ExceptionPlannificationImpossible {

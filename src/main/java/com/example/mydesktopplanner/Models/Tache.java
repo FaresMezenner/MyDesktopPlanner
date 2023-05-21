@@ -20,7 +20,6 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
 
 
     // When running the app for the first time , the lastUpdateTime is set to 2000-01-01 00:00
-    private static LocalDateTime lastUpdateTime = LocalDateTime.of(2000,1,1,0,0);    // Cette variable sert a modifier l'etat des taches , (In progress -> Not realized)
 
     public Tache(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie) {
         this.nom = nom;
@@ -82,13 +81,6 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
         this.categorie = categorie;
     }
 
-    public static LocalDateTime getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public static void setLastUpdateTime(LocalDateTime lastUpdateTime) {
-        Tache.lastUpdateTime = lastUpdateTime;
-    }
 
     // -------------------------------------- Delimitation Setters/Getters --------------------------------------
 
