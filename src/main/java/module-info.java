@@ -12,8 +12,10 @@ module com.example.mydesktopplanner {
 
     opens com.example.mydesktopplanner to javafx.fxml;
     opens com.example.mydesktopplanner.Authentification to javafx.fxml;
+    opens com.example.mydesktopplanner.View to javafx.fxml;
     exports com.example.mydesktopplanner;
     exports com.example.mydesktopplanner.Models;
     exports com.example.mydesktopplanner.Control;
+    exports com.example.mydesktopplanner.View;
 
 }

@@ -16,7 +16,6 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
     private Priorite priorite;
     private LocalDate dateLimite;   // Dans ce projet , la limite est une date et non une heure
     private Categorie categorie;
-
     private Etat etat = Etat.UNSCHEDULED;
 
 

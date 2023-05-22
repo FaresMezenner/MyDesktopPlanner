@@ -23,11 +23,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Authentification/AuthentificationScreen.fxml"));
+        System.out.println(getClass().getResource("RightSidePanelTaches.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RightSidePanelTaches.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        TextField pseudoField =  (TextField) scene.lookup("#pseudo");
-        Button button = (Button) scene.lookup("#btn");
-        button.setOnAction(new Authentification(pseudoField, stage));
+
 //        button.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
 //            public void handle(ActionEvent actionEvent) {

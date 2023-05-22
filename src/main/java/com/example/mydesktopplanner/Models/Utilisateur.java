@@ -464,7 +464,6 @@ public class Utilisateur implements Serializable {
                 } catch (ExceptionDureeInvalide e) {
                 // On essaye de plannifier une tache simple dans un créneau plus petit , on ne fait rien
                 }
-
         }
     }
         throw new ExceptionPlannificationImpossible("Aucun creneau disponible");
