@@ -25,7 +25,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         System.out.println(getClass().getResource("Main.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Authentification/AuthentificationScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AjouterTache.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 //        button.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
@@ -65,7 +65,7 @@ public class Main extends Application {
     public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau, IOException, ClassNotFoundException, ExceptionCollisionPeriode, ExceptionUserDoesNotExist {
 
 
-
+        launch(args);
 
         Utilisateur utilisateur = new Utilisateur("fares");
 
@@ -93,6 +93,7 @@ public class Main extends Application {
                 LocalDateTime.of(2023, 05, 31, 12, 00 ),
                 LocalDateTime.of(2023, 05, 31, 13, 51)
         );
+
 //
 //        myDesktopPlanner.ajouterCreneau(a);
 //        myDesktopPlanner.ajouterCreneau(b);
