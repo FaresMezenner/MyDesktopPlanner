@@ -74,6 +74,7 @@ public class MainView extends Stage {
 
 
     public void update() throws IOException {
+        emptyRightSidePannel();
         calendarView.update();
         hudView.update();
         sidePanelView.update();

@@ -26,7 +26,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <TextField layoutX="50.0" layoutY="138.0" prefHeight="26.0" prefWidth="242.0" promptText="Nom de la tache" style="-fx-background-color: ffffff;">
+      <TextField fx:id="name" layoutX="50.0" layoutY="138.0" prefHeight="26.0" prefWidth="242.0" promptText="Nom de la tache" style="-fx-background-color: ffffff;">
          <font>
             <Font size="15.0" />
          </font>
@@ -36,7 +36,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <DatePicker layoutX="51.0" layoutY="336.0" prefHeight="30.0" prefWidth="242.0" />
+      <DatePicker fx:id="DeadlineDatePicker" layoutX="51.0" layoutY="336.0" prefHeight="30.0" prefWidth="242.0" />
       <Text layoutX="50.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie " wrappingWidth="81.52501678466797">
          <font>
             <Font size="16.0" />
@@ -66,31 +66,31 @@
          </font>
       </Text>
       <Text layoutX="91.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Periodique" />
-      <CheckBox layoutX="52.0" layoutY="382.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" />
+      <CheckBox fx:id="perio" layoutX="52.0" layoutY="382.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" />
       <AnchorPane layoutY="65.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: #000000;" />
       <Text layoutX="221.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Decomposable" />
-      <CheckBox layoutX="182.0" layoutY="382.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" />
-      <TextField fx:id="PeriodiciteTextField" layoutX="46.0" layoutY="441.0" prefHeight="26.0" prefWidth="242.0" promptText="Periodicite" style="-fx-background-color: ffffff;">
+      <CheckBox fx:id="deco" layoutX="182.0" layoutY="382.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" />
+      <TextField fx:id="PeriodiciteTextField" layoutX="46.0" layoutY="441.0" prefHeight="26.0" prefWidth="242.0" promptText="Periodicite" style="-fx-background-color: ffffff;" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Text layoutX="50.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Periodicité" wrappingWidth="81.52501678466797">
+      <Text fx:id="perioText" layoutX="50.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Periodicité" visible="false" wrappingWidth="81.52501678466797">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="50.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de plannifications" wrappingWidth="217.52501678466797">
+      <Text fx:id="NbText" layoutX="50.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de plannifications" visible="false" wrappingWidth="217.52501678466797">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="NbPlannificationsTextField" layoutX="46.0" layoutY="509.0" prefHeight="26.0" prefWidth="242.0" promptText="Nombre plannifications" style="-fx-background-color: ffffff;">
+      <TextField fx:id="NbPlannificationsTextField" layoutX="46.0" layoutY="509.0" prefHeight="26.0" prefWidth="242.0" promptText="Nombre plannifications" style="-fx-background-color: ffffff;" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <AnchorPane layoutX="33.0" layoutY="546.0" prefHeight="140.0" prefWidth="278.0">
+      <AnchorPane fx:id="debutFinContainer" layoutX="33.0" layoutY="546.0" prefHeight="140.0" prefWidth="278.0">
          <children>
             <Text layoutX="91.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Debut" textAlignment="CENTER" wrappingWidth="96.0">
                <font>

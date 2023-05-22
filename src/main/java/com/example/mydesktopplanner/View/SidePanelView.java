@@ -151,7 +151,11 @@ public class SidePanelView {
             view.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    System.out.println(periode);
+                    try {
+                        MainView.getInstance().setRightSidePannel((new RightSidePannelPeriode(periode)).getView());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
         }

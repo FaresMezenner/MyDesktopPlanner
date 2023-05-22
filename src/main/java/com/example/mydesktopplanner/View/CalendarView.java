@@ -49,6 +49,7 @@ public class CalendarView {
 
             videLabel[i] = (Label) calendar.lookup("#v1" + i);
 
+
             BorderPane borderPane = (BorderPane) calendar.lookup("#p1" + i);
             periodeLabel[i] = (Label) borderPane.getCenter().lookup("#p0" + i);
 

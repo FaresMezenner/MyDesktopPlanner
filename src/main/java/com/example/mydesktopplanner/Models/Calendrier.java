@@ -3,7 +3,7 @@ package com.example.mydesktopplanner.Models;
 
 import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
-import java.io.Serializable;
+import java.io.*;
 import java.time.*;
 import java.time.LocalDateTime;
 import java.time.LocalDateTime;
@@ -59,8 +59,21 @@ public Calendrier() {
     }
 
     public void plannifierTachePeriodique(CreneauPeriodique tache, int nJours, int nbFois) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
-    //we will save the list of days in case we face an exception and we need the abort the operation
-    TreeMap<LocalDate, Jour> jours = this.jours;
+    //we will save the list of days in case we face an exception and we need to abort the operation
+        try {
+            FileOutputStream fOut = new FileOutputStream("joursTmp");
+            ObjectOutputStream out = new ObjectOutputStream(fOut);
+            out.writeObject(jours);
+            fOut.flush();
+            out.flush();
+            fOut.close();
+            out.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
 
     CreneauPeriodique tachePeriodique = tache;
@@ -86,13 +99,52 @@ public Calendrier() {
 
         }
     } catch (ExceptionDateInvalide e) {
-        this.jours = jours;
+        try {
+
+            FileInputStream fIn = new FileInputStream("joursTmp");
+            ObjectInputStream in = new ObjectInputStream(fIn);
+            jours = (TreeMap<LocalDate, Jour>) in.readObject();
+            fIn.close();
+            in.close();
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
         throw new ExceptionDateInvalide();
     } catch (ExceptionCollisionHorairesCreneau e) {
-        this.jours = jours;
+        try {
+
+            FileInputStream fIn = new FileInputStream("joursTmp");
+            ObjectInputStream in = new ObjectInputStream(fIn);
+            jours = (TreeMap<LocalDate, Jour>) in.readObject();
+            fIn.close();
+            in.close();
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
         throw e;
     } catch (ExceptionDureeInvalide e) {
-        this.jours = jours;
+        try {
+
+            FileInputStream fIn = new FileInputStream("joursTmp");
+            ObjectInputStream in = new ObjectInputStream(fIn);
+            jours = (TreeMap<LocalDate, Jour>) in.readObject();
+            fIn.close();
+            in.close();
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
         throw new RuntimeException(e);
     }
 

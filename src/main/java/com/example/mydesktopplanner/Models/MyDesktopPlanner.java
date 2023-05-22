@@ -242,6 +242,11 @@ public class MyDesktopPlanner {
     }
 
 
+    public void replannifierPeriode(Periode periode, boolean aleatoir) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
+        getUtilisateur().getCalendrier().rePlanifier(periode, aleatoir);
+    }
+
+
 
 
 

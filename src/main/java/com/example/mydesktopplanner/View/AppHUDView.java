@@ -193,6 +193,18 @@ public class AppHUDView {
             }
         });
 
+        ((Button) view.lookup("#tache")).setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    (new AjouterTacheView()).show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+
 
 
     }
