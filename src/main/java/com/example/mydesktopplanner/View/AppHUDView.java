@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -77,10 +79,14 @@ public class AppHUDView {
         });
 
 
-        ((Button) view.lookup("#profile")).setOnAction(new EventHandler<ActionEvent>() {
+        ((ImageView) view.lookup("#profile")).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
-
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    (new ProfilePopUpView()).show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
