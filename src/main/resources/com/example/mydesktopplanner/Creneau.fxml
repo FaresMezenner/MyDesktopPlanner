@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -19,15 +19,12 @@
                </font>
             </Label>
          </children>
-         <effect>
-            <InnerShadow />
-         </effect>
       </AnchorPane>
    </children>
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <effect>
-      <InnerShadow />
+      <DropShadow />
    </effect>
 </AnchorPane>

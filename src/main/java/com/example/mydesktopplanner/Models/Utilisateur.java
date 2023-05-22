@@ -322,8 +322,9 @@ public class Utilisateur implements Serializable {
 
     }
 
-
-
+    public TreeMap<LocalDate, Periode> getPeriodes() {
+        return calendrier.getPeriodes();
+    }
     public void changerEtatTache(Creneau creneau, Etat etat){
         if (creneau == null || etat == null ){return;}
         if (!creneau.isLibre()) {

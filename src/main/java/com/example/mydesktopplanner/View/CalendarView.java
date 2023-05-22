@@ -18,7 +18,9 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class CalendarView {
 
@@ -54,15 +56,18 @@ public class CalendarView {
             dayOfWeek = dayOfWeek.plusDays(1);
         }
 
-        setCrenaux();
+        setCrenauxEtPeriodes();
 
     }
 
-    private void setCrenaux()  {
+    private void setCrenauxEtPeriodes()  {
 
         LocalDate date = LocalDate.of(startOfWeek.getYear(), startOfWeek.getMonth(), startOfWeek.getDayOfMonth());
+
+        LinkedList<Periode> periodes = new LinkedList<>();
         for (int i = 0; i < 7; i++) {
 
+            //setting creneaux
             LinkedList<Creneau> creneaux;
             try {
                 creneaux = MyDesktopPlanner.getInstance().getUtilisateur().getCalendrier().getCreneauxJour(date);
@@ -76,8 +81,6 @@ public class CalendarView {
                 videLabel[i].setVisible(false);
             }
 
-
-
             for (Creneau creneau : creneaux) {
                 try {
                     daysAgenda[i].getChildren().add(new CreneauView(creneau).getView());
@@ -87,8 +90,55 @@ public class CalendarView {
             }
 
 
+            //now getting the periodes that will be shown
+            Periode periode = MyDesktopPlanner.getInstance().getUtilisateur().getCalendrier().getPeriode(date);
+            if (periode != null) {
+                periodes.add(periode);
+
+            }
+
+
             date = date.plusDays(1);
         }
+
+        //getting the periode that is before this week, since it could end this week;
+        date = date.minusDays(7);
+        //testing if there's any periode before this week
+        try {
+            LocalDate firstPeriodeDate = MyDesktopPlanner.getInstance().getUtilisateur().getCalendrier().getPeriodes().firstKey();
+            if (firstPeriodeDate.isBefore(date)) {
+                //if there's, we get all those periodes
+                ArrayList<Periode> previousPeriodes = MyDesktopPlanner.getInstance().getUtilisateur().getCalendrier().getPeriodesIntervalle(
+                        firstPeriodeDate, date.minusDays(1)
+                );
+                //we add the last one to the periodes list if it's before this week
+                Periode lastPeriodeBeforeWeek = previousPeriodes.get(previousPeriodes.size() - 1);
+                if (lastPeriodeBeforeWeek.getFin().isAfter(date) || lastPeriodeBeforeWeek.getFin().isEqual(date))
+                    periodes.add(0, lastPeriodeBeforeWeek);
+
+            }
+        } catch (NoSuchElementException e){
+            System.out.println("No periode before this week");
+        }
+        //now we show these periodes on the calendar
+
+        for (int i = 0; i < 7; i++) {
+            for (Periode periode : periodes) {
+                if (periode.getDebut().isEqual(date) || periode.getFin().isEqual(date)) {
+                    if (periode.getDebut().isEqual(periode.getFin())) {
+                        periodeLabel[date.getDayOfWeek().getValue()].setText(periode.getNom());
+                    } else if (periode.getDebut().isEqual(date)) {
+                        periodeLabel[date.getDayOfWeek().getValue()].setText("Debut " + periode.getNom());
+                    } else  {
+                        periodeLabel[date.getDayOfWeek().getValue()].setText("Fin " + periode.getNom());
+                    }
+                }
+            }
+
+            date = date.plusDays(1);
+        }
+
+
 
     }
 
@@ -102,7 +152,7 @@ public class CalendarView {
             periodeLabel[i].setText("");
             date = date.plusDays(1);
         }
-        setCrenaux();
+        setCrenauxEtPeriodes();
     }
 
 
@@ -110,7 +160,7 @@ public class CalendarView {
         LocalDate dayOfWeek = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth());
         if (!(dayOfWeek.isEqual(startOfWeek)
                 || (dayOfWeek.isAfter(startOfWeek) && dayOfWeek.isBefore(startOfWeek.plusDays(7)))
-                || dayOfWeek.isEqual(startOfWeek.plusDays(7)))) {
+        )) {
             while (dayOfWeek.getDayOfWeek() != DayOfWeek.SUNDAY){
                 dayOfWeek = dayOfWeek.minusDays(1);
             }
@@ -123,6 +173,11 @@ public class CalendarView {
 
     public AnchorPane getView(){
         return calendar;
+    }
+
+
+    public LocalDate getStartOfWeek() {
+        return startOfWeek;
     }
 
     private class CreneauView {
@@ -139,7 +194,6 @@ public class CalendarView {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     //TODO: open creneau Info view
-                    changeWeek(LocalDate.of(2023, 5,31));
                 }
             });
 
@@ -173,4 +227,5 @@ public class CalendarView {
         }
 
     }
+
 }

@@ -22,6 +22,8 @@ public class MainView extends Stage {
     }
 
     private CalendarView calendarView;
+    private AppHUDView hudView;
+    private SidePanelView sidePanelView;
 
 
 
@@ -38,7 +40,24 @@ public class MainView extends Stage {
         //getting the calendar placeholder
         AnchorPane calendar = (AnchorPane) getScene().lookup("#calendar");
         this.calendarView = new CalendarView();
-        calendar.getChildren().add(calendarView.getView());
+        //setting the calendar inside its placeholder
+        calendar.getChildren().add(this.calendarView.getView());
+
+        //getting the hud placeholder
+        AnchorPane hud = (AnchorPane) getScene().lookup("#hud");
+        this.hudView = new AppHUDView(this.calendarView);
+        //setting the hud inside its placeholder
+        hud.getChildren().add(hudView.getView());
+
+        //getting the side panel placeholder
+        AnchorPane sidePanel = (AnchorPane) getScene().lookup("#side_panel");
+        this.sidePanelView = new SidePanelView();
+        //setting the side panel inside its placeholder
+        sidePanel.getChildren().add(sidePanelView.getView());
+
+
+
+
     }
 
     public CalendarView getCalendarView() {

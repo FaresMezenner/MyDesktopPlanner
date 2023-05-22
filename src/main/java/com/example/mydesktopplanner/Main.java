@@ -2,7 +2,10 @@ package com.example.mydesktopplanner;
 
 import com.example.mydesktopplanner.Control.Authentification;
 import com.example.mydesktopplanner.Models.*;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionPeriode;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInvalide;
 import com.example.mydesktopplanner.View.MainView;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -16,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.time.*;
+import java.util.TreeMap;
 
 
 public class Main extends Application {
@@ -62,7 +66,7 @@ public class Main extends Application {
 
     }
 
-    public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau, IOException, ClassNotFoundException, ExceptionCollisionPeriode {
 
 
 
@@ -89,110 +93,108 @@ public class Main extends Application {
                 LocalDateTime.of(2023, 05, 31, 13, 51)
         );
 
-
-
-        myDesktopPlanner.afficherCreneaux();
-
-        Creneau d = new Creneau(
-                LocalDateTime.of(2023, 07, 4, 12, 11 ),
-                LocalDateTime.of(2023, 07, 4, 13, 51)
-        );
-
-        Creneau g = new Creneau(
-                LocalDateTime.of(2023, 07, 4, 14, 11 ),
-                LocalDateTime.of(2023, 07, 4, 16, 51)
-        );
-
-        Creneau e = new Creneau(
-                LocalDateTime.of(2023, 07, 5, 12, 10 ),
-                LocalDateTime.of(2023, 07, 5, 13, 10)
-        );
-
-        Creneau f = new Creneau(
-                LocalDateTime.of(2023, 7, 6, 12, 10 ),
-                LocalDateTime.of(2023, 7, 6, 13, 10)
-        );
-
-
         myDesktopPlanner.ajouterCreneau(a);
         myDesktopPlanner.ajouterCreneau(b);
         myDesktopPlanner.ajouterCreneau(c);
-        myDesktopPlanner.ajouterCreneau(d);
-        myDesktopPlanner.ajouterCreneau(e);
-        myDesktopPlanner.ajouterCreneau(f);
-        myDesktopPlanner.ajouterCreneau(g);
 
-
-
-
-
-
-        Tache tacheSimple1 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-        Tache tacheSimple2 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-        Tache tacheSimple3 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-        Tache tacheSimple4 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-        Tache tacheSimple5 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
-        Tache tacheSimple6 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.STUDIES,false);
-        Tache tacheSimple7 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.STUDIES,false);
-
-
-        myDesktopPlanner.ajouterTache(tacheSimple1);
-        myDesktopPlanner.ajouterTache(tacheSimple2);
-        myDesktopPlanner.ajouterTache(tacheSimple3);
-        myDesktopPlanner.ajouterTache(tacheSimple4);
-        myDesktopPlanner.ajouterTache(tacheSimple5);
-        myDesktopPlanner.ajouterTache(tacheSimple6);
-        myDesktopPlanner.ajouterTache(tacheSimple7);
-
-
-
-        try {
-        myDesktopPlanner.affecterTacheCreneau(a, tacheSimple1);
-        myDesktopPlanner.affecterTacheCreneau(b, tacheSimple2);
-        myDesktopPlanner.affecterTacheCreneau(c, tacheSimple3);
-        myDesktopPlanner.affecterTacheCreneau(d, tacheSimple4);
-        myDesktopPlanner.affecterTacheCreneau(e, tacheSimple5);
-        myDesktopPlanner.affecterTacheCreneau(f, tacheSimple6);
-        myDesktopPlanner.affecterTacheCreneau(g, tacheSimple7);
-        } catch (ExceptionCreneauNonLibre ex) {
-            throw new RuntimeException(ex);
-        }
-        myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(a);
-
-        myDesktopPlanner.changerEtatTache(b,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(b);
-
-        myDesktopPlanner.changerEtatTache(c,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(c);
-
-        myDesktopPlanner.changerEtatTache(d,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(d);
-
-        myDesktopPlanner.changerEtatTache(g,Etat.COMPLETED);
-
-        myDesktopPlanner.changerEtatTache(e,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(e);
-
-        myDesktopPlanner.changerEtatTache(f,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(f);
-
-        System.out.println(utilisateur.getLastUpdateTachesTime());
 
         Periode periode = new Periode(
-                LocalDate.of(2023, 7, 4 ),
-                LocalDate.of(2023, 7, 6)
+                LocalDate.of(2023, 05, 23),
+                LocalDate.of(2023, 05, 23),
+                "periode 1"
         );
+        myDesktopPlanner.ajouterPeriode(periode);
+
+        TacheSimple tacha = new TacheSimple("tache 1", Duration.ofMinutes(30), Priorite.HIGH, LocalDateTime.of(2023, 05, 23, 12, 00), Categorie.HEALTH, false);
 
 
+        myDesktopPlanner.ajouterTache(tacha);
 
-        try {
-            myDesktopPlanner.ajouterPeriode(periode);
-        } catch (ExceptionCollisionPeriode ex) {
-            throw new RuntimeException(ex);
-        }
+        Projet projeta = new Projet("projet 1", "testing", new TreeMap<>());
 
+        myDesktopPlanner.ajouterProjet(projeta);
 
+        launch();
+//        myDesktopPlanner.afficherCreneaux();
+
+//        Creneau d = new Creneau(
+//                LocalDateTime.of(2023, 07, 4, 12, 11 ),
+//                LocalDateTime.of(2023, 07, 4, 13, 51)
+//        );
+//
+//        Creneau e = new Creneau(
+//                LocalDateTime.of(2023, 07, 5, 12, 10 ),
+//                LocalDateTime.of(2023, 07, 5, 13, 10)
+//        );
+//
+//        Creneau f = new Creneau(
+//                LocalDateTime.of(2023, 8, 5, 12, 10 ),
+//                LocalDateTime.of(2023, 8, 5, 13, 10)
+//        );
+
+//
+//        myDesktopPlanner.ajouterCreneau(a);
+//        myDesktopPlanner.ajouterCreneau(b);
+//        myDesktopPlanner.ajouterCreneau(c);
+//        myDesktopPlanner.ajouterCreneau(d);
+//        myDesktopPlanner.ajouterCreneau(e);
+//        myDesktopPlanner.ajouterCreneau(f);
+//
+//
+//
+//
+//
+//
+//        Tache tacheSimple1 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+//        Tache tacheSimple2 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+//        Tache tacheSimple3 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+//        Tache tacheSimple4 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+//        Tache tacheSimple5 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+//        Tache tacheSimple6 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+//
+//
+//        myDesktopPlanner.ajouterTache(tacheSimple1);
+//        myDesktopPlanner.ajouterTache(tacheSimple2);
+//        myDesktopPlanner.ajouterTache(tacheSimple3);
+//        myDesktopPlanner.ajouterTache(tacheSimple4);
+//        myDesktopPlanner.ajouterTache(tacheSimple5);
+//        myDesktopPlanner.ajouterTache(tacheSimple6);
+//
+//
+//
+//        try {
+//        myDesktopPlanner.affecterTacheCreneau(a, tacheSimple1);
+//        myDesktopPlanner.affecterTacheCreneau(b, tacheSimple2);
+//        myDesktopPlanner.affecterTacheCreneau(c, tacheSimple3);
+//        myDesktopPlanner.affecterTacheCreneau(d, tacheSimple4);
+//        myDesktopPlanner.affecterTacheCreneau(e, tacheSimple5);
+//        myDesktopPlanner.affecterTacheCreneau(f, tacheSimple6);
+//        } catch (ExceptionCreneauNonLibre ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(a);
+//
+//        myDesktopPlanner.changerEtatTache(b,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(b);
+//
+//        myDesktopPlanner.changerEtatTache(c,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(c);
+//
+//        myDesktopPlanner.changerEtatTache(d,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(d);
+//
+//        myDesktopPlanner.changerEtatTache(e,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(e);
+//
+//        myDesktopPlanner.changerEtatTache(f,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(f);
+//
+//
+//
+//       myDesktopPlanner.updateEtatTaches();
+//
+//        System.out.println(utilisateur.getLastUpdateTachesTime());
 
 
 //        TacheSimple test = new TacheSimple("test", Duration.ofMinutes(30), Priorite.HIGH, LocalDateTime.of(2021, 7, 1, 12, 00), Categorie.HEALTH, false);

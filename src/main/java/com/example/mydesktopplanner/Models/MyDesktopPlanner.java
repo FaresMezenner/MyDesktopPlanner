@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.TreeMap;
 
 // Cette classe est la classe globale du DesktopPlanner
 // Cette classe n'est pas finie , il manque les methodes.
@@ -106,9 +107,6 @@ public class MyDesktopPlanner {
 
     }
 
-    public LinkedList<Tache> getUnscheduledTaches(){
-        return utilisateur.getUnscheduledTaches();
-    }
 
     public void afficherCreneaux(){
         utilisateur.afficherCrenaux();
@@ -213,6 +211,11 @@ public class MyDesktopPlanner {
 
     public void updateStatistics(){
         utilisateur.updateStatistics();
+    }
+
+
+    public TreeMap<LocalDate, Periode> getPeriodes() {
+        return utilisateur.getPeriodes();
     }
 
 

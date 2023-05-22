@@ -2,9 +2,9 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="calendar" layoutX="203.0" layoutY="27.0" maxHeight="650.0" maxWidth="1000.0" prefHeight="650.0" prefWidth="1000.0" />
+      <AnchorPane fx:id="hud" prefHeight="100.0" prefWidth="1500.0" />
+      <AnchorPane fx:id="side_panel" layoutY="100.0" maxHeight="650.0" maxWidth="250.0" prefHeight="649.0" prefWidth="249.0" />
    </children>
 </AnchorPane>

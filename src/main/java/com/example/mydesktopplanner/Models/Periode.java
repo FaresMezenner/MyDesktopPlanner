@@ -14,12 +14,14 @@ import java.util.LinkedList;
 public class Periode implements Serializable , Collidable<Periode> , Comparable<Periode>{
 
     private LocalDate debut,fin;
+    private String nom;
 
 
 
 
-    public Periode(LocalDate debut, LocalDate fin) throws ExceptionDateInvalide {
+    public Periode(LocalDate debut, LocalDate fin, String nom) throws ExceptionDateInvalide {
 
+        this.nom = nom;
         if (debut.isBefore(LocalDate.now())) {
             throw new ExceptionDateInvalide("La date de debut est deja passee et invalide");
         } else if (fin.isBefore(debut)) {
@@ -98,4 +100,7 @@ public class Periode implements Serializable , Collidable<Periode> , Comparable<
         }
     }
 
+    public String getNom() {
+        return nom;
+    }
 }

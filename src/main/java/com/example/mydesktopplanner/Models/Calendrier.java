@@ -108,9 +108,6 @@ public Calendrier() {
         this.jours = jours;
     }
 
-    public TreeMap<LocalDate, Periode> getPeriodes() {
-        return periodes;
-    }
 
     public void setPeriodes(TreeMap<LocalDate, Periode> periodes) {
         this.periodes = periodes;
@@ -369,6 +366,16 @@ public Calendrier() {
     }
 
 
+    public Periode getPeriode(LocalDate debut){
+        return periodes.get(debut);
+    }
 
+    public TreeMap<LocalDate, Periode> getPeriodes() {
+        return periodes;
+    }
 
+    public ArrayList<Periode> getPeriodesIntervalle(LocalDate debut , LocalDate fin){
+        // Cette fonction renvoies une liste contenant tout les periodes du calendrier [EXISTANTS] dans l'intervalle indiqué
+        return new ArrayList<>(periodes.subMap(debut,fin.plusDays(1)).values());
+    }
 }

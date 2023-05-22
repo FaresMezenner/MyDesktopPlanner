@@ -13,7 +13,7 @@ public enum Etat{
 
 
     Etat(String name){
-        this.name = this.name();
+        this.name = name;
     }
 
     public String getName() {

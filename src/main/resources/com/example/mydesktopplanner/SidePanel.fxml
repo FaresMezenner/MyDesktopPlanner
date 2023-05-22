@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="650.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fx:id="container" prefHeight="649.0" prefWidth="249.0">
+         <content>
+            <Accordion fx:id="accordion" prefWidth="247.0">
+               <panes>
+                  <TitledPane fx:id="taches_pane" animated="false" prefWidth="250.0" text="Taches non planifiées">
+                     <content>
+                        <VBox fx:id="taches" alignment="TOP_CENTER" prefWidth="100.0" style="-fx-padding: 0;" />
+                     </content>
+                  </TitledPane>
+                  <TitledPane fx:id="projets_pane" animated="false" text="Projets">
+                     <content>
+                        <VBox fx:id="projets" alignment="TOP_CENTER" prefWidth="100.0" style="-fx-padding: 0;" />
+                     </content>
+                  </TitledPane>
+                  <TitledPane fx:id="periodes_pane" animated="false" text="Periodes">
+                     <content>
+                        <VBox fx:id="periodes" alignment="TOP_CENTER" prefWidth="100.0" style="-fx-padding: 0;" />
+                     </content>
+                  </TitledPane>
+               </panes>
+            </Accordion>
+         </content>
+      </ScrollPane>
+   </children>
 </AnchorPane>
