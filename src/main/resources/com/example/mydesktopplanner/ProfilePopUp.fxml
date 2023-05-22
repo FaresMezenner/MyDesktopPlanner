@@ -187,7 +187,7 @@
       <Text layoutX="108.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
       <Text layoutX="257.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
       <Text layoutX="405.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
-      <Button layoutX="317.0" layoutY="694.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="141.0" style="-fx-background-color: #e2001a;" text="Archiver" textFill="WHITE">
+      <Button layoutX="304.0" layoutY="694.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="141.0" style="-fx-background-color: #e2001a;" text="Archiver" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -197,7 +197,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="174.0" layoutY="695.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #000000;" text="D'accord" textFill="WHITE">
+      <Button layoutX="169.0" layoutY="695.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #000000;" text="D'accord" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

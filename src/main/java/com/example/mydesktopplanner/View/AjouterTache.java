@@ -38,6 +38,9 @@ public class AjouterTache implements Initializable {
             }
     });}
 
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CategorieChoiceBox.getItems().addAll(categories);
