@@ -3,7 +3,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="650.0" maxWidth="1000.0" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
@@ -14,8 +16,11 @@
                <children>
                   <AnchorPane layoutY="150.0">
                      <children>
-                        <ScrollPane fx:id="c10" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
-                        <Label fx:id="v1" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
+                        <ScrollPane fx:id="c0" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" vbarPolicy="NEVER">
+                           <content>
+                              <VBox fx:id="c10" alignment="TOP_CENTER" prefHeight="498.0" prefWidth="140.0" />
+                           </content></ScrollPane>
+                        <Label fx:id="v10" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
                            <font>
                               <Font name="System Italic" size="20.0" />
                            </font>
@@ -32,13 +37,22 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <BorderPane fx:id="p10" layoutY="91.0" prefHeight="56.0" prefWidth="143.0">
+                     <center>
+                        <Label fx:id="p00" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="500.0" prefWidth="143.0">
                <children>
                   <AnchorPane layoutY="150.0">
                      <children>
-                        <ScrollPane fx:id="c11" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <ScrollPane fx:id="c1" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" vbarPolicy="NEVER">
+                           <content>
+                              <VBox fx:id="c11" alignment="TOP_CENTER" prefHeight="498.0" prefWidth="140.0" />
+                           </content>
+                        </ScrollPane>
                         <Label fx:id="v11" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
                            <font>
                               <Font name="System Italic" size="20.0" />
@@ -56,13 +70,22 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <BorderPane fx:id="p11" layoutY="91.0" prefHeight="56.0" prefWidth="143.0">
+                     <center>
+                        <Label fx:id="p01" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="500.0" prefWidth="143.0">
                <children>
                   <AnchorPane layoutY="150.0">
                      <children>
-                        <ScrollPane fx:id="c12" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <ScrollPane fx:id="c2" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" vbarPolicy="NEVER">
+                           <content>
+                              <VBox fx:id="c12" alignment="TOP_CENTER" prefHeight="498.0" prefWidth="140.0" />
+                           </content>
+                        </ScrollPane>
                         <Label fx:id="v12" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
                            <font>
                               <Font name="System Italic" size="20.0" />
@@ -80,13 +103,22 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <BorderPane fx:id="p12" layoutY="91.0" prefHeight="56.0" prefWidth="143.0">
+                     <center>
+                        <Label fx:id="p02" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="500.0" prefWidth="143.0">
                <children>
                   <AnchorPane layoutY="150.0">
                      <children>
-                        <ScrollPane fx:id="c13" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <ScrollPane fx:id="c3" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" vbarPolicy="NEVER">
+                           <content>
+                              <VBox fx:id="c13" alignment="TOP_CENTER" prefHeight="498.0" prefWidth="140.0" />
+                           </content>
+                        </ScrollPane>
                         <Label fx:id="v13" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
                            <font>
                               <Font name="System Italic" size="20.0" />
@@ -104,13 +136,22 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <BorderPane fx:id="p13" layoutY="91.0" prefHeight="56.0" prefWidth="143.0">
+                     <center>
+                        <Label fx:id="p03" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="500.0" prefWidth="143.0">
                <children>
                   <AnchorPane layoutY="150.0">
                      <children>
-                        <ScrollPane fx:id="c14" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <ScrollPane fx:id="c4" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" vbarPolicy="NEVER">
+                           <content>
+                              <VBox fx:id="c14" alignment="TOP_CENTER" prefHeight="498.0" prefWidth="140.0" />
+                           </content>
+                        </ScrollPane>
                         <Label fx:id="v14" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
                            <font>
                               <Font name="System Italic" size="20.0" />
@@ -128,13 +169,22 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <BorderPane fx:id="p14" layoutY="91.0" prefHeight="56.0" prefWidth="143.0">
+                     <center>
+                        <Label fx:id="p04" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="500.0" prefWidth="143.0">
                <children>
                   <AnchorPane layoutY="150.0">
                      <children>
-                        <ScrollPane fx:id="c15" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <ScrollPane fx:id="c5" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" vbarPolicy="NEVER">
+                           <content>
+                              <VBox fx:id="c15" alignment="TOP_CENTER" prefHeight="498.0" prefWidth="140.0" />
+                           </content>
+                        </ScrollPane>
                         <Label fx:id="v15" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
                            <font>
                               <Font name="System Italic" size="20.0" />
@@ -152,13 +202,22 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <BorderPane fx:id="p15" layoutY="91.0" prefHeight="56.0" prefWidth="143.0">
+                     <center>
+                        <Label fx:id="p05" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="500.0" prefWidth="143.0">
                <children>
                   <AnchorPane layoutY="150.0">
                      <children>
-                        <ScrollPane fx:id="c16" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" />
+                        <ScrollPane fx:id="c6" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="143.0" style="-fx-background-color: none;" vbarPolicy="NEVER">
+                           <content>
+                              <VBox fx:id="c16" alignment="TOP_CENTER" prefHeight="498.0" prefWidth="140.0" />
+                           </content>
+                        </ScrollPane>
                         <Label fx:id="v16" layoutX="52.23" layoutY="250.0" text="Vide" textFill="#949494">
                            <font>
                               <Font name="System Italic" size="20.0" />
@@ -176,6 +235,11 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <BorderPane fx:id="p16" layoutY="91.0" prefHeight="56.0" prefWidth="143.0">
+                     <center>
+                        <Label fx:id="p06" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </AnchorPane>
          </children>

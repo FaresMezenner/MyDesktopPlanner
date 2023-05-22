@@ -3,6 +3,7 @@ import com.example.mydesktopplanner.Main;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionUserDoesNotExist;
 import com.example.mydesktopplanner.Models.UserManager;
 import com.example.mydesktopplanner.Models.Utilisateur;
+import com.example.mydesktopplanner.View.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -33,14 +34,17 @@ public class Authentification implements EventHandler<ActionEvent> {
         try {
             //we'll try to authentic the user
             utilisateur = UserManager.getInstance().Authentify(pseudoField.getText());
-
-
             window.close();
+
+            //once authenticated, we'll show the main view
+            MainView.getInstance().show();
         } catch (ExceptionUserDoesNotExist e) {
             //id the user is not found, we'll show a pop up asking him to create a user or not
             System.out.println("USER DOESN't EXIST");
             (new CreateUserPopUp(pseudo)).show();
             return;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -77,13 +81,19 @@ public class Authentification implements EventHandler<ActionEvent> {
                     Utilisateur utilisateur = new Utilisateur(pseudo);
                     try {
                         UserManager.getInstance().setUser(utilisateur);
+                        window.close();
+
+                        //once uer created, we'll show the main view
+                        MainView.getInstance().show();
+
                     } catch (ExceptionUserDoesNotExist e) {
                         System.out.println("THIS ERROR SHOULD NEVER HAPPEN");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     } finally {
                         close();
-                        //TODO: here we need to open the whole app
 
-                        window.close();
+
 
                     }
                 }

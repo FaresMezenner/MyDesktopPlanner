@@ -2,6 +2,21 @@ package com.example.mydesktopplanner.Models;
 
 // Cette classe contiens les etats possibles d'une tache
 public enum Etat{
-    NOTREALIZED,COMPLETED,INPROGRESS,CANCELLED,DELAYED,UNSCHEDULED;
+    NOTREALIZED("Non réalisé"),
+    COMPLETED("terminée"),
+    INPROGRESS("en cours"),
+    CANCELLED("annulée"),
+    DELAYED("retardée"),
+    UNSCHEDULED("non planifiée");
 
+    final String name;
+
+
+    Etat(String name){
+        this.name = this.name();
+    }
+
+    public String getName() {
+        return name;
+    }
 }
