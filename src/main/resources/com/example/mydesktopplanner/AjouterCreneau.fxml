@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="388.0" prefWidth="340.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.AjouterCreneau">
+   <children>
+      <AnchorPane prefHeight="86.0" prefWidth="340.0" style="-fx-background-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <children>
+            <Text fx:id="user" fill="WHITE" layoutX="7.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un creneau" textAlignment="CENTER" wrappingWidth="320.9999389648435">
+               <font>
+                  <Font name="System Bold" size="31.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Button fx:id="ok" layoutX="110.0" layoutY="327.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <DatePicker layoutX="49.0" layoutY="138.0" prefHeight="30.0" prefWidth="242.0" />
+      <Text layoutX="49.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="81.52501678466797">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutY="65.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: #000000;" />
+      <Text layoutX="122.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Debut" textAlignment="CENTER" wrappingWidth="96.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="DebutHeures" layoutX="47.0" layoutY="204.0" prefHeight="30.0" prefWidth="96.0" promptText="Heures" />
+      <Text layoutX="167.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Text>
+      <TextField fx:id="DebutMinutes" layoutX="197.0" layoutY="205.0" prefHeight="30.0" prefWidth="96.0" promptText="Minutes" />
+      <Text layoutX="122.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fin" textAlignment="CENTER" wrappingWidth="96.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="FinHeures" layoutX="47.0" layoutY="271.0" prefHeight="30.0" prefWidth="96.0" promptText="Heures" />
+      <Text layoutX="167.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Text>
+      <TextField fx:id="FinMinutes" layoutX="197.0" layoutY="272.0" prefHeight="30.0" prefWidth="96.0" promptText="Minutes" />
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>
