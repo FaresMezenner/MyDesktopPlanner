@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,10 +16,12 @@ public class Utilisateur implements Serializable {
 
     private int nbEncouragements = 0;
     private Jour jourRentable = null;
-    private LocalDateTime[] tempsCategories = new LocalDateTime[6];
+    private Duration[] tempsCategories = {Duration.ofMinutes(0),Duration.ofMinutes(0),Duration.ofMinutes(0),Duration.ofMinutes(0),Duration.ofMinutes(0),Duration.ofMinutes(0)};
     private Duration tempsMinCreneau = Duration.ofMinutes(30);
 
     private LinkedList<Tache> unscheduledTaches = new LinkedList<>();
+
+    private LinkedList<Tache> cancelledTaches = new LinkedList<>();
     private Calendrier calendrier = new Calendrier();
     private int[] badges = {0,0,0};
     private ArrayList<Projet> projets = new ArrayList<>();
@@ -74,11 +77,11 @@ public class Utilisateur implements Serializable {
         this.jourRentable = jourRentable;
     }
 
-    public LocalDateTime[] getTempsCategories() {
+    public Duration[] getTempsCategories() {
         return tempsCategories;
     }
 
-    public void setTempsCategories(LocalDateTime[] tempsCategories) {
+    public void setTempsCategories(Duration[] tempsCategories) {
         this.tempsCategories = tempsCategories;
     }
 
@@ -156,9 +159,6 @@ public class Utilisateur implements Serializable {
 
     // ----------------------------- Delimitation Gettes / Setters ----------------------------------
 
-    public float getRendementPeriode(Periode periode) throws ExceptionPeriodeInexistante{
-        return calendrier.getRendementPeriode(periode);
-    }
 
     public void ajouterTache(Tache tache) {
         int i = 0;
@@ -315,12 +315,25 @@ public class Utilisateur implements Serializable {
         projet.supprimerTache(creneau);
     }
 
+    public void ajouterDureeCategorie(Categorie categorie , Duration duree){
+        if (duree == null || categorie == null){return;}
+
+        tempsCategories[categorie.index()] = tempsCategories[categorie.index()].plus(duree);
+
+    }
+
+
 
     public void changerEtatTache(Creneau creneau, Etat etat){
-        if (creneau == null || etat == null){return;}
+        if (creneau == null || etat == null ){return;}
         if (!creneau.isLibre()) {
             Tache tache = creneau.getTache();
             tache.setEtat(etat);
+
+            if (etat.equals(Etat.COMPLETED)){
+                Categorie categorie = tache.getCategorie();
+                ajouterDureeCategorie(categorie,tache.getDuree());
+            }
             // Always remember to check for greetings when calling this function}
         }
         updateEtatTaches();
@@ -432,11 +445,6 @@ public class Utilisateur implements Serializable {
         setLastUpdateTachesTime(LocalDateTime.now());
     }
 
-
-    public void updateStatistiques(){
-    // TODO : Update stats
-    }
-
     public void plannifierTacheAutomatiquement(Tache tache,LocalDate date) throws ExceptionPlannificationImpossible {
         ArrayList<Creneau> creneaux = calendrier.getCreneauxIntervalle(date, calendrier.getDernierJour().getDate());
 
@@ -464,6 +472,7 @@ public class Utilisateur implements Serializable {
 
     public float getRendementJournalier(Jour jour){
         // Renvoies le nombre de taches réalisés / nombre de taches planifiées
+        if (jour == null){return 0;}
         int nbTachesRealisees = 0;
         int nbTachesPlanifiees = 0;
         try {
@@ -472,8 +481,10 @@ public class Utilisateur implements Serializable {
                 for (Creneau creneau : creneaux){
                     if (creneau.getTache() != null){
                         nbTachesPlanifiees++;
+
                         if (creneau.getTache().getEtat().equals(Etat.COMPLETED)){
                             nbTachesRealisees++;
+
                         }
                     }
                 }
@@ -481,7 +492,7 @@ public class Utilisateur implements Serializable {
             if (nbTachesPlanifiees == 0){
                 return 0;
             }
-            return nbTachesRealisees / nbTachesPlanifiees;
+            return (float) nbTachesRealisees / nbTachesPlanifiees;
         } catch (ExceptionDateInvalide e) {
             throw new RuntimeException(e);
         }
@@ -514,15 +525,74 @@ public class Utilisateur implements Serializable {
     }
 
     public float updateRendementJournalier(){
-    // TODO : Finish this
-        return 0;
+    int[] rendement = getRendementJournalierArray();
+    float rendementMoyen = 0;
+
+    int tachesRealisees = rendement[0];
+    int tachesTotales = rendement[1];
+
+    LocalDateTime debut = getLastUpdateStatisticsTime();
+    LocalDateTime fin = LocalDateTime.now();
+
+    // On récupére tout les creneaux dont la date de fin est comprise entre debut et fin
+
+    ArrayList<Creneau> creneaux = calendrier.getCreneauxIntervalle(debut.toLocalDate(),fin.toLocalDate());
+    Tache tache;
+    // On récupére le nombre de creneaux dont la date de fin est comprise entre debut et fin
+    for (Creneau creneau : creneaux){
+        if (creneau.getDebut().plus(creneau.getDuree()).isBefore(fin)){
+            tache = creneau.getTache();
+            if (tache != null){
+                tachesTotales++;
+                if (tache.getEtat().equals(Etat.COMPLETED)){
+                    tachesRealisees++;
+                }
+            }
+        }
+    }
+    if (tachesTotales == 0){return rendementJournalierArray[0]/rendementJournalierArray[1];}
+    this.rendementJournalierArray[0] = rendement[0] + tachesRealisees;
+    this.rendementJournalierArray[1] = rendement[1] + tachesTotales;
+    return rendement[0]/rendement[1];
+
     }
 
     public ArrayList<Creneau> getCreneauxIntervalle(LocalDate debut, LocalDate fin){
         return calendrier.getCreneauxIntervalle(debut,fin);
     }
 
+    public void cancelUnscheduledTache(Tache tache){
+        unscheduledTaches.remove(tache);
+        cancelledTaches.add(tache);
+    }
+    public void cancelScheduledTache(Creneau tache){
+        Tache tache_supprimee = tache.dissocierTache();
+        cancelUnscheduledTache(tache_supprimee);
+    }
 
+    public void updateStatistics(){
+        updateRendementJournalier();
+        jourRentable = UpdateJourRentable();
+        setLastUpdateStatisticsTime(LocalDateTime.now());
+    }
 
+    public float getRendementPeriode(Periode periode) throws ExceptionPeriodeInexistante{
+        if (periode == null){throw new ExceptionPeriodeInexistante("La periode est null");}
 
+        ArrayList<Jour> jours = calendrier.getJoursIntervalle(periode.getDebut(),periode.getFin());
+        TreeMap<LocalDate,Periode> periodes = calendrier.getPeriodes();
+        if (periodes.containsValue(periode)){
+        jours = calendrier.getJoursIntervalle(periode.getDebut(),periode.getFin());
+        // nombre jours est egal au nombre de jours dans la periode
+        int nombreJours = jours.size();
+        float rendementJournalier = 0;
+        for (Jour jour : jours){
+            rendementJournalier = rendementJournalier + getRendementJournalier(jour);
+
+        }
+        if (nombreJours == 0){return 0;}
+        return rendementJournalier/nombreJours;
+        }
+        return 0;
+    }
 }

@@ -100,6 +100,22 @@ public Calendrier() {
 
     }
 
+    public TreeMap<LocalDate, Jour> getJours() {
+        return jours;
+    }
+
+    public void setJours(TreeMap<LocalDate, Jour> jours) {
+        this.jours = jours;
+    }
+
+    public TreeMap<LocalDate, Periode> getPeriodes() {
+        return periodes;
+    }
+
+    public void setPeriodes(TreeMap<LocalDate, Periode> periodes) {
+        this.periodes = periodes;
+    }
+
     public void supprimerCreneau(Creneau tache) {
         jours.get(tache.getDebut().toLocalDate()).suprimerCreneau(tache);
     }

@@ -173,6 +173,7 @@ public class MyDesktopPlanner {
     }
 
     public void plannifierTacheAutomatiquement(Tache tache) throws ExceptionPlannificationImpossible {
+        // TESTED
         utilisateur.plannifierTacheAutomatiquement(tache, LocalDate.now());
     }
 
@@ -189,8 +190,35 @@ public class MyDesktopPlanner {
     }
 
     public ArrayList<Creneau> getCreneauxIntervalle(LocalDate dateDebut, LocalDate dateFin){
+        // TESTED
         return utilisateur.getCreneauxIntervalle(dateDebut,dateFin);
     }
+
+    public float getRendementJournalier(Jour jour){
+        // TESTED
+        return utilisateur.getRendementJournalier(jour);
+    }
+
+    public float getRendementJournalier(LocalDate date){
+        // TESTED
+        Jour jour = utilisateur.getCalendrier().getJourDate(date);
+        return utilisateur.getRendementJournalier(jour);
+    }
+
+    public float getRendementJournalierAujourdhui(){
+        // TESTED
+        Jour jour = utilisateur.getCalendrier().getJourDate(LocalDate.now());
+        return utilisateur.getRendementJournalier(jour);
+    }
+
+    public void updateStatistics(){
+        utilisateur.updateStatistics();
+    }
+
+
+
+
+
 
 
 

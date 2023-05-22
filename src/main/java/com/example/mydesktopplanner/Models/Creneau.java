@@ -184,9 +184,11 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
 
     public Tache dissocierTache(){
         Tache tache = this.tache;
+        if (tache != null){
         tache.setEtat(Etat.UNSCHEDULED);
         this.tache = null;
         this.libre = true;
+        }
         return tache;
     }
 

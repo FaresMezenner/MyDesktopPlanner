@@ -18,7 +18,6 @@ public class Periode implements Serializable , Collidable<Periode> , Comparable<
 
 
 
-
     public Periode(LocalDate debut, LocalDate fin) throws ExceptionDateInvalide {
 
         if (debut.isBefore(LocalDate.now())) {
