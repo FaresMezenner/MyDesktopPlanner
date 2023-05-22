@@ -62,7 +62,6 @@ public class AjouterCreneau implements Initializable {
                 }
             }
         });
-
     }
 
 
