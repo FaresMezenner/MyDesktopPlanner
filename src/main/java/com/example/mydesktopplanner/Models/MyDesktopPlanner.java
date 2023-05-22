@@ -5,6 +5,7 @@ import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -137,13 +138,14 @@ public class MyDesktopPlanner {
     public void changerEtatTache(Creneau creneau , Etat etat){
         utilisateur.changerEtatTache(creneau,etat);
     }
+    // A chaque fois que cette méthode est appelée , on doit aussi appeler la methode attribuerFelicitationsBadges
 
     public int attribuerFelicitationsBadges(Creneau creneau){
         return utilisateur.attribuerFelicitationsBadges(creneau);
     }
 
-    public void supprimerTacheProjet(Projet projet , Creneau creneau , Tache tache){
-        utilisateur.supprimerTacheProjet(projet,creneau,tache);
+    public void supprimerTacheProjet(Projet projet , Creneau tache){
+        utilisateur.supprimerTacheProjet(projet,tache);
     }
 
     public void ajouterProjet(Projet projet){
@@ -177,6 +179,21 @@ public class MyDesktopPlanner {
     public float getRendementPeriode(Periode periode) throws ExceptionPeriodeInexistante{
        return utilisateur.getRendementPeriode(periode);
     }
+
+    public ArrayList<Projet> getProjets(){
+        return utilisateur.getProjets();
+    }
+
+    public LinkedList<Tache> getTachesUnscheduled(){
+        return utilisateur.getUnscheduledTaches();
+    }
+
+    public ArrayList<Creneau> getCreneauxIntervalle(LocalDate dateDebut, LocalDate dateFin){
+        return utilisateur.getCreneauxIntervalle(dateDebut,dateFin);
+    }
+
+
+
 
 
 

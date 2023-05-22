@@ -51,8 +51,8 @@ public class Projet implements Serializable {
 
 
 
-    public void supprimerTache(Tache tache) {
-        taches.remove(tache);
+    public void supprimerTache(Creneau tache) {
+        taches.remove(tache.getDebut());
     }
 
     public void afficher(){

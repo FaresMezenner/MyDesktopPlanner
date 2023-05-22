@@ -262,7 +262,7 @@ public Calendrier() {
         Jour dernierJour = getDernierJour();
 
 
-        ArrayList<Creneau> creneaux= getCreneauxIntervalle(lastUpdateTime.toLocalDate(), dernierJour.getDate());
+        ArrayList<Creneau> creneaux= getCreneauxIntervalle(lastUpdateTime.toLocalDate(), LocalDate.now());
 
         for (Creneau creneau : creneaux) {
             Tache tache = creneau.getTache();
@@ -275,9 +275,6 @@ public Calendrier() {
     //cette fonction prend une periode et re-planifie tout les tach non blockées dans cette periode
     // et renvoie la liste des taches qui n'ont pas été planifiées
     public ArrayList<Tache> rePlanifier(Periode periode, boolean aleatoir) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
-
-
-
 
         ArrayList<Tache> unscheduledTaches = new ArrayList<>();
 
@@ -349,6 +346,10 @@ public Calendrier() {
         }
         if (totalTaches == 0){return 0;}
         return totalTachesRealises / totalTaches;
+    }
+
+    public Jour getPremierJour(){
+        return jours.firstEntry().getValue();
     }
 
 

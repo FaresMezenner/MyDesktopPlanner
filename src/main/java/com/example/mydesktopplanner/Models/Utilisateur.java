@@ -310,14 +310,9 @@ public class Utilisateur implements Serializable {
         projet.ajouterTache(tache);
     }
 
-    public void supprimerTacheProjet(Projet projet , Creneau creneau , Tache tache){
+    public void supprimerTacheProjet(Projet projet , Creneau creneau){
         // Supprimer tache Projet
-        projet.supprimerTache(tache);
-        unscheduledTaches.remove(tache);
-        if (creneau != null){
-            creneau.setTache(null);
-            creneau.setLibre(true);
-        }
+        projet.supprimerTache(creneau);
     }
 
 
@@ -328,6 +323,7 @@ public class Utilisateur implements Serializable {
             tache.setEtat(etat);
             // Always remember to check for greetings when calling this function}
         }
+        updateEtatTaches();
         }
 
 
@@ -361,7 +357,8 @@ public class Utilisateur implements Serializable {
         // Elle renvoie 4 si l'utilisateur recoit un badge EXCELLENT
         Jour jour = calendrier.getJourDate(creneau.getDate());
         Tache tache = creneau.getTache();
-        Etat etat = tache.getEtat();
+        Etat etat = Etat.CANCELLED;
+        if (tache != null){etat = tache.getEtat();}
         // On vérifie si l'utilisateur a deja ete félicité
         if (jour.getFelicitations() || !(etat.equals(Etat.COMPLETED))){return 0;}
         try {
@@ -372,7 +369,7 @@ public class Utilisateur implements Serializable {
             for (Creneau c : creneaux){
                 Tache tacheCreneau = c.getTache();
                 if (tacheCreneau != null){
-                    if (tache.getEtat().equals(Etat.COMPLETED)){
+                    if (tacheCreneau.getEtat().equals(Etat.COMPLETED)){
                         nbTachesAccomplies++;
                     }
                 }
@@ -437,7 +434,7 @@ public class Utilisateur implements Serializable {
 
 
     public void updateStatistiques(){
-
+    // TODO : Update stats
     }
 
     public void plannifierTacheAutomatiquement(Tache tache,LocalDate date) throws ExceptionPlannificationImpossible {
@@ -447,20 +444,82 @@ public class Utilisateur implements Serializable {
         List<Creneau> creneauxLibres = creneaux.stream().filter(Creneau::isLibre).collect(Collectors.toList());
         if (!creneauxLibres.isEmpty() && !(creneauxLibres == null)){
             for (Creneau creneau : creneauxLibres) {
-                    try {
-                        try {
-                            affecterTacheCreneau(creneau, tache);
-                            return;
-                        } catch (ExceptionCreneauNonLibre e) {
-                        // On essaye de plannifier une atche dans un creneau deja occupe , on ne fait rien
-                        }
-                        } catch (ExceptionDureeInvalide e) {
-                        // On essaye de plannifier une tache simple dans un créneau plus petit , on ne fait rien
-                        }
+                if (creneau.getDate().isAfter(tache.getDateLimite().toLocalDate())) {
+                    throw new ExceptionPlannificationImpossible("Creneau non libre");
+                }
+                try {
+                    affecterTacheCreneau(creneau, tache);
+                    return;
+                } catch (ExceptionCreneauNonLibre e) {
+                // On essaye de plannifier une atche dans un creneau deja occupe , on ne fait rien
+                } catch (ExceptionDureeInvalide e) {
+                // On essaye de plannifier une tache simple dans un créneau plus petit , on ne fait rien
+                }
 
         }
     }
         throw new ExceptionPlannificationImpossible("Aucun creneau disponible");
+    }
+
+
+    public float getRendementJournalier(Jour jour){
+        // Renvoies le nombre de taches réalisés / nombre de taches planifiées
+        int nbTachesRealisees = 0;
+        int nbTachesPlanifiees = 0;
+        try {
+            LinkedList<Creneau> creneaux = calendrier.getCreneauxJour(jour.getDate());
+            if (creneaux != null && !creneaux.isEmpty()){
+                for (Creneau creneau : creneaux){
+                    if (creneau.getTache() != null){
+                        nbTachesPlanifiees++;
+                        if (creneau.getTache().getEtat().equals(Etat.COMPLETED)){
+                            nbTachesRealisees++;
+                        }
+                    }
+                }
+            }
+            if (nbTachesPlanifiees == 0){
+                return 0;
+            }
+            return nbTachesRealisees / nbTachesPlanifiees;
+        } catch (ExceptionDateInvalide e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public float getRendementJournalierToday(){
+        return getRendementJournalier(calendrier.getJourDate(LocalDate.now()));
+    }
+
+    public Jour UpdateJourRentable(){
+        // On calcule le jour le plus rentable
+        float rendementMax = 0;
+        LocalDate debut = lastUpdateStatisticsTime.toLocalDate();
+        ArrayList<Jour> jours = calendrier.getJoursIntervalle(debut, LocalDate.now());
+        if (jours.isEmpty() || jours == null){
+            return null;
+        }
+        if (jourRentable != null){
+        rendementMax = getRendementJournalier(jourRentable);}
+        for (Jour jour : jours){
+            float rendement = getRendementJournalier(jour);
+            if (rendement > rendementMax){
+                rendementMax = rendement;
+                jourRentable = jour;
+            }
+        }
+        // setLastUpdateStatisticsTime(LocalDateTime.now());
+        return jourRentable;
+    }
+
+    public float updateRendementJournalier(){
+    // TODO : Finish this
+        return 0;
+    }
+
+    public ArrayList<Creneau> getCreneauxIntervalle(LocalDate debut, LocalDate fin){
+        return calendrier.getCreneauxIntervalle(debut,fin);
     }
 
 

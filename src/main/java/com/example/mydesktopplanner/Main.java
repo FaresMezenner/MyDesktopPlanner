@@ -1,10 +1,7 @@
 package com.example.mydesktopplanner;
 
 import com.example.mydesktopplanner.Models.*;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCreneauNonLibre;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInvalide;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,7 +32,7 @@ public class Main extends Application{
 
     public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau, IOException, ClassNotFoundException {
 
-        launch();
+        //launch();
 
         Utilisateur utilisateur = new Utilisateur("user");
 
@@ -93,6 +90,7 @@ public class Main extends Application{
         Tache tacheSimple4 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
         Tache tacheSimple5 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
         Tache tacheSimple6 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+        Tache tacheSimple7 = new TacheSimple("Revision 1",Duration.ofMinutes(130),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
 
 
         myDesktopPlanner.ajouterTache(tacheSimple1);
@@ -101,19 +99,19 @@ public class Main extends Application{
         myDesktopPlanner.ajouterTache(tacheSimple4);
         myDesktopPlanner.ajouterTache(tacheSimple5);
         myDesktopPlanner.ajouterTache(tacheSimple6);
+        myDesktopPlanner.ajouterTache(tacheSimple7);
 
 
 
         try {
         myDesktopPlanner.affecterTacheCreneau(a, tacheSimple1);
         myDesktopPlanner.affecterTacheCreneau(b, tacheSimple2);
-        myDesktopPlanner.affecterTacheCreneau(c, tacheSimple3);
-        myDesktopPlanner.affecterTacheCreneau(d, tacheSimple4);
         myDesktopPlanner.affecterTacheCreneau(e, tacheSimple5);
         myDesktopPlanner.affecterTacheCreneau(f, tacheSimple6);
         } catch (ExceptionCreneauNonLibre ex) {
             throw new RuntimeException(ex);
         }
+
         myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
         myDesktopPlanner.attribuerFelicitationsBadges(a);
 
@@ -134,9 +132,18 @@ public class Main extends Application{
 
 
 
-       myDesktopPlanner.updateEtatTaches();
 
-        System.out.println(utilisateur.getLastUpdateTachesTime());
+        // Affichage des creneaux et de leur contenu
+
+        ArrayList<Creneau> creneaux= myDesktopPlanner.getCreneauxIntervalle(LocalDate.of(2023, 07, 1 ),LocalDate.of(2023, 07, 6));
+
+        for (Creneau creneau : creneaux) {
+            if (creneau.getTache() != null) {
+                System.out.println(creneau.getTache().getNom());
+            }
+        }
+
+
 
 
 //        TacheSimple test = new TacheSimple("test", Duration.ofMinutes(30), Priorite.HIGH, LocalDateTime.of(2021, 7, 1, 12, 00), Categorie.HEALTH, false);
@@ -194,10 +201,12 @@ public class Main extends Application{
 **/
 
 
-
-
-
-
+        for (Creneau creneau : creneaux) {
+            System.out.println(creneau.getDebut());
+            if (creneau.getTache() != null) {
+                System.out.println(creneau.getTache().getNom());
+            }
+        }
 
 
     }
