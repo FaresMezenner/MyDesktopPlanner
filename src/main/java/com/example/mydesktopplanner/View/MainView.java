@@ -24,6 +24,7 @@ public class MainView extends Stage {
     private CalendarView calendarView;
     private AppHUDView hudView;
     private SidePanelView sidePanelView;
+    private RightSidePannelTache rightSidePannelTache;
 
 
 
@@ -54,6 +55,12 @@ public class MainView extends Stage {
         this.sidePanelView = new SidePanelView();
         //setting the side panel inside its placeholder
         sidePanel.getChildren().add(sidePanelView.getView());
+
+        //getting the right side panel placeholder
+        AnchorPane rightSidePanel = (AnchorPane) getScene().lookup("#right_planel");
+        this.rightSidePannelTache = new RightSidePannelTache();
+        //setting the right side panel inside its placeholder
+        rightSidePanel.getChildren().add(rightSidePannelTache.getView());
 
 
 

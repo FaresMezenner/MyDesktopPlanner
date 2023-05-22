@@ -2,8 +2,7 @@ package com.example.mydesktopplanner.View;
 
 import com.example.mydesktopplanner.Main;
 import com.example.mydesktopplanner.Models.*;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionPlannificationImpossible;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionUserDoesNotExist;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +17,8 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.TreeMap;
 
 public class AppHUDView {
 
@@ -125,6 +126,70 @@ public class AppHUDView {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            }
+        });
+
+        ((Button) view.lookup("#periode")).setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+
+                Creneau a = null;
+                Creneau b = null;
+                Creneau c = null;
+                try {
+                    a = new Creneau(
+                            LocalDateTime.of(2023, 05, 23, 12, 00 ),
+                            LocalDateTime.of(2023, 05, 23, 13, 10)
+                    );
+                    b = new Creneau(
+                            LocalDateTime.of(2023, 05, 24, 12, 00 ),
+                            LocalDateTime.of(2023, 05, 24, 13, 51)
+                    );
+
+                    c = new Creneau(
+                            LocalDateTime.of(2023, 05, 31, 12, 00 ),
+                            LocalDateTime.of(2023, 05, 31, 13, 51)
+                    );
+
+
+                    MyDesktopPlanner.getInstance().ajouterCreneau(a);
+                    MyDesktopPlanner.getInstance().ajouterCreneau(b);
+                    MyDesktopPlanner.getInstance().ajouterCreneau(c);
+
+                    Periode periode = new Periode(
+                            LocalDate.of(2023, 05, 23),
+                            LocalDate.of(2023, 05, 23),
+                            "periode 1"
+                    );
+
+
+                    MyDesktopPlanner.getInstance().ajouterPeriode(periode);
+
+                    TacheSimple tacha = new TacheSimple("tache 1", Duration.ofMinutes(30), Priorite.HIGH, LocalDate.of(2023, 05, 23), Categorie.HEALTH, false);
+
+
+                    MyDesktopPlanner.getInstance().ajouterTache(tacha);
+
+                    Projet projeta = new Projet("projet 1", "testing", new TreeMap<>());
+
+                    MyDesktopPlanner.getInstance().ajouterProjet(projeta);
+
+                    MainView.getInstance().update();
+
+                } catch (ExceptionDureeInvalide e) {
+                    throw new RuntimeException(e);
+                } catch (ExceptionDateInvalide e) {
+                    throw new RuntimeException(e);
+                } catch (ExceptionCollisionHorairesCreneau e) {
+                    throw new RuntimeException(e);
+                } catch (ExceptionCollisionPeriode e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
             }
         });
 

@@ -22,7 +22,6 @@ public class MyDesktopPlanner {
     public static MyDesktopPlanner initiateInstance(Utilisateur utilisateur) {
         if (instance == null) {
             instance = new MyDesktopPlanner(utilisateur);
-
             return instance;
         }
         else return instance;

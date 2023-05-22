@@ -7,5 +7,6 @@
       <AnchorPane fx:id="hud" prefHeight="100.0" prefWidth="1500.0" />
       <AnchorPane fx:id="side_panel" layoutY="100.0" maxHeight="650.0" maxWidth="250.0" prefHeight="649.0" prefWidth="249.0" />
       <AnchorPane fx:id="calendar" layoutX="250.0" layoutY="100.0" prefHeight="650.0" prefWidth="1000.0" />
+      <AnchorPane fx:id="right_planel" layoutX="1250.0" layoutY="100.0" maxHeight="650.0" maxWidth="250.0" prefHeight="649.0" prefWidth="249.0" />
    </children>
 </AnchorPane>
