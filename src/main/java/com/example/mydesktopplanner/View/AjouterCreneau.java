@@ -43,6 +43,9 @@ public class AjouterCreneau implements Initializable {
                 int heures = Integer.parseInt(newValue);
                 if (heures > 59) {
                     tf.setText("59");
+                }else {
+                    // Supprime les zéros non significatifs
+                    tf.setText(String.valueOf(heures));
                 }
             }
         });
@@ -59,7 +62,10 @@ public class AjouterCreneau implements Initializable {
                 int heures = Integer.parseInt(newValue);
                 if (heures > 23) {
                     tf.setText("23");
-                }
+                } else {
+                // Supprime les zéros non significatifs
+                tf.setText(String.valueOf(heures));
+            }
             }
         });
     }
