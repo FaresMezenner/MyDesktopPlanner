@@ -1,6 +1,7 @@
 package com.example.mydesktopplanner.Control;
 import com.example.mydesktopplanner.Main;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionUserDoesNotExist;
+import com.example.mydesktopplanner.Models.MyDesktopPlanner;
 import com.example.mydesktopplanner.Models.UserManager;
 import com.example.mydesktopplanner.Models.Utilisateur;
 import com.example.mydesktopplanner.View.MainView;
@@ -35,6 +36,7 @@ public class Authentification implements EventHandler<ActionEvent> {
             //we'll try to authentic the user
             utilisateur = UserManager.getInstance().Authentify(pseudoField.getText());
             window.close();
+            MyDesktopPlanner.initiateInstance(utilisateur);
 
             //once authenticated, we'll show the main view
             MainView.getInstance().show();
@@ -81,6 +83,7 @@ public class Authentification implements EventHandler<ActionEvent> {
                     Utilisateur utilisateur = new Utilisateur(pseudo);
                     try {
                         UserManager.getInstance().setUser(utilisateur);
+                        MyDesktopPlanner.initiateInstance(utilisateur);
                         window.close();
 
                         //once uer created, we'll show the main view

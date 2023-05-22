@@ -22,6 +22,7 @@ public class MyDesktopPlanner {
     public static MyDesktopPlanner initiateInstance(Utilisateur utilisateur) {
         if (instance == null) {
             instance = new MyDesktopPlanner(utilisateur);
+
             return instance;
         }
         else return instance;
@@ -216,6 +217,12 @@ public class MyDesktopPlanner {
 
     public TreeMap<LocalDate, Periode> getPeriodes() {
         return utilisateur.getPeriodes();
+    }
+
+
+    public void logout(){
+        utilisateur = null;
+        instance = null;
     }
 
 

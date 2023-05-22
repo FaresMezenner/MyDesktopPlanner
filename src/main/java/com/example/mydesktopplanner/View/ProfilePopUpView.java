@@ -33,7 +33,7 @@ public class ProfilePopUpView extends Stage {
     }
 
     private void setValues() {
-        (getScene().lookup("#user")).setAccessibleText(MyDesktopPlanner.getInstance().getUtilisateur().getPseudo());
+        ((Text)getScene().lookup("#user")).setText(MyDesktopPlanner.getInstance().getUtilisateur().getPseudo());
         ((Text)getScene().lookup("#good")).setText(
                 String.valueOf(MyDesktopPlanner.getInstance().getUtilisateur().getBadges()[Badge.GOOD.ordinal()])
         );

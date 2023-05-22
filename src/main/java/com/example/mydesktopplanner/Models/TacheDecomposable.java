@@ -1,6 +1,7 @@
 package com.example.mydesktopplanner.Models;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class TacheDecomposable extends Tache implements Decomposable<Duration> {
@@ -8,21 +9,21 @@ public class TacheDecomposable extends Tache implements Decomposable<Duration> {
     private int numeroSousTache = 1;
     private TacheDecomposable precedent = null,suivant = null;
 
-    public TacheDecomposable(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie, TacheDecomposable precedent, TacheDecomposable suivant, int numeroSousTache) {
+    public TacheDecomposable(String nom, Duration duree, Priorite priorite, LocalDate dateLimite, Categorie categorie, TacheDecomposable precedent, TacheDecomposable suivant, int numeroSousTache) {
         super(nom, duree, priorite, dateLimite, categorie);
         this.numeroSousTache = numeroSousTache;
         this.precedent = precedent;
         this.suivant = suivant;
     }
 
-    public TacheDecomposable(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie, TacheDecomposable precedent, int numeroSousTache) {
+    public TacheDecomposable(String nom, Duration duree, Priorite priorite, LocalDate dateLimite, Categorie categorie, TacheDecomposable precedent, int numeroSousTache) {
         super(nom, duree, priorite, dateLimite, categorie);
         this.numeroSousTache = numeroSousTache;
         this.precedent = precedent;
     }
 
     // Constructeur qui permets de générer une tache décomposable avec un numéro de sous tache par défaut à 1 et UNSCHEDULED
-    public TacheDecomposable(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie) {
+    public TacheDecomposable(String nom, Duration duree, Priorite priorite, LocalDate dateLimite, Categorie categorie) {
         super(nom, duree, priorite, dateLimite, categorie);
     }
 

@@ -143,7 +143,7 @@ public class CalendarView {
     }
 
 
-    public void updateCalendar() {
+    public void update() {
         LocalDate date = LocalDate.of(startOfWeek.getYear(), startOfWeek.getMonth(), startOfWeek.getDayOfMonth());
         for (int i = 0; i < 7; i++) {
             daysLabel[i].setText(date.getDayOfMonth() + ". " + MonthsFrench.values()[date.getMonth().getValue() -1 ].getName());
@@ -165,7 +165,7 @@ public class CalendarView {
                 dayOfWeek = dayOfWeek.minusDays(1);
             }
             startOfWeek = dayOfWeek;
-            updateCalendar();
+            update();
         }
 
 

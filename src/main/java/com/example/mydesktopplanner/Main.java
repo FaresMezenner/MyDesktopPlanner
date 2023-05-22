@@ -2,10 +2,7 @@ package com.example.mydesktopplanner;
 
 import com.example.mydesktopplanner.Control.Authentification;
 import com.example.mydesktopplanner.Models.*;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionPeriode;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
-import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInvalide;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 import com.example.mydesktopplanner.View.MainView;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -66,53 +63,53 @@ public class Main extends Application {
 
     }
 
-    public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau, IOException, ClassNotFoundException, ExceptionCollisionPeriode {
+    public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau, IOException, ClassNotFoundException, ExceptionCollisionPeriode, ExceptionUserDoesNotExist {
 
 
 
-        Utilisateur utilisateur = new Utilisateur("fares");
-
-       MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
-
-        utilisateur.setNbMinimalTachesParJour(1);
-
-
-
-        Creneau a = new Creneau(
-                LocalDateTime.of(2023, 05, 23, 12, 00 ),
-                LocalDateTime.of(2023, 05, 23, 13, 10)
-        );
-
-        Creneau b = new Creneau(
-                LocalDateTime.of(2023, 05, 24, 12, 00 ),
-                LocalDateTime.of(2023, 05, 24, 13, 51)
-        );
-
-        Creneau c = new Creneau(
-                LocalDateTime.of(2023, 05, 31, 12, 00 ),
-                LocalDateTime.of(2023, 05, 31, 13, 51)
-        );
-
-        myDesktopPlanner.ajouterCreneau(a);
-        myDesktopPlanner.ajouterCreneau(b);
-        myDesktopPlanner.ajouterCreneau(c);
-
-
-        Periode periode = new Periode(
-                LocalDate.of(2023, 05, 23),
-                LocalDate.of(2023, 05, 23),
-                "periode 1"
-        );
-        myDesktopPlanner.ajouterPeriode(periode);
-
-        TacheSimple tacha = new TacheSimple("tache 1", Duration.ofMinutes(30), Priorite.HIGH, LocalDateTime.of(2023, 05, 23, 12, 00), Categorie.HEALTH, false);
-
-
-        myDesktopPlanner.ajouterTache(tacha);
-
-        Projet projeta = new Projet("projet 1", "testing", new TreeMap<>());
-
-        myDesktopPlanner.ajouterProjet(projeta);
+//        Utilisateur utilisateur = UserManager.getInstance().Authentify("fares");
+//
+//       MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
+//
+//        utilisateur.setNbMinimalTachesParJour(1);
+//
+//
+//
+//        Creneau a = new Creneau(
+//                LocalDateTime.of(2023, 05, 23, 12, 00 ),
+//                LocalDateTime.of(2023, 05, 23, 13, 10)
+//        );
+//
+//        Creneau b = new Creneau(
+//                LocalDateTime.of(2023, 05, 24, 12, 00 ),
+//                LocalDateTime.of(2023, 05, 24, 13, 51)
+//        );
+//
+//        Creneau c = new Creneau(
+//                LocalDateTime.of(2023, 05, 31, 12, 00 ),
+//                LocalDateTime.of(2023, 05, 31, 13, 51)
+//        );
+//
+//        myDesktopPlanner.ajouterCreneau(a);
+//        myDesktopPlanner.ajouterCreneau(b);
+//        myDesktopPlanner.ajouterCreneau(c);
+//
+//
+//        Periode periode = new Periode(
+//                LocalDate.of(2023, 05, 23),
+//                LocalDate.of(2023, 05, 23),
+//                "periode 1"
+//        );
+//        myDesktopPlanner.ajouterPeriode(periode);
+//
+//        TacheSimple tacha = new TacheSimple("tache 1", Duration.ofMinutes(30), Priorite.HIGH, LocalDate.of(2023, 05, 23), Categorie.HEALTH, false);
+//
+//
+//        myDesktopPlanner.ajouterTache(tacha);
+//
+//        Projet projeta = new Projet("projet 1", "testing", new TreeMap<>());
+//
+//        myDesktopPlanner.ajouterProjet(projeta);
 
         launch();
 //        myDesktopPlanner.afficherCreneaux();

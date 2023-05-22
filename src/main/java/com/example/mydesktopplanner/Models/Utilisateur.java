@@ -439,7 +439,7 @@ public class Utilisateur implements Serializable {
         calendrier.updateEtatTaches(this.lastUpdateTachesTime);
         // Update l'etat des taches UNSCHEDULED
         for (Tache tache : unscheduledTaches){
-            if (tache.getDateLimite().isBefore(LocalDate.now().atStartOfDay())){
+            if (tache.getDateLimite().isBefore(LocalDate.now())){
                 tache.setEtat(Etat.NOTREALIZED);
             }
         }
@@ -453,7 +453,7 @@ public class Utilisateur implements Serializable {
         List<Creneau> creneauxLibres = creneaux.stream().filter(Creneau::isLibre).collect(Collectors.toList());
         if (!creneauxLibres.isEmpty() && !(creneauxLibres == null)){
             for (Creneau creneau : creneauxLibres) {
-                if (creneau.getDate().isAfter(tache.getDateLimite().toLocalDate())) {
+                if (creneau.getDate().isAfter(tache.getDateLimite())) {
                     throw new ExceptionPlannificationImpossible("Creneau non libre");
                 }
                 try {

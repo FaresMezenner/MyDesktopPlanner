@@ -63,4 +63,12 @@ public class MainView extends Stage {
     public CalendarView getCalendarView() {
         return calendarView;
     }
+
+
+    public void update() throws IOException {
+        calendarView.update();
+        hudView.update();
+        sidePanelView.update();
+    }
+
 }

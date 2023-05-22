@@ -2,6 +2,7 @@ package com.example.mydesktopplanner.Models;
 
 import javax.swing.plaf.TableHeaderUI;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class TacheSimple extends Tache{
@@ -9,7 +10,7 @@ public class TacheSimple extends Tache{
     boolean isPeriodique;
 
 
-    public TacheSimple(String nom, Duration durée, Priorite priorite, LocalDateTime dateLimite, Categorie categorie, boolean isPeriodique) {
+    public TacheSimple(String nom, Duration durée, Priorite priorite, LocalDate dateLimite, Categorie categorie, boolean isPeriodique) {
         super(nom, durée, priorite, dateLimite, categorie);
         this.isPeriodique = isPeriodique;
     }

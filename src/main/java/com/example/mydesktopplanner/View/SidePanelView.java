@@ -159,4 +159,13 @@ public class SidePanelView {
 
 
 
+    public void update() throws IOException {
+        taches.getChildren().clear();
+        projets.getChildren().clear();
+        periodes.getChildren().clear();
+        fillTitledPanes();
+    }
+
+
+
 }

@@ -6,6 +6,7 @@ import javafx.scene.control.skin.TableColumnHeader;
 
 import java.io.Serializable;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -13,7 +14,7 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
     private String nom;
     private Duration duree;
     private Priorite priorite;
-    private LocalDateTime dateLimite;   // Dans ce projet , la limite est une date et non une heure
+    private LocalDate dateLimite;   // Dans ce projet , la limite est une date et non une heure
     private Categorie categorie;
 
     private Etat etat = Etat.UNSCHEDULED;
@@ -21,7 +22,7 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
 
     // When running the app for the first time , the lastUpdateTime is set to 2000-01-01 00:00
 
-    public Tache(String nom, Duration duree, Priorite priorite, LocalDateTime dateLimite, Categorie categorie) {
+    public Tache(String nom, Duration duree, Priorite priorite, LocalDate dateLimite, Categorie categorie) {
         this.nom = nom;
         this.duree = duree;
         this.priorite = priorite;
@@ -65,11 +66,11 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
         this.priorite = priorite;
     }
 
-    public LocalDateTime getDateLimite() {
+    public LocalDate getDateLimite() {
         return dateLimite;
     }
 
-    public void setDateLimite(LocalDateTime dateLimite) {
+    public void setDateLimite(LocalDate dateLimite) {
         this.dateLimite = dateLimite;
     }
 
@@ -124,7 +125,7 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
 
     public void syncEtat() {
         // Permets de mettre a jour l'etat des taches in progress quand leur deadline est dépassée
-    	if (this.etat == Etat.INPROGRESS && this.dateLimite.isBefore(LocalDateTime.now())) {
+    	if (this.etat == Etat.INPROGRESS && this.dateLimite.isBefore(LocalDate.now())) {
     		this.etat = Etat.NOTREALIZED;
     	}
     }
