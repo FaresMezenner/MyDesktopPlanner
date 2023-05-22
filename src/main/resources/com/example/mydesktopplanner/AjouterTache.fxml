@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="605.0" prefWidth="340.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.AjouterTache">
+<AnchorPane prefHeight="741.0" prefWidth="340.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.AjouterTache">
    <children>
       <AnchorPane prefHeight="86.0" prefWidth="340.0" style="-fx-background-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
          <children>
@@ -21,7 +21,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <Button fx:id="ok" layoutX="102.0" layoutY="557.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
+      <Button fx:id="ok" layoutX="109.0" layoutY="691.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -90,6 +90,34 @@
             <Font size="16.0" />
          </font>
       </TextField>
+      <AnchorPane layoutX="33.0" layoutY="546.0" prefHeight="140.0" prefWidth="278.0">
+         <children>
+            <Text layoutX="91.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Debut" textAlignment="CENTER" wrappingWidth="96.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="DebutMinutes" layoutX="163.0" layoutY="33.0" prefHeight="30.0" prefWidth="96.0" promptText="Minutes" />
+            <TextField fx:id="DebutHeures" layoutX="14.0" layoutY="33.0" prefHeight="30.0" prefWidth="96.0" promptText="Heures" />
+            <TextField fx:id="FinHeures" layoutX="16.0" layoutY="101.0" prefHeight="30.0" prefWidth="96.0" promptText="Heures" />
+            <Text layoutX="136.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="89.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fin" textAlignment="CENTER" wrappingWidth="96.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="133.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+            <TextField fx:id="FinMinutes" layoutX="163.0" layoutY="100.0" prefHeight="30.0" prefWidth="96.0" promptText="Minutes" />
+         </children>
+      </AnchorPane>
    </children>
    <effect>
       <DropShadow />
