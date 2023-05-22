@@ -84,7 +84,7 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
 
     // -------------------------------------- Delimitation Setters/Getters --------------------------------------
 
-    abstract boolean isDecomposable();  // Retourne vrai si la tache est décomposable , faux sinon
+    public abstract boolean isDecomposable();  // Retourne vrai si la tache est décomposable , faux sinon
 
 
     // Fonction qui permet de comparer deux taches

@@ -55,7 +55,7 @@ public class TacheDecomposable extends Tache implements Decomposable<Duration> {
 
     // --------------- Getters/Setters ---------------
     @Override
-    boolean isDecomposable() {
+    public boolean isDecomposable() {
         return true;
     }
 
@@ -94,6 +94,18 @@ public class TacheDecomposable extends Tache implements Decomposable<Duration> {
         super.afficher();
         System.out.println("Numero de sous-tache : " + this.getNumeroSousTache());
 
+    }
+
+
+    public int getNbSousTaches(){
+        TacheDecomposable tache = this;
+        int nbSousTaches = numeroSousTache;
+        while (tache.getSuivant() != null){
+            nbSousTaches++;
+            tache = tache.getSuivant();
+        }
+
+        return nbSousTaches;
     }
 
 

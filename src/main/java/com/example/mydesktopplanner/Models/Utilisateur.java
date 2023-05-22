@@ -280,6 +280,9 @@ public class Utilisateur implements Serializable {
     }
 
     public void suprimerCreneau(Creneau tache) {
+        for (Projet p : projets) {
+            if (p.getTaches().containsValue(tache)) p.getTaches().remove(tache);
+        }
         calendrier.supprimerCreneau(tache);
     }
 

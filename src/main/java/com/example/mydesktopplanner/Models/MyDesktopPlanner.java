@@ -237,6 +237,10 @@ public class MyDesktopPlanner {
         return utilisateur.getArchives();
     }
 
+    public void suprimerCreneau(Creneau creneau){
+        utilisateur.suprimerCreneau(creneau);
+    }
+
 
 
 

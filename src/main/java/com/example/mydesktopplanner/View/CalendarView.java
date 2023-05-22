@@ -193,7 +193,11 @@ public class CalendarView {
             view.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    //TODO: open creneau Info view
+                    try {
+                        MainView.getInstance().setRightSidePannel((new RightSidePannelCreneau(creneau)).getView());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
 

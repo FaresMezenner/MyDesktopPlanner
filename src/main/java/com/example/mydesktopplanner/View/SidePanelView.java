@@ -82,7 +82,11 @@ public class SidePanelView {
             view.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    System.out.println(tache);
+                    try {
+                        MainView.getInstance().setRightSidePannel((new RightSidePannelTache(tache)).getView());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
         }

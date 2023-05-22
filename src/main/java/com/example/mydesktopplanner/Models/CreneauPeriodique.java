@@ -36,4 +36,8 @@ public class CreneauPeriodique extends Creneau  {
         this.precedent = precedent;
     }
 
+    @Override
+    public boolean isPeriodique() {
+        return true;
+    }
 }

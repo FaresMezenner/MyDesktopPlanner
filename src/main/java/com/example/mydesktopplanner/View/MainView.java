@@ -1,6 +1,7 @@
 package com.example.mydesktopplanner.View;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -24,7 +25,8 @@ public class MainView extends Stage {
     private CalendarView calendarView;
     private AppHUDView hudView;
     private SidePanelView sidePanelView;
-    private RightSidePannelTache rightSidePannelTache;
+
+    private AnchorPane rightSidePanel;
 
 
 
@@ -57,10 +59,9 @@ public class MainView extends Stage {
         sidePanel.getChildren().add(sidePanelView.getView());
 
         //getting the right side panel placeholder
-        AnchorPane rightSidePanel = (AnchorPane) getScene().lookup("#right_planel");
-        this.rightSidePannelTache = new RightSidePannelTache();
-        //setting the right side panel inside its placeholder
-        rightSidePanel.getChildren().add(rightSidePannelTache.getView());
+        rightSidePanel = (AnchorPane) getScene().lookup("#right_planel");
+        //setting the empty right side panel inside its placeholder
+        rightSidePanel.getChildren().add(FXMLLoader.load(com.example.mydesktopplanner.Main.class.getResource("RightSidePanelEmpty.fxml")));
 
 
 
@@ -76,6 +77,16 @@ public class MainView extends Stage {
         calendarView.update();
         hudView.update();
         sidePanelView.update();
+    }
+
+
+    public void setRightSidePannel(Node view){
+        rightSidePanel.getChildren().clear();
+        rightSidePanel.getChildren().add(view);
+    }
+    public void emptyRightSidePannel() throws IOException {
+        rightSidePanel.getChildren().clear();
+        rightSidePanel.getChildren().add(FXMLLoader.load(com.example.mydesktopplanner.Main.class.getResource("RightSidePanelEmpty.fxml")));
     }
 
 }

@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.time.*;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 
@@ -24,9 +23,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println(getClass().getResource("Main.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AjouterTache.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Authentification/AuthentificationScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        TextField pseudoField =  (TextField) scene.lookup("#pseudo");
+        Button button = (Button) scene.lookup("#btn");
+        button.setOnAction(new Authentification(pseudoField, stage));
 //        button.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
 //            public void handle(ActionEvent actionEvent) {
@@ -65,35 +66,29 @@ public class Main extends Application {
     public static void main(String[] args) throws ExceptionDureeInvalide, ExceptionDateInvalide, ExceptionCollisionHorairesCreneau, IOException, ClassNotFoundException, ExceptionCollisionPeriode, ExceptionUserDoesNotExist {
 
 
-        launch(args);
 
-        Utilisateur utilisateur = new Utilisateur("fares");
-
-        UserManager.getInstance().setUser(utilisateur);
-
-
-
-        MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
-
-        utilisateur.setNbMinimalTachesParJour(1);
-
-
-
-        Creneau a = new Creneau(
-                LocalDateTime.of(2023, 05, 23, 12, 00 ),
-                LocalDateTime.of(2023, 05, 23, 13, 10)
-        );
-
-        Creneau b = new Creneau(
-                LocalDateTime.of(2023, 05, 24, 12, 00 ),
-                LocalDateTime.of(2023, 05, 24, 13, 51)
-        );
-
-        Creneau c = new Creneau(
-                LocalDateTime.of(2023, 05, 31, 12, 00 ),
-                LocalDateTime.of(2023, 05, 31, 13, 51)
-        );
-
+//        Utilisateur utilisateur = UserManager.getInstance().Authentify("fares");
+//
+//       MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
+//
+//        utilisateur.setNbMinimalTachesParJour(1);
+//
+//
+//
+//        Creneau a = new Creneau(
+//                LocalDateTime.of(2023, 05, 23, 12, 00 ),
+//                LocalDateTime.of(2023, 05, 23, 13, 10)
+//        );
+//
+//        Creneau b = new Creneau(
+//                LocalDateTime.of(2023, 05, 24, 12, 00 ),
+//                LocalDateTime.of(2023, 05, 24, 13, 51)
+//        );
+//
+//        Creneau c = new Creneau(
+//                LocalDateTime.of(2023, 05, 31, 12, 00 ),
+//                LocalDateTime.of(2023, 05, 31, 13, 51)
+//        );
 //
 //        myDesktopPlanner.ajouterCreneau(a);
 //        myDesktopPlanner.ajouterCreneau(b);
@@ -107,16 +102,16 @@ public class Main extends Application {
 //        );
 //        myDesktopPlanner.ajouterPeriode(periode);
 //
-        TacheSimple tacha = new TacheSimple("tache 1", Duration.ofMinutes(30), Priorite.HIGH, LocalDate.of(2023, 05, 23), Categorie.HEALTH, false);
+//        TacheSimple tacha = new TacheSimple("tache 1", Duration.ofMinutes(30), Priorite.HIGH, LocalDate.of(2023, 05, 23), Categorie.HEALTH, false);
 //
 //
-        myDesktopPlanner.ajouterTache(tacha);
+//        myDesktopPlanner.ajouterTache(tacha);
 //
-        Projet projeta = new Projet("projet 1", "testing", new TreeMap<>());
+//        Projet projeta = new Projet("projet 1", "testing", new TreeMap<>());
 //
-        myDesktopPlanner.ajouterProjet(projeta);
+//        myDesktopPlanner.ajouterProjet(projeta);
 
-        //launch();
+        launch();
 //        myDesktopPlanner.afficherCreneaux();
 
 //        Creneau d = new Creneau(
@@ -135,9 +130,9 @@ public class Main extends Application {
 //        );
 
 //
-        myDesktopPlanner.ajouterCreneau(a);
-        myDesktopPlanner.ajouterCreneau(b);
-        myDesktopPlanner.ajouterCreneau(c);
+//        myDesktopPlanner.ajouterCreneau(a);
+//        myDesktopPlanner.ajouterCreneau(b);
+//        myDesktopPlanner.ajouterCreneau(c);
 //        myDesktopPlanner.ajouterCreneau(d);
 //        myDesktopPlanner.ajouterCreneau(e);
 //        myDesktopPlanner.ajouterCreneau(f);
@@ -147,55 +142,41 @@ public class Main extends Application {
 //
 //
 //
-        Tache tacheSimple1 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDate.of(2024, 07, 20),Categorie.HEALTH,false);
-        Tache tacheSimple2 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDate.of(2024, 07, 20),Categorie.HEALTH,false);
-        Tache tacheSimple3 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDate.of(2024, 07, 20),Categorie.HEALTH,false);
+//        Tache tacheSimple1 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+//        Tache tacheSimple2 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
+//        Tache tacheSimple3 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
 //        Tache tacheSimple4 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
 //        Tache tacheSimple5 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
 //        Tache tacheSimple6 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDateTime.of(2024, 07, 20, 02, 10),Categorie.HEALTH,false);
 //
 //
-        myDesktopPlanner.ajouterTache(tacheSimple1);
-        myDesktopPlanner.ajouterTache(tacheSimple2);
-        myDesktopPlanner.ajouterTache(tacheSimple3);
+//        myDesktopPlanner.ajouterTache(tacheSimple1);
+//        myDesktopPlanner.ajouterTache(tacheSimple2);
+//        myDesktopPlanner.ajouterTache(tacheSimple3);
 //        myDesktopPlanner.ajouterTache(tacheSimple4);
 //        myDesktopPlanner.ajouterTache(tacheSimple5);
 //        myDesktopPlanner.ajouterTache(tacheSimple6);
 //
 //
 //
-        try {
-        myDesktopPlanner.affecterTacheCreneau(a, tacheSimple1);
-        myDesktopPlanner.affecterTacheCreneau(b, tacheSimple2);
-        myDesktopPlanner.affecterTacheCreneau(c, tacheSimple3);
+//        try {
+//        myDesktopPlanner.affecterTacheCreneau(a, tacheSimple1);
+//        myDesktopPlanner.affecterTacheCreneau(b, tacheSimple2);
+//        myDesktopPlanner.affecterTacheCreneau(c, tacheSimple3);
 //        myDesktopPlanner.affecterTacheCreneau(d, tacheSimple4);
 //        myDesktopPlanner.affecterTacheCreneau(e, tacheSimple5);
 //        myDesktopPlanner.affecterTacheCreneau(f, tacheSimple6);
-        } catch (ExceptionCreneauNonLibre ex) {
-            throw new RuntimeException(ex);
-        }
-        myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(a);
+//        } catch (ExceptionCreneauNonLibre ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        myDesktopPlanner.changerEtatTache(a,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(a);
 //
-        myDesktopPlanner.changerEtatTache(b,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(b);
+//        myDesktopPlanner.changerEtatTache(b,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(b);
 //
-        myDesktopPlanner.changerEtatTache(c,Etat.COMPLETED);
-        myDesktopPlanner.attribuerFelicitationsBadges(c);
-
-
-        myDesktopPlanner.archiver();
-
-        // Afficher l'archive :
-        TreeMap<LocalDateTime,Archive> map = myDesktopPlanner.getArchives();
-        Archive archive = map.firstEntry().getValue();
-
-        archive.afficher();
-
-        utilisateur.afficher();
-
-
-
+//        myDesktopPlanner.changerEtatTache(c,Etat.COMPLETED);
+//        myDesktopPlanner.attribuerFelicitationsBadges(c);
 //
 //        myDesktopPlanner.changerEtatTache(d,Etat.COMPLETED);
 //        myDesktopPlanner.attribuerFelicitationsBadges(d);
@@ -291,7 +272,6 @@ public class Main extends Application {
 //        System.out.println((String) in.readObject());
 
 //        launch();
-
 
 
 

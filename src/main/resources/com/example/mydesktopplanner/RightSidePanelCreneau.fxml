@@ -13,133 +13,121 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="250.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.RightSidePannelCreneauController">
    <children>
-      <ScrollPane hbarPolicy="NEVER" prefHeight="560.0" prefWidth="250.0" style="-fx-background-color: #1f1f21;" vbarPolicy="NEVER">
+      <ScrollPane fx:id="container" hbarPolicy="NEVER" prefHeight="560.0" prefWidth="250.0" style="-fx-background-color: #1f1f21; -fx-background-radius: 10; -fx-border-radius: 10;" vbarPolicy="NEVER">
          <content>
-            <AnchorPane prefHeight="900.0" prefWidth="250.0" style="-fx-background-color: #1f1f21; -fx-border-color: #000000;">
+            <AnchorPane prefHeight="900.0" prefWidth="250.0" style="-fx-background-color: #1f1f21; -fx-background-radius: 10; -fx-border-radius: 10;">
                <children>
-                  <Text fill="WHITE" layoutX="83.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creneau">
+                  <Text fill="WHITE" layoutX="86.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creneau">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </Text>
-                  <Line endX="100.0" layoutX="126.0" layoutY="102.0" startX="-100.0" stroke="WHITE" />
-                  <DatePicker layoutX="24.0" layoutY="157.0" prefHeight="26.0" prefWidth="200.0" />
-                  <Text fill="WHITE" layoutX="24.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Debut" wrappingWidth="81.52501678466797">
+                  <TextField fx:id="debut" editable="false" layoutX="12.0" layoutY="108.0" prefHeight="26.0" prefWidth="224.0" />
+                  <TextField fx:id="fin" editable="false" layoutX="12.0" layoutY="179.0" prefHeight="26.0" prefWidth="224.0" />
+                  <Line endX="108.5999755859375" layoutX="129.0" layoutY="53.0" startX="-115.4000244140625" stroke="WHITE" />
+                  <Text fill="WHITE" layoutX="12.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Debut" wrappingWidth="81.52501678466797">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <DatePicker layoutX="25.0" layoutY="228.0" prefHeight="26.0" prefWidth="200.0" />
-                  <Text fill="WHITE" layoutX="25.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fin" wrappingWidth="81.52501678466797">
+                  <Text fill="WHITE" layoutX="12.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fin" wrappingWidth="81.52501678466797">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="27.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bloqué " wrappingWidth="84.7451171875">
+                  <Text fill="WHITE" layoutX="12.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bloqué " wrappingWidth="84.7451171875">
                      <font>
-                        <Font size="19.0" />
+                        <Font size="16.0" />
                      </font>
                   </Text>
-                  <CheckBox layoutX="205.0" layoutY="284.0" mnemonicParsing="false" />
-                  <Text fill="WHITE" layoutX="27.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre" wrappingWidth="84.7451171875">
+                  <CheckBox fx:id="blocked" layoutX="208.0" layoutY="235.0" mnemonicParsing="false" />
+                  <Text fill="WHITE" layoutX="12.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre" wrappingWidth="84.7451171875">
                      <font>
-                        <Font size="19.0" />
+                        <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="27.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Périodique" wrappingWidth="94.34515380859375">
+                  <Text fill="WHITE" layoutX="12.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Périodique" wrappingWidth="94.34515380859375">
                      <font>
-                        <Font size="19.0" />
+                        <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="192.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oui" wrappingWidth="37.54510498046875">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Text>
-                  <Text fill="WHITE" layoutX="192.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oui" wrappingWidth="37.54510498046875">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Text>
-                  <AnchorPane layoutX="14.0" layoutY="430.0" prefHeight="467.0" prefWidth="210.0">
+                  <AnchorPane fx:id="tache_info" layoutX="-1.0" layoutY="369.0" maxHeight="650.0" maxWidth="250.0" prefWidth="250.0" style="-fx-background-color: #1f1f21; -fx-background-radius: 10;">
                      <children>
-                        <Text fill="WHITE" layoutX="74.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tache">
+                        <Text fill="WHITE" layoutX="93.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tache">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Text>
-                        <Line endX="100.0" layoutX="106.0" layoutY="33.0" startX="-100.0" stroke="WHITE" />
-                        <TextField layoutX="5.0" layoutY="72.0" prefHeight="26.0" prefWidth="200.0" promptText="Nom de la tache" style="-fx-background-color: ffffff;" />
-                        <Text fill="WHITE" layoutX="5.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom " wrappingWidth="81.52501678466797">
+                        <Line endX="123.00001525878906" layoutX="113.0" layoutY="47.0" startX="-100.0" stroke="WHITE" />
+                        <TextField fx:id="name" layoutX="12.0" layoutY="86.0" prefHeight="26.0" prefWidth="224.0" promptText="Nom de la tache" style="-fx-background-color: ffffff;" />
+                        <Text fill="WHITE" layoutX="12.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom " wrappingWidth="81.52501678466797">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <DatePicker layoutX="6.0" layoutY="270.0" prefHeight="26.0" prefWidth="200.0" />
-                        <Text fill="WHITE" layoutX="5.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie " wrappingWidth="81.52501678466797">
+                        <DatePicker fx:id="deadline" layoutX="13.0" layoutY="284.0" prefHeight="26.0" prefWidth="224.0" />
+                        <Text fill="WHITE" layoutX="12.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie " wrappingWidth="81.52501678466797">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <ChoiceBox fx:id="CategorieChoiceBox" layoutX="4.0" layoutY="137.0" prefHeight="26.0" prefWidth="200.0" />
-                        <Text fill="WHITE" layoutX="6.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priorité " wrappingWidth="81.52501678466797">
+                        <ChoiceBox fx:id="CategorieChoiceBox" layoutX="11.0" layoutY="151.0" prefHeight="26.0" prefWidth="224.0" />
+                        <Text fill="WHITE" layoutX="13.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priorité " wrappingWidth="81.52501678466797">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="82.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée " wrappingWidth="129.60002441406243">
+                        <Text fill="WHITE" layoutX="131.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée " wrappingWidth="49.60002441406243">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <TextField layoutX="80.0" layoutY="202.0" prefHeight="26.0" prefWidth="90.0" promptText="Durée" style="-fx-background-color: ffffff; -fx-background-radius: 2;" />
-                        <Text fill="WHITE" layoutX="6.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date limite" wrappingWidth="81.52501678466797">
+                        <TextField fx:id="duration" disable="true" layoutX="130.0" layoutY="216.0" prefHeight="26.0" prefWidth="70.0" promptText="Durée" style="-fx-background-color: ffffff; -fx-background-radius: 2;" />
+                        <Text fill="WHITE" layoutX="13.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date limite" wrappingWidth="81.52501678466797">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="6.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat" wrappingWidth="81.52501678466797">
+                        <Text fill="WHITE" layoutX="13.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat" wrappingWidth="81.52501678466797">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <ChoiceBox fx:id="PrioriteChoiceBox" layoutX="7.0" layoutY="202.0" prefHeight="28.0" prefWidth="60.0" />
-                        <Text fill="WHITE" layoutX="177.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min">
+                        <ChoiceBox fx:id="PrioriteChoiceBox" layoutX="14.0" layoutY="216.0" prefHeight="28.0" prefWidth="109.0" />
+                        <Text fill="WHITE" layoutX="207.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Text>
-                        <ChoiceBox fx:id="EtatChoiceBox" layoutX="7.0" layoutY="336.0" prefHeight="28.0" prefWidth="200.0" />
-                        <Text fill="WHITE" layoutX="8.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Periodique">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Text>
-                        <CheckBox layoutX="192.0" layoutY="381.0" mnemonicParsing="false" />
-                        <Text fill="WHITE" layoutX="11.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de sous-taches :">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="194.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Text>
+                        <AnchorPane layoutX="10.0" layoutY="392.0" prefHeight="38.0" prefWidth="224.0">
+                           <children>
+                              <Text fill="WHITE" layoutX="3.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deconposable" />
+                              <CheckBox fx:id="deco" disable="true" layoutX="209.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="nb_sous_container" layoutX="14.0" layoutY="425.0" prefHeight="44.0" prefWidth="224.0">
+                           <children>
+                              <Text fill="WHITE" layoutX="-1.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de sous-tache :" />
+                              <Text fx:id="nb_sous" fill="WHITE" layoutX="205.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" wrappingWidth="15.486979007720947" />
+                           </children>
+                        </AnchorPane>
+                        <ChoiceBox fx:id="EtatChoiceBox" layoutX="14.0" layoutY="350.0" prefHeight="28.0" prefWidth="224.0" />
                      </children>
                   </AnchorPane>
+                  <CheckBox fx:id="free" disable="true" layoutX="208.0" layoutY="288.0" mnemonicParsing="false" />
+                  <CheckBox fx:id="perio" disable="true" layoutX="208.0" layoutY="339.0" mnemonicParsing="false" />
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
-      <AnchorPane layoutY="560.0" prefHeight="90.0" prefWidth="250.0" style="-fx-background-color: #1f1f21; -fx-border-color: #1f1f21;">
+      <AnchorPane layoutY="548.0" prefHeight="102.0" prefWidth="250.0" style="-fx-background-color: #1f1f21; -fx-border-color: #1f1f21;">
          <children>
-            <Button layoutX="25.0" layoutY="52.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #e2001a;" text="Supprimer" textFill="WHITE">
+            <Button fx:id="delete" layoutX="11.0" layoutY="52.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="224.0" style="-fx-background-color: #e2001a;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="25.0" layoutY="7.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #506486;" text="Aller a la tache" textFill="WHITE">
+            <Button fx:id="save" layoutX="13.0" layoutY="9.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="224.0" style="-fx-background-color: #506486;" text="Enregistrer les modifications" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

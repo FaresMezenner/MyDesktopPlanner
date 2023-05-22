@@ -25,7 +25,7 @@ public class TacheSimple extends Tache{
     }
 
     @Override
-    boolean isDecomposable() {
+    public boolean isDecomposable() {
         return false;
     }
 

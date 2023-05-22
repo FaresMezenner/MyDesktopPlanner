@@ -19,4 +19,15 @@ public enum Etat{
     public String getName() {
         return name;
     }
+
+
+    public static Etat getEtat(String name) {
+        for (Etat etat : Etat.values()) {
+            if (name.equals(etat.getName())) {
+                return etat;
+
+            }
+        }
+        return null;
+    }
 }

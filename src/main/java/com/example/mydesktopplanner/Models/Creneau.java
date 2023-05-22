@@ -193,6 +193,11 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
     }
 
 
+    public boolean isPeriodique(){
+        return false;
+    }
+
+
 
 
 
