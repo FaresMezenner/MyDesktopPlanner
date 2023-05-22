@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="250.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.RightSidePannelTachesController">
+   <children>
+      <AnchorPane maxHeight="650.0" maxWidth="250.0" prefHeight="649.0" prefWidth="249.0" style="-fx-background-color: #1f1f21; -fx-background-radius: 10;">
+         <children>
+            <Text fill="WHITE" layoutX="81.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Periode">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+            <Line endX="123.00001525878906" layoutX="113.0" layoutY="47.0" startX="-100.0" stroke="WHITE" />
+            <TextField layoutX="12.0" layoutY="86.0" prefHeight="26.0" prefWidth="224.0" promptText="Nom de la tache" style="-fx-background-color: ffffff;" />
+            <Text fill="WHITE" layoutX="12.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom " wrappingWidth="81.52501678466797">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <DatePicker layoutX="13.0" layoutY="164.0" prefHeight="26.0" prefWidth="224.0" />
+            <Button layoutX="11.0" layoutY="599.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="224.0" style="-fx-background-color: #e2001a;" text="Supprimer" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="13.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Debut" wrappingWidth="81.52501678466797">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="392.0" prefHeight="38.0" prefWidth="224.0" />
+            <DatePicker layoutX="14.0" layoutY="242.0" prefHeight="26.0" prefWidth="224.0" />
+            <Text fill="WHITE" layoutX="14.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fin" wrappingWidth="81.52501678466797">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button layoutX="10.0" layoutY="557.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="224.0" style="-fx-background-color: #506486;" text="Replannifier les taches" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

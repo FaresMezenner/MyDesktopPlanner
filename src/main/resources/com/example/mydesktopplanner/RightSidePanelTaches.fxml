@@ -14,7 +14,7 @@
    <children>
       <AnchorPane maxHeight="650.0" maxWidth="250.0" prefHeight="649.0" prefWidth="249.0" style="-fx-background-color: #1f1f21; -fx-background-radius: 10;">
          <children>
-            <Text fill="WHITE" layoutX="81.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tache">
+            <Text fill="WHITE" layoutX="93.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tache">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>

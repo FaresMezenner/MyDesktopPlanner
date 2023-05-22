@@ -5,6 +5,7 @@ import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -224,6 +225,17 @@ public class MyDesktopPlanner {
         instance = null;
     }
 
+    public void archiver(){
+        utilisateur.archiver();
+    }
+
+    public void afficherArchive(){
+        utilisateur.afficherArchive();
+    }
+
+    public TreeMap<LocalDateTime,Archive> getArchives(){
+        return utilisateur.getArchives();
+    }
 
 
 

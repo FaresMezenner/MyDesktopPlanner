@@ -11,72 +11,73 @@
 
 <AnchorPane prefHeight="454.0" prefWidth="482.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="207.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="207.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/my-account-login.png" />
          </image>
       </ImageView>
-      <Text fx:id="user" layoutX="29.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fares" textAlignment="CENTER" wrappingWidth="422.5999755859373">
+      <Text fx:id="user" layoutX="29.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fares" textAlignment="CENTER" wrappingWidth="422.5999755859373">
          <font>
             <Font name="System Bold" size="35.0" />
          </font>
       </Text>
-      <Button fx:id="ok" layoutX="179.0" layoutY="386.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="D'accord" textFill="WHITE">
+      <Button fx:id="ok" layoutX="179.0" layoutY="408.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="D'accord" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Line endX="232.5999755859375" endY="1.52587890625E-5" layoutX="219.0" layoutY="96.0" startX="-189.0" startY="1.52587890625E-5" />
-      <Line endX="232.5999755859375" endY="1.52587890625E-5" layoutX="219.0" layoutY="154.0" startX="-189.0" startY="1.52587890625E-5" />
-      <AnchorPane layoutX="29.0" layoutY="166.0" prefHeight="200.0" prefWidth="423.0">
+      <Line endX="232.5999755859375" endY="1.52587890625E-5" layoutX="219.0" layoutY="68.0" startX="-189.0" startY="1.52587890625E-5" />
+      <Line endX="232.5999755859375" endY="1.52587890625E-5" layoutX="219.0" layoutY="126.0" startX="-189.0" startY="1.52587890625E-5" />
+      <AnchorPane layoutX="26.0" layoutY="131.0" prefHeight="142.0" prefWidth="425.0">
          <children>
             <Text layoutX="76.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Badges obtenus" textAlignment="CENTER" wrappingWidth="271.73667907714844">
                <font>
                   <Font size="25.0" />
                </font>
             </Text>
-            <ImageView fitHeight="66.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="66.0" fitWidth="66.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/badge.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="358.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="358.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/badge.png" />
                </image>
             </ImageView>
-            <Text layoutX="18.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Badges GOOD         :" wrappingWidth="166.79998779296875">
+            <Text layoutX="18.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Badges GOOD         :" wrappingWidth="166.79998779296875">
                <font>
                   <Font size="17.0" />
                </font>
             </Text>
-            <Text layoutX="18.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Badges VERYGOOD :" wrappingWidth="166.79998779296875">
+            <Text layoutX="18.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Badges VERYGOOD :" wrappingWidth="166.79998779296875">
                <font>
                   <Font size="17.0" />
                </font>
             </Text>
-            <Text layoutX="22.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Badges EXCELLENT :" wrappingWidth="158.800048828125">
+            <Text layoutX="18.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Badges EXCELLENT :" wrappingWidth="158.800048828125">
                <font>
                   <Font size="17.0" />
                </font>
             </Text>
-            <Text fx:id="excellent" layoutX="360.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
+            <Text fx:id="excellent" layoutX="360.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
                <font>
                   <Font size="17.0" />
                </font>
             </Text>
-            <Text fx:id="verygood" layoutX="360.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
+            <Text fx:id="verygood" layoutX="360.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
                <font>
                   <Font size="17.0" />
                </font>
             </Text>
-            <Text fx:id="good" layoutX="360.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
+            <Text fx:id="good" layoutX="360.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
                <font>
                   <Font size="17.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
+      <Line endX="232.5999755859375" endY="1.52587890625E-5" layoutX="224.0" layoutY="282.0" startX="-189.0" startY="1.52587890625E-5" />
    </children>
    <effect>
       <DropShadow />

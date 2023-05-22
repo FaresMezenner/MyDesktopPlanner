@@ -2,12 +2,14 @@ package com.example.mydesktopplanner.Models;
 
 import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Utilisateur implements Serializable {
@@ -23,9 +25,15 @@ public class Utilisateur implements Serializable {
 
     private LinkedList<Tache> cancelledTaches = new LinkedList<>();
     private Calendrier calendrier = new Calendrier();
+
+    private TreeMap<LocalDateTime,Archive> archives = new TreeMap<>();
     private int[] badges = {0,0,0};
     private ArrayList<Projet> projets = new ArrayList<>();
     private int nbMinimalTachesParJourBadgeGood = 5;         // Pour l'attribution des badges (lire l'ennoncé)
+
+    private int nbTachesCompletees= 0;
+
+    private Color couleursCategorie[] = {Color.CYAN,Color.lightGray,Color.pink,Color.yellow,Color.green,Color.blue};
 
     private  LocalDateTime lastUpdateTachesTime = LocalDateTime.of(2000,1,1,0,0);    // Cette variable sert a modifier l'etat des taches , (In progress -> Not realized)
 
@@ -33,6 +41,8 @@ public class Utilisateur implements Serializable {
     public Utilisateur(String pseudo) {
         this.pseudo = pseudo;
     }
+
+
 
 
     // ----------------------------- Delimitation Gettes / Setters ----------------------------------
@@ -58,6 +68,8 @@ public class Utilisateur implements Serializable {
     public void rendementJournalierArray(int[] rendementJournalier) {
         this.rendementJournalierArray = rendementJournalier;
     }
+
+
 
 
 
@@ -157,6 +169,42 @@ public class Utilisateur implements Serializable {
         this.lastUpdateStatisticsTime = lastUpdateStatisticsTime;
     }
 
+    public void setRendementJournalierArray(int[] rendementJournalierArray) {
+        this.rendementJournalierArray = rendementJournalierArray;
+    }
+
+    public LinkedList<Tache> getCancelledTaches() {
+        return cancelledTaches;
+    }
+
+    public void setCancelledTaches(LinkedList<Tache> cancelledTaches) {
+        this.cancelledTaches = cancelledTaches;
+    }
+
+    public TreeMap<LocalDateTime, Archive> getArchives() {
+        return archives;
+    }
+
+    public void setArchives(TreeMap<LocalDateTime, Archive> archives) {
+        this.archives = archives;
+    }
+
+    public int getNbTachesCompletees() {
+        return nbTachesCompletees;
+    }
+
+    public void setNbTachesCompletees(int nbTachesCompletees) {
+        this.nbTachesCompletees = nbTachesCompletees;
+    }
+
+    public Color[] getCouleursCategorie() {
+        return couleursCategorie;
+    }
+
+    public void setCouleursCategorie(Color[] couleursCategorie) {
+        this.couleursCategorie = couleursCategorie;
+    }
+
     // ----------------------------- Delimitation Gettes / Setters ----------------------------------
 
 
@@ -184,7 +232,6 @@ public class Utilisateur implements Serializable {
 
     public void ajouterCreneau(Creneau creneau) throws ExceptionDateInvalide, ExceptionCollisionHorairesCreneau {
         calendrier.ajouterCreneau(creneau);
-
     }
 
 
@@ -200,6 +247,9 @@ public class Utilisateur implements Serializable {
         // Dissocie la tache d'un créneau et la rend UNSCHEDULED
         if (creneau == null || creneau.getTache() == null) {
             return;
+        }
+        if (creneau.getTache().getEtat().equals(Etat.COMPLETED)) {
+            nbTachesCompletees--;
         }
         ajouterTache(creneau.dissocierTache());
     }
@@ -312,6 +362,11 @@ public class Utilisateur implements Serializable {
 
     public void supprimerTacheProjet(Projet projet , Creneau creneau){
         // Supprimer tache Projet
+        if (projet == null || creneau == null){return;}
+
+        if ((creneau.getTache() != null) && (creneau.getTache().getEtat().equals(Etat.COMPLETED))){
+            nbTachesCompletees--;
+        }
         projet.supprimerTache(creneau);
     }
 
@@ -334,6 +389,7 @@ public class Utilisateur implements Serializable {
             if (etat.equals(Etat.COMPLETED)){
                 Categorie categorie = tache.getCategorie();
                 ajouterDureeCategorie(categorie,tache.getDuree());
+                nbTachesCompletees++;
             }
             // Always remember to check for greetings when calling this function}
         }
@@ -594,5 +650,62 @@ public class Utilisateur implements Serializable {
         return rendementJournalier/nombreJours;
         }
         return 0;
+    }
+
+    public boolean projetComplete(Projet projet){
+        // Renvoies true si l'entiéreté des taches d'un projet sont a l'état completed
+        // Renvoies false sinon
+        TreeMap<LocalDateTime,Creneau> taches = projet.getTaches();
+        if (taches == null || taches.isEmpty()){return true;}
+
+        for (Creneau creneau : taches.values()){
+            if (creneau.getTache() != null){
+                if(!creneau.getTache().getEtat().equals(Etat.COMPLETED)){return false;}
+            }
+        }
+        return true;
+    }
+
+    public void afficherArchive(){
+        for (LocalDateTime date : archives.keySet()){
+            System.out.println(date);
+            System.out.println(archives.get(date));
+        }
+    }
+
+
+    public void archiver(){
+        // Cette méthode permets d'archiver les données d'un utilisateur;
+        // On crée une nouvelle instance de Archive , et on supprime les données de l'utilisateur.
+
+        int projetsCompletes = 0;
+        for (Projet projet : projets){
+            if (projetComplete(projet)){
+                projetsCompletes++;
+            }
+        }
+
+        Archive archive = new Archive(getBadges(),nbTachesCompletees,projetsCompletes);
+
+        archives.put(LocalDateTime.now(),archive);
+
+
+        // On efface les données de l'utilisateur
+          rendementJournalierArray = new int[] {0,0};
+          nbEncouragements = 0;
+          jourRentable = null;
+          tempsCategories = new Duration[] {Duration.ofMinutes(0),Duration.ofMinutes(0),Duration.ofMinutes(0),Duration.ofMinutes(0),Duration.ofMinutes(0),Duration.ofMinutes(0)};
+          unscheduledTaches = new LinkedList<>();
+          cancelledTaches = new LinkedList<>();
+          calendrier = new Calendrier();
+          badges = new int[]{0,0,0};
+          projets = new ArrayList<>();
+          nbTachesCompletees= 0;
+          lastUpdateTachesTime = LocalDateTime.of(2000,1,1,0,0);    // Cette variable sert a modifier l'etat des taches , (In progress -> Not realized)
+          lastUpdateStatisticsTime = LocalDateTime.of(2000,1,1,0,0);    // Cette variable sert a modifier statistiques
+
+
+
+
     }
 }
