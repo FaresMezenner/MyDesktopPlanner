@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="416.0" prefWidth="482.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="416.0" prefWidth="482.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.ArchiveSettings">
    <children>
       <Text fx:id="user" layoutX="29.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Archives" textAlignment="CENTER" wrappingWidth="422.5999755859373">
          <font>
@@ -17,22 +17,22 @@
       </Text>
       <Line endX="232.5999755859375" endY="1.52587890625E-5" layoutX="219.0" layoutY="28.0" startX="-189.0" startY="1.52587890625E-5" />
       <Line endX="232.5999755859375" endY="1.52587890625E-5" layoutX="219.0" layoutY="86.0" startX="-189.0" startY="1.52587890625E-5" />
-      <Button layoutX="307.0" layoutY="360.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="141.0" style="-fx-background-color: #e2001a;" text="Retour" textFill="WHITE">
+      <Button fx:id="retour" layoutX="307.0" layoutY="360.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="141.0" style="-fx-background-color: #e2001a;" text="Retour" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="33.0" layoutY="361.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #506486;" text="Afficher archive" textFill="WHITE">
+      <Button fx:id="afficherArchiveBtn" layoutX="33.0" layoutY="361.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #506486;" text="Afficher archive" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="172.0" layoutY="361.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #000000;" text="Archiver" textFill="WHITE">
+      <Button fx:id="archiver" layoutX="172.0" layoutY="361.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #000000;" text="Archiver" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <ListView layoutX="32.0" layoutY="108.0" prefHeight="209.0" prefWidth="423.0" />
+      <ListView fx:id="archivesList" layoutX="32.0" layoutY="108.0" prefHeight="209.0" prefWidth="423.0" />
    </children>
    <effect>
       <DropShadow />

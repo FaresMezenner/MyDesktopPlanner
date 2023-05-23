@@ -83,7 +83,7 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Text fx:id="good1" layoutX="386.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
+      <Text fx:id="rendementJournalier" layoutX="386.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
          <font>
             <Font size="17.0" />
          </font>
@@ -93,7 +93,7 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Text fx:id="good11" layoutX="386.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
+      <Text fx:id="rendementPeriode" layoutX="386.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
          <font>
             <Font size="17.0" />
          </font>
@@ -103,7 +103,7 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Text fx:id="good111" layoutX="386.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
+      <Text fx:id="encouragement" layoutX="386.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="45.199951171875">
          <font>
             <Font size="17.0" />
          </font>
@@ -113,7 +113,7 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Text fx:id="good1111" layoutX="316.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="23 mars 2024" textAlignment="CENTER" wrappingWidth="107.5999755859375">
+      <Text fx:id="day" layoutX="316.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="23 mars 2024" textAlignment="CENTER" wrappingWidth="107.5999755859375">
          <font>
             <Font size="17.0" />
          </font>
@@ -151,32 +151,32 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="41.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
+      <Text fx:id="studies" layoutX="41.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <Text layoutX="168.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
+      <Text fx:id="work" layoutX="168.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <Text layoutX="308.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
+      <Text fx:id="hobbies" layoutX="308.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <Text layoutX="40.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
+      <Text fx:id="sport" layoutX="40.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <Text layoutX="167.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
+      <Text fx:id="health" layoutX="167.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <Text layoutX="307.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
+      <Text fx:id="others" layoutX="307.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="51.58203125">
          <font>
             <Font size="21.0" />
          </font>
@@ -187,17 +187,17 @@
       <Text layoutX="108.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
       <Text layoutX="257.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
       <Text layoutX="405.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
-      <Button layoutX="304.0" layoutY="694.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="141.0" style="-fx-background-color: #e2001a;" text="Archiver" textFill="WHITE">
+      <Button fx:id="archiver" layoutX="304.0" layoutY="694.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="141.0" style="-fx-background-color: #e2001a;" text="Archiver" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="30.0" layoutY="695.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #506486;" text="Paramétres" textFill="WHITE">
+      <Button fx:id="settings" layoutX="30.0" layoutY="695.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #506486;" text="Paramétres" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="169.0" layoutY="695.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #000000;" text="D'accord" textFill="WHITE">
+      <Button fx:id="ok" layoutX="169.0" layoutY="695.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="119.0" style="-fx-background-color: #000000;" text="D'accord" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

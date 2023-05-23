@@ -41,6 +41,14 @@ public class Archive {
         this.nbProjetsCompletes = nbProjetsCompletes;
     }
 
+    public LocalDateTime getDateArchivage() {
+        return dateArchivage;
+    }
+
+    public void setDateArchivage(LocalDateTime dateArchivage) {
+        this.dateArchivage = dateArchivage;
+    }
+
     public void afficher(){
         System.out.println("Date d'archivage : "+dateArchivage);
         System.out.println("Nombre de taches completes : "+nbTachesCompletees);
