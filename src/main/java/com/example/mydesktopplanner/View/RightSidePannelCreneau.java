@@ -38,7 +38,7 @@ public class RightSidePannelCreneau {
             @Override
             public void handle(ActionEvent actionEvent) {
                 creneau.setBlocked(((CheckBox) view.lookup("#blocked")).isSelected());
-                if (creneau.isLibre() || !((CheckBox) view.lookup("#free")).isSelected()) {
+                if (creneau.isLibre() && !((CheckBox) view.lookup("#free")).isSelected()) {
                     try {
                         (new TachesListPopUp("Plannifier tache",
                                 "Veuillez choisir la tache a plannifier dans ce creneau",
@@ -46,6 +46,20 @@ public class RightSidePannelCreneau {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                } else if (!creneau.isLibre()) {
+
+                    Node view = ((ScrollPane) this.view.lookup("#container")).getContent();
+                    String etatString = ((ChoiceBox) view.lookup("#EtatChoiceBox")).getValue().toString();
+
+                    MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
+
+                    //Etat etatPrecedent = tache.getEtat();
+                    //Etat etatActuel = Etat.getEtat(etatString);
+
+                    //myDesktopPlanner.changerEtatTache(creneau, etatActuel);
+                    //myDesktopPlanner.attribuerFelicitationsBadges(creneau);
+
+
                 }
                 super.handle(actionEvent);
             }

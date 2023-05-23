@@ -4,10 +4,14 @@ import com.example.mydesktopplanner.Control.Authentification;
 import com.example.mydesktopplanner.Models.*;
 import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 import com.example.mydesktopplanner.View.MainView;
+import com.example.mydesktopplanner.View.ProfilePopUpView;
+import com.example.mydesktopplanner.View.RightSidePannelCreneau;
+import com.example.mydesktopplanner.View.RightSidePannelTache;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -23,11 +27,32 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Authentification/AuthentificationScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        TextField pseudoField =  (TextField) scene.lookup("#pseudo");
-        Button button = (Button) scene.lookup("#btn");
-        button.setOnAction(new Authentification(pseudoField, stage));
+
+        Utilisateur utilisateur = new Utilisateur("fares");
+
+        UserManager.getInstance().setUser(utilisateur);
+
+        MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
+
+        System.out.println(myDesktopPlanner);
+
+        Creneau creneau = new Creneau(LocalDateTime.of(2024, 05, 23, 12, 00 ), LocalDateTime.of(2024, 05, 23, 13, 10));
+        myDesktopPlanner.ajouterCreneau(creneau);
+
+        Tache tacheSimple1 = new TacheSimple("Revision 1",Duration.ofMinutes(30),Priorite.HIGH,LocalDate.of(2024, 07, 20),Categorie.HEALTH,false);
+//
+
+
+
+        RightSidePannelTache profilePopUpView = new RightSidePannelTache(tacheSimple1);
+
+        Scene nouvelleScene = new Scene(profilePopUpView.getView());
+
+
+        // Définir la nouvelle scène sur la fenêtre principale
+        stage.setTitle("My desktop planner");
+        stage.setScene(nouvelleScene);
+        stage.show();
 //        button.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
 //            public void handle(ActionEvent actionEvent) {
@@ -57,9 +82,7 @@ public class Main extends Application {
 //
 //            }
 //        });
-        stage.setTitle("My desktop planner");
-        stage.setScene(scene);
-        stage.show();
+
 
     }
 
@@ -67,9 +90,6 @@ public class Main extends Application {
 
 
 
-//        Utilisateur utilisateur = UserManager.getInstance().Authentify("fares");
-//
-//       MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
 //
 //        utilisateur.setNbMinimalTachesParJour(1);
 //
@@ -89,6 +109,19 @@ public class Main extends Application {
 //                LocalDateTime.of(2023, 05, 31, 12, 00 ),
 //                LocalDateTime.of(2023, 05, 31, 13, 51)
 //        );
+
+
+        Utilisateur utilisateur = new Utilisateur("fares");
+
+        UserManager.getInstance().setUser(utilisateur);
+
+        MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.initiateInstance(utilisateur);
+
+
+        for (int i = 0 ; i < 10 ; i++) {
+            myDesktopPlanner.ajouterCreneau(new Creneau(LocalDateTime.of(2023, 05, 23, 12, 00 ).plusDays(i),LocalDateTime.of(2023, 05, 23, 15, 00 ).plusDays(i)));
+        }
+
 //
 //        myDesktopPlanner.ajouterCreneau(a);
 //        myDesktopPlanner.ajouterCreneau(b);
@@ -102,16 +135,18 @@ public class Main extends Application {
 //        );
 //        myDesktopPlanner.ajouterPeriode(periode);
 //
-//        TacheSimple tacha = new TacheSimple("tache 1", Duration.ofMinutes(30), Priorite.HIGH, LocalDate.of(2023, 05, 23), Categorie.HEALTH, false);
-//
-//
+
+
+
+        launch();
+
+
 //        myDesktopPlanner.ajouterTache(tacha);
 //
 //        Projet projeta = new Projet("projet 1", "testing", new TreeMap<>());
 //
 //        myDesktopPlanner.ajouterProjet(projeta);
 
-        launch();
 //        myDesktopPlanner.afficherCreneaux();
 
 //        Creneau d = new Creneau(
@@ -130,7 +165,7 @@ public class Main extends Application {
 //        );
 
 //
-//        myDesktopPlanner.ajouterCreneau(a);
+
 //        myDesktopPlanner.ajouterCreneau(b);
 //        myDesktopPlanner.ajouterCreneau(c);
 //        myDesktopPlanner.ajouterCreneau(d);

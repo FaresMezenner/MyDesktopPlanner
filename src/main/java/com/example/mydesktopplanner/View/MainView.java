@@ -30,7 +30,7 @@ public class MainView extends Stage {
 
 
 
-    private MainView() throws IOException {
+    public MainView() throws IOException {
         Scene mainScene = new Scene((new FXMLLoader(com.example.mydesktopplanner.Main.class.getResource("Main.fxml"))).load());
         setScene(mainScene);
         setTitle("My desktop planner");

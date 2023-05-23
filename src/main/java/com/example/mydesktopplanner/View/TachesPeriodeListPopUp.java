@@ -51,6 +51,7 @@ public class TachesPeriodeListPopUp extends Stage {
                 );
 
                 Stage stage = new Stage();
+                System.out.println(Main.class.getResource("ListPopUp.fxml"));
                 stage.setScene(new Scene(FXMLLoader.load(Main.class.getResource("ListPopUp.fxml"))));
                 ((Text) stage.getScene().lookup("#title")).setText("Taches non planifiées");
                 ((Text) stage.getScene().lookup("#message")).setText("Les taches suivantes n'ont pas pu être planifiées \n voullez vous les planifier apres la periode ou annulers l'operation ?");
@@ -63,6 +64,8 @@ public class TachesPeriodeListPopUp extends Stage {
                 ok.setOnAction(actionEvent1 -> {
                     try {
                         for (Tache tache : taches.getSelectionModel().getSelectedItems()){
+
+                            System.out.println(tache.getNom());
 
                             MyDesktopPlanner.getInstance().getUtilisateur().plannifierTacheAutomatiquement(tache, periode.getFin().plusDays(1));
                         }
