@@ -16,7 +16,7 @@
          </font>
       </Text>
       <Line endX="143.39996337890625" endY="7.62939453125E-6" layoutX="138.0" layoutY="58.0" startX="-114.19999694824219" startY="7.62939453125E-6" />
-      <Text fx:id="message" layoutX="23.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My text field" textAlignment="CENTER" wrappingWidth="258.5999755859375">
+      <Text fx:id="message" layoutX="23.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My text field" textAlignment="CENTER" wrappingWidth="258.5999755859375">
          <font>
             <Font size="16.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <ListView fx:id="list" layoutX="24.0" layoutY="157.0" prefHeight="228.0" prefWidth="258.0" />
+      <ListView fx:id="list" layoutX="24.0" layoutY="195.0" prefHeight="190.0" prefWidth="258.0" />
       <AnchorPane layoutY="48.0" prefHeight="15.0" prefWidth="306.0" style="-fx-background-color: #000000;" />
    </children>
 </AnchorPane>

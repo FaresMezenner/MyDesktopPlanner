@@ -51,6 +51,7 @@ public class RightSidePannelCreneau {
         ((Button) view.lookup("#delete")).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
                 if (!creneau.isLibre()) MyDesktopPlanner.getInstance().getTachesUnscheduled().remove(creneau.getTache());
                 MyDesktopPlanner.getInstance().suprimerCreneau(creneau);
                 try {

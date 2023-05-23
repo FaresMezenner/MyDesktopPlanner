@@ -11,7 +11,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -52,6 +54,20 @@ public class AjouterPeriode implements Initializable {
                                 nom.getText()
                         );
 
+                FileOutputStream fOut = new FileOutputStream("utilisateurTmp");
+                ObjectOutputStream out = new ObjectOutputStream(fOut);
+                out.writeObject(MyDesktopPlanner.getInstance().getUtilisateur());
+                fOut.flush();
+                out.flush();
+                fOut.close();
+                out.close();
+
+                MyDesktopPlanner.getInstance().ajouterPeriode(periode);
+
+                MainView.getInstance().update();
+
+
+
 
                 Stage stage = new TachesPeriodeListPopUp("Choisir les taches", "Choisissez les taches a plannifier dans cette periode",periode);
                 stage.show();
@@ -59,6 +75,8 @@ public class AjouterPeriode implements Initializable {
 
             } catch (ExceptionDateInvalide e) {
                 ErrorPopUpView.show("Erreur", e.getMessage());
+            } catch (ExceptionCollisionPeriode e) {
+               ErrorPopUpView.show("Erreur", "La periode entre en collision avec une autre periode");
             }
 
         } else {

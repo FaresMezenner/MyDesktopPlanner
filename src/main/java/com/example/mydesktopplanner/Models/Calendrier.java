@@ -270,23 +270,23 @@ public Calendrier() {
 
             while (date.isBefore(periode.getFin()) || date.isEqual(periode.getFin())){
                 jour = jours.get(date);
+                if (jour != null) {
+                    //we'll add the task to scheduledTasks and schedule it in the day
 
-                //we'll add the task to scheduledTasks and schedule it in the day
+                    Tache old = tache;
+                    tache = jour.plannifierTache(tache);
+                    if (tache != null && tache != old) {
+                        //if scheduling the task returns another task, we'll add it to the unscheduledTasks
+                        //exactly after the task we were scheduling
+                        secheduledTaches.add(old);
+                        unscheduledTaches.add(i + 1, tache);
+                        break;
+                    } else if (tache == null) {
 
-                Tache old = tache;
-                tache = jour.plannifierTache(tache);
-                if (tache != null && tache != old) {
-                    //if scheduling the task returns another task, we'll add it to the unscheduledTasks
-                    //exactly after the task we were scheduling
-                    secheduledTaches.add(old);
-                    unscheduledTaches.add(i+1, tache);
-                    break;
-                } else if (tache == null) {
-
-                    secheduledTaches.add(old);
-                    break;
+                        secheduledTaches.add(old);
+                        break;
+                    }
                 }
-
                 date = date.plusDays(1);
             }
             i++;

@@ -85,8 +85,8 @@ public class MyDesktopPlanner {
         utilisateur.affecterTacheCreneau(creneau, tache);
     }
 
-    public void plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
-        utilisateur.plannifierTachesPeriode(taches, periode);
+    public ArrayList<Tache> plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
+        return utilisateur.plannifierTachesPeriode(taches, periode);
     }
 
 
@@ -245,26 +245,13 @@ public class MyDesktopPlanner {
     }
 
 
-    public void replannifierPeriode(Periode periode, boolean aleatoir) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
-        getUtilisateur().getCalendrier().rePlanifier(periode, aleatoir);
+    public ArrayList<Tache> replannifierPeriode(Periode periode, boolean aleatoir) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
+        return getUtilisateur().getCalendrier().rePlanifier(periode, aleatoir);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
 }
 
 

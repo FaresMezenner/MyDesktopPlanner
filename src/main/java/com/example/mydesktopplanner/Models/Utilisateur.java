@@ -333,7 +333,7 @@ public class Utilisateur implements Serializable {
     }
 
 
-    public void plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
+    public ArrayList<Tache> plannifierTachesPeriode(LinkedList<Tache> taches, Periode periode) throws ExceptionDureeInvalide, ExceptionCollisionHorairesCreneau {
 
         ArrayList<Tache> unscheduledTaches = calendrier.plannifierTachesPeriode(taches, periode);
 
@@ -355,6 +355,8 @@ public class Utilisateur implements Serializable {
                 this.unscheduledTaches.remove(unscheduledTache);
             }
         }
+
+        return unscheduledTaches;
 
 
     }
@@ -505,7 +507,11 @@ public class Utilisateur implements Serializable {
         setLastUpdateTachesTime(LocalDateTime.now());
     }
 
-    public void plannifierTacheAutomatiquement(Tache tache,LocalDate date) throws ExceptionPlannificationImpossible {
+    public void plannifierTacheAutomatiquement(Tache tache, LocalDate date) throws ExceptionPlannificationImpossible {
+        if (tache == null || date == null){
+            return;
+        }
+        if (date.isAfter(calendrier.getDernierJour().getDate())){throw new ExceptionPlannificationImpossible("Date invalide");}
         ArrayList<Creneau> creneaux = calendrier.getCreneauxIntervalle(date, calendrier.getDernierJour().getDate());
 
         // On filtre les creneaux pour obtenir que ceux qui sont libres , pour ne pas tout parcourir
@@ -519,13 +525,13 @@ public class Utilisateur implements Serializable {
                     affecterTacheCreneau(creneau, tache);
                     return;
                 } catch (ExceptionCreneauNonLibre e) {
-                // On essaye de plannifier une atche dans un creneau deja occupe , on ne fait rien
+                    // On essaye de plannifier une atche dans un creneau deja occupe , on ne fait rien
                 } catch (ExceptionDureeInvalide e) {
-                // On essaye de plannifier une tache simple dans un créneau plus petit , on ne fait rien
+                    // On essaye de plannifier une tache simple dans un créneau plus petit , on ne fait rien
                 }
+            }
         }
-    }
-        throw new ExceptionPlannificationImpossible("Aucun creneau disponible");
+        throw new ExceptionPlannificationImpossible("plannification impossible");
     }
 
 
