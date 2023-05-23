@@ -3,6 +3,8 @@ package com.example.mydesktopplanner.View;
 import com.example.mydesktopplanner.Main;
 import com.example.mydesktopplanner.Models.Creneau;
 import com.example.mydesktopplanner.Models.Etat;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCreneauNonLibre;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInvalide;
 import com.example.mydesktopplanner.Models.MyDesktopPlanner;
 import com.example.mydesktopplanner.Models.TacheDecomposable;
 import javafx.event.ActionEvent;
@@ -53,14 +55,39 @@ public class RightSidePannelCreneau {
 
                     MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
 
-                    //Etat etatPrecedent = tache.getEtat();
-                    //Etat etatActuel = Etat.getEtat(etatString);
+                    Etat etatPrecedent = tache.getEtat();
+                    Etat etatActuel = Etat.getEtat(etatString);
 
-                    //myDesktopPlanner.changerEtatTache(creneau, etatActuel);
-                    //myDesktopPlanner.attribuerFelicitationsBadges(creneau);
+                    if (etatPrecedent.equals(Etat.INPROGRESS))  {
+                        if (etatActuel.equals(Etat.UNSCHEDULED)){
+                            myDesktopPlanner.dissocierTacheCreneau(creneau);
+                        }
+                        if (etatActuel.equals(Etat.COMPLETED)){
+                            myDesktopPlanner.changerEtatTache(creneau, etatActuel);
+                            myDesktopPlanner.attribuerFelicitationsBadges(creneau);
+                        }
+
+                    }else if (etatPrecedent.equals(Etat.UNSCHEDULED)){
+                            try {
+                                myDesktopPlanner.affecterTacheCreneau(creneau,tache);
+                                myDesktopPlanner.attribuerFelicitationsBadges(creneau);
+                            } catch (ExceptionDureeInvalide e) {
+                                throw new RuntimeException(e);
+                            } catch (ExceptionCreneauNonLibre e) {
+                                throw new RuntimeException(e);
+                            }
 
 
-                }
+                        }
+                    else if (etatPrecedent.equals(Etat.COMPLETED)){
+                        if (etatActuel.equals(Etat.UNSCHEDULED)){
+                            myDesktopPlanner.dissocierTacheCreneau(creneau);
+                        }
+                        if (etatActuel.equals(Etat.INPROGRESS)){
+                            myDesktopPlanner.changerEtatTache(creneau, etatActuel);}
+
+                        }
+                    }
                 super.handle(actionEvent);
             }
         });
