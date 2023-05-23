@@ -133,6 +133,7 @@ public class AjouterTacheView extends Stage {
                         );
                         if (perioCheck.isSelected()) {
                             tache.setPeriodique(true);
+                            tache.setEtat(Etat.INPROGRESS);
 
                             CreneauPeriodique creneauPeriodique;
                             try {

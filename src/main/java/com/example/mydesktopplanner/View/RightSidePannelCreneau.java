@@ -1,15 +1,19 @@
 package com.example.mydesktopplanner.View;
 
+import com.example.mydesktopplanner.Main;
 import com.example.mydesktopplanner.Models.Creneau;
+import com.example.mydesktopplanner.Models.Etat;
 import com.example.mydesktopplanner.Models.MyDesktopPlanner;
 import com.example.mydesktopplanner.Models.TacheDecomposable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +34,7 @@ public class RightSidePannelCreneau {
     private void setControllers() {
 
         //setting the save button
-        ((Button) view.lookup("#save")).setOnAction(new EventHandler<ActionEvent>() {
+        ((Button) view.lookup("#save")).setOnAction(new SaveButtonControllerTache(creneau.getTache(), view){
             @Override
             public void handle(ActionEvent actionEvent) {
                 creneau.setBlocked(((CheckBox) view.lookup("#blocked")).isSelected());
@@ -43,6 +47,7 @@ public class RightSidePannelCreneau {
                         throw new RuntimeException(e);
                     }
                 }
+                super.handle(actionEvent);
             }
         });
 
@@ -52,8 +57,45 @@ public class RightSidePannelCreneau {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-                if (!creneau.isLibre()) MyDesktopPlanner.getInstance().getTachesUnscheduled().remove(creneau.getTache());
-                MyDesktopPlanner.getInstance().suprimerCreneau(creneau);
+
+
+
+                if (!creneau.isLibre()) {
+
+                    try {
+                        ChoiceView.showChoice(
+                                new EventHandler<ActionEvent>() {
+                                    @Override
+                                    public void handle(ActionEvent actionEvent) {
+                                        MyDesktopPlanner.getInstance().suprimerCreneau(creneau);
+                                        try {
+                                            MainView.getInstance().update();
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                    }
+                                },
+                                new EventHandler<ActionEvent>() {
+                                    @Override
+                                    public void handle(ActionEvent actionEvent) {
+                                        creneau.getTache().setEtat(Etat.UNSCHEDULED);
+                                        MyDesktopPlanner.getInstance().getTachesUnscheduled().add(creneau.getTache());
+                                        MyDesktopPlanner.getInstance().suprimerCreneau(creneau);
+                                        try {
+                                            MainView.getInstance().update();
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                    }
+                                },
+                                "Voulez vous vraiment supprimer la tache aussi?"
+                        );
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    MyDesktopPlanner.getInstance().suprimerCreneau(creneau);
+                }
                 try {
                     MainView.getInstance().emptyRightSidePannel();
                 } catch (IOException e) {

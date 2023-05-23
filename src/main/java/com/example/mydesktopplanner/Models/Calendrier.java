@@ -77,6 +77,8 @@ public Calendrier() {
 
 
     CreneauPeriodique tachePeriodique = tache;
+        LocalDateTime dateDebut = tache.getDebut();
+        LocalDateTime dateFin = tache.getFin();
 
     try {
         for (int i = 0; i < nbFois; i++) {
@@ -86,9 +88,12 @@ public Calendrier() {
             ajouterCreneau(tachePeriodique);
 
 
+            dateDebut = dateDebut.plusDays(nJours);
+            dateFin = dateFin.plusDays(nJours);
+
             tmp = new CreneauPeriodique(
-                    tachePeriodique.getDebut().plusDays((long) i *nJours),
-                    tachePeriodique.getFin().plusDays((long) i *nJours),
+                    dateDebut,
+                    dateFin,
                     (TacheSimple) tachePeriodique.getTache()
             );
 
@@ -344,23 +349,24 @@ public Calendrier() {
 
         LocalDate date = periode.getDebut();
 
-        Jour jour = jours.get(date);
+        Jour jour;
         Tache tache;
         //we'll unschedule all the tasks in the period
         while (date.isBefore(periode.getFin()) || date.isEqual(periode.getFin())){
+            jour = jours.get(date);
+            if (jour != null) {
+                for (Creneau c : jour.getCreneaux()) {
+                    //if the creneau is not blocked and not free, we'll unschedule its task and free it
+                    if (!c.isLibre() && !c.isBlocked()) {
+                        tache = c.getTache();
+                        ajouterTache(tache, unscheduledTaches);
+                        tache.setEtat(Etat.UNSCHEDULED);
 
-            for (Creneau c : jour.getCreneaux()){
-                //if the creneau is not blocked and not free, we'll unschedule its task and free it
-                if (!c.isLibre() && !c.isBlocked()){
-                    tache = c.getTache();
-                    ajouterTache(tache, unscheduledTaches);
-                    tache.setEtat(Etat.UNSCHEDULED);
-
-                    c.setLibre(true);
-                    c.setTache(null);
+                        c.setLibre(true);
+                        c.setTache(null);
+                    }
                 }
             }
-
             date = date.plusDays(1);
         }
 
@@ -369,7 +375,7 @@ public Calendrier() {
         if (!aleatoir) return plannifierTachesPeriode(new LinkedList<>(unscheduledTaches), periode);
         else {
             Collections.shuffle(unscheduledTaches);
-            unscheduledTaches = plannifierTachesPeriode(new LinkedList<>(unscheduledTaches), periode);
+            unscheduledTaches = plannifierTachesPeriode(new LinkedList<Tache>(unscheduledTaches), periode);
             return unscheduledTaches;
         }
     }
@@ -429,4 +435,18 @@ public Calendrier() {
         // Cette fonction renvoies une liste contenant tout les periodes du calendrier [EXISTANTS] dans l'intervalle indiqué
         return new ArrayList<>(periodes.subMap(debut,fin.plusDays(1)).values());
     }
+
+    public ArrayList<Creneau> getCreneauxNonLibres() {
+        ArrayList<Creneau> creneauxNonLibre = new ArrayList<>();
+        for (Jour jour : jours.values()) {
+            for (Creneau creneau : jour.getCreneaux()) {
+                if (!creneau.isLibre()) {
+                    creneauxNonLibre.add(creneau);
+                }
+            }
+
+        }
+        return creneauxNonLibre;
+    }
+
 }

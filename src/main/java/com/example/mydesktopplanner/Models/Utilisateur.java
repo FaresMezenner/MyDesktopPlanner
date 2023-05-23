@@ -718,9 +718,13 @@ public class Utilisateur implements Serializable {
 
     }
 
-    public void suprimerCreneaux(Creneau[] toArray) {
+    public void suprimerCreneaux(ArrayList<Creneau> toArray) {
         for (Creneau creneau :  toArray){
             calendrier.supprimerCreneau(creneau);
         }
+    }
+
+    public ArrayList<Creneau> getCreneauxNonLibres() {
+        return calendrier.getCreneauxNonLibres();
     }
 }

@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+import java.awt.*;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -187,6 +188,7 @@ public class CalendarView {
 
         AnchorPane view;
         String titre, begin, end, state;
+        Color color;
         Creneau creneau;
 
         public CreneauView(Creneau creneau) throws IOException {
@@ -216,6 +218,9 @@ public class CalendarView {
             if (!creneau.isLibre()) {
                 this.titre = creneau.getTache().getNom();
                 this.state = "Etat: " + creneau.getTache().getEtat().getName();
+                this.color = MyDesktopPlanner.getInstance().getUtilisateur().getCouleursCategorie()[creneau.getTache().getCategorie().ordinal()];
+            } else {
+//                this.color = Color.decode(" #90EE90");
             }
 
             setView();
@@ -227,6 +232,8 @@ public class CalendarView {
             ((Label) view.lookup("#debut")).setText(begin);
             ((Label) view.lookup("#fin")).setText(end);
             ((Label) view.lookup("#etat")).setText(state);
+            AnchorPane pane = (AnchorPane) view.lookup("#background");
+//            pane.setStyle("-fx-background-color: "+color.getCod+";");
         }
 
         public AnchorPane getView(){

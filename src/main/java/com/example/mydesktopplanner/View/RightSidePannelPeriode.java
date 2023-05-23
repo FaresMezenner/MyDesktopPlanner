@@ -6,18 +6,18 @@ import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInval
 import com.example.mydesktopplanner.Models.MyDesktopPlanner;
 import com.example.mydesktopplanner.Models.Periode;
 import com.example.mydesktopplanner.Models.Tache;
+import com.example.mydesktopplanner.Models.Utilisateur;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class RightSidePannelPeriode {
@@ -72,6 +72,8 @@ public class RightSidePannelPeriode {
                 out.close();
 
                 ArrayList<Tache> unscheduledTaches =  MyDesktopPlanner.getInstance().replannifierPeriode(periode, false);
+                Stage stage = new UnschduledTachesPopUp(unscheduledTaches);
+                stage.show();
                 MainView.getInstance().update();
             } catch (ExceptionDureeInvalide e) {
                 throw new RuntimeException(e);
@@ -100,9 +102,57 @@ public class RightSidePannelPeriode {
 
     private class UnschduledTachesPopUp extends Stage {
 
-        public UnschduledTachesPopUp() throws IOException {
+        public UnschduledTachesPopUp(ArrayList<Tache> taches) throws IOException {
             setScene(new Scene(FXMLLoader.load(Main.class.getResource("ListPopUp.fxml"))));
-            ((Text) view.lookup("#text")).setText("Les taches suivantes n'ont pas pu être replannifiées");
+            ((Text) getScene().lookup("#title")).setText("Replanification");
+            ((Text) getScene().lookup("#message")).setText("Les tâches suivantes n'ont pas pu être replanifiées :");
+            ((ListView<Tache>)  getScene().lookup("#list")).getItems().addAll(taches);
+
+            ((Button) getScene().lookup("#ok")).setText("replanifier");
+            ((Button) getScene().lookup("#ok")).setOnAction(event -> {
+                close();
+                ArrayList<Tache> unscheduledTaches = null;
+                try {
+                    FileInputStream fIn = new FileInputStream("utilisateurTmp");
+                    ObjectInputStream in = new ObjectInputStream(fIn);
+                    MyDesktopPlanner.getInstance().setUtilisateur((Utilisateur) in.readObject());
+                    fIn.close();
+                    in.close();
+
+                    unscheduledTaches = MyDesktopPlanner.getInstance().replannifierPeriode(periode, true);
+                    MainView.getInstance().update();
+                    Stage stage = new UnschduledTachesPopUp(unscheduledTaches);
+                    stage.show();
+                } catch (ExceptionDureeInvalide e) {
+                    throw new RuntimeException(e);
+                } catch (ExceptionCollisionHorairesCreneau e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+                ((Button) getScene().lookup("#annuler")).setOnAction(event -> {
+                    close();
+
+                    FileInputStream fIn = null;
+                    try {
+                        fIn = new FileInputStream("utilisateurTmp");
+                        ObjectInputStream in = new ObjectInputStream(fIn);
+                        MyDesktopPlanner.getInstance().setUtilisateur((Utilisateur) in.readObject());
+                        fIn.close();
+                        in.close();
+                        MainView.getInstance().update();
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
         }
     }

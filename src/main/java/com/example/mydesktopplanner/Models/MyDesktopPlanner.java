@@ -6,10 +6,7 @@ import com.example.mydesktopplanner.Models.ExceptionsPackage.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.TreeMap;
+import java.util.*;
 
 // Cette classe est la classe globale du DesktopPlanner
 // Cette classe n'est pas finie , il manque les methodes.
@@ -155,7 +152,7 @@ public class MyDesktopPlanner {
     public void supprimerProjetAvecCreneau(Projet projet){
 
         utilisateur.supprimerProjet(projet);
-        utilisateur.suprimerCreneaux((Creneau[]) projet.getTaches().values().toArray());
+        utilisateur.suprimerCreneaux(new ArrayList<>(projet.getTaches().values()));
     }
 
     public void dissocierTacheCreneau(Creneau creneau){
@@ -251,6 +248,10 @@ public class MyDesktopPlanner {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public ArrayList<Creneau> getCreneauxNonLibres(){
+        return utilisateur.getCreneauxNonLibres();
     }
 }
 
