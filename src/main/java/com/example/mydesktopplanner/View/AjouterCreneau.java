@@ -1,11 +1,20 @@
 package com.example.mydesktopplanner.View;
 
+import com.example.mydesktopplanner.Models.Creneau;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionCollisionHorairesCreneau;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDateInvalide;
+import com.example.mydesktopplanner.Models.ExceptionsPackage.ExceptionDureeInvalide;
+import com.example.mydesktopplanner.Models.MyDesktopPlanner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AjouterCreneau implements Initializable {
@@ -21,6 +30,9 @@ public class AjouterCreneau implements Initializable {
 
     @FXML
     TextField FinHeures;
+
+    @FXML
+    DatePicker date;
 
 
 
@@ -81,5 +93,50 @@ public class AjouterCreneau implements Initializable {
         // Ajoute un écouteur d'événements pour le TextField
 
     }
+
+    private boolean checkInput() {
+        return !(date.getValue() == null || DebutHeures.getText().isEmpty() || DebutMinutes.getText().isEmpty() || FinHeures.getText().isEmpty() || FinMinutes.getText().isEmpty());
+    }
+
+    public void ajouter() throws IOException {
+        if (checkInput()) {
+
+            Creneau creneau;
+            try {
+                creneau = new Creneau(
+                        LocalDateTime.of(date.getValue(), LocalTime.of(Integer.parseInt(DebutHeures.getText()), Integer.parseInt(DebutMinutes.getText()))),
+                        LocalDateTime.of(date.getValue(), LocalTime.of(Integer.parseInt(FinHeures.getText()), Integer.parseInt(FinMinutes.getText())))
+                );
+            } catch (ExceptionDureeInvalide e) {
+                try {
+                    (new ErrorPopUpView(null, e.getMessage())).show();
+                    return;
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            try {
+                MyDesktopPlanner.getInstance().ajouterCreneau(creneau);
+            } catch (ExceptionDateInvalide e) {
+                ErrorPopUpView.show(null, e.getMessage());
+            } catch (ExceptionCollisionHorairesCreneau e) {
+                ErrorPopUpView.show(null, e.getMessage());
+            }
+
+            MainView.getInstance().update();
+
+
+        } else {
+
+            try {
+                (new ErrorPopUpView(null, "Veuillez remplir tous tous les champs")).show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
 
 }

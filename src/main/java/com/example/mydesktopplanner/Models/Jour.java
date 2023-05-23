@@ -193,4 +193,32 @@ public class Jour implements Serializable {
         }
         return t;
     }
+
+    public Tache plannifierTacheCreneau(Tache tache, Creneau creneau) throws ExceptionDureeInvalide {
+        Tache t = tache;
+        HashMap<String,Object> map;
+        if (creneau.isLibre()) {
+            try {
+                map = ajouterTacheCreneau(t, creneau);
+            } catch (ExceptionDureeInvalide e) {
+                throw e;
+            }
+            if (map.get("creneau") != null) {
+                Creneau newCreneau = (Creneau) map.get("creneau");
+                try {
+                    ajouterCreneau(newCreneau);
+                } catch (ExceptionCollisionHorairesCreneau e) {
+                    throw new RuntimeException(e);
+                }
+                return null;
+            } else if ( (t = (Tache) map.get("tache")) == null){
+                return null;
+            }
+        } else {
+            throw new RuntimeException("Le creneau n'est pas libre");
+        }
+        return t;
+    }
+
+
 }

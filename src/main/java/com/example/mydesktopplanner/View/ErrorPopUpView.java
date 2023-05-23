@@ -1,8 +1,11 @@
 package com.example.mydesktopplanner.View;
 
 import com.example.mydesktopplanner.Main;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -23,6 +26,22 @@ public class ErrorPopUpView extends Stage {
 
         ((Text) getScene().lookup("#title")).setText(title);
         ((Text) getScene().lookup("#message")).setText(message);
+        ((Button) getScene().lookup("#ok")).setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                close();
+            }
+        });
 
+    }
+
+
+    static public void show(String title, String message) throws IOException {
+        try {
+            (new ErrorPopUpView(title, message)).show();
+            return;
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

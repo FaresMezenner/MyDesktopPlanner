@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
 public class RightSidePannelCreneau {
@@ -31,11 +30,19 @@ public class RightSidePannelCreneau {
     private void setControllers() {
 
         //setting the save button
-        ((Button) view.lookup("#save")).setOnAction(new SaveButtonControllerTache(creneau.getTache(), view){
+        ((Button) view.lookup("#save")).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                super.handle(actionEvent);
                 creneau.setBlocked(((CheckBox) view.lookup("#blocked")).isSelected());
+                if (creneau.isLibre() || !((CheckBox) view.lookup("#free")).isSelected()) {
+                    try {
+                        (new TachesListPopUp("Plannifier tache",
+                                "Veuillez choisir la tache a plannifier dans ce creneau",
+                                creneau)).show();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
 

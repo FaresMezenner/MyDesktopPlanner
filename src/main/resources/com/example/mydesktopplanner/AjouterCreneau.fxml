@@ -19,12 +19,12 @@
             </Text>
          </children>
       </AnchorPane>
-      <Button fx:id="ok" layoutX="110.0" layoutY="327.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
+      <Button fx:id="ok" layoutX="110.0" layoutY="327.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <DatePicker layoutX="49.0" layoutY="138.0" prefHeight="30.0" prefWidth="242.0" />
+      <DatePicker fx:id="date" layoutX="49.0" layoutY="138.0" prefHeight="30.0" prefWidth="242.0" />
       <Text layoutX="49.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="81.52501678466797">
          <font>
             <Font size="16.0" />

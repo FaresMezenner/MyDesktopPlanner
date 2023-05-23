@@ -129,6 +129,8 @@ public abstract class Tache implements Serializable, Comparable<Tache> {
     	}
     }
 
-    // Cette méthode permet de sauvegarder une tache dans une nouvelle tache
-
+    @Override
+    public String toString() {
+        return getNom();
+    }
 }

@@ -198,9 +198,12 @@ public class Creneau implements Decomposable<Void>, Collidable<Creneau>, Seriali
     }
 
 
+    @Override
+    public String toString() {
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy - HH:mm");
 
-
-
+        return getDebut().format(formatter) + " ~ " + getFin().format(formatter) + " - " + (isLibre() ? "Libre" : tache.getNom());
+    }
 }
 

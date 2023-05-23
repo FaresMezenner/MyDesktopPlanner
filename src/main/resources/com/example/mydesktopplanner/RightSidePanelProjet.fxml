@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="250.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.RightSidePannelTachesController">
+<AnchorPane prefHeight="650.0" prefWidth="250.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane maxHeight="650.0" maxWidth="250.0" prefHeight="649.0" prefWidth="249.0" style="-fx-background-color: #1f1f21; -fx-background-radius: 10;">
          <children>
@@ -23,8 +23,8 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextField layoutX="20.0" layoutY="89.0" prefHeight="26.0" prefWidth="200.0" promptText="Nom du projet" style="-fx-background-color: ffffff;" />
-            <Button layoutX="20.0" layoutY="599.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #e2001a;" text="Supprimer" textFill="WHITE">
+            <TextField fx:id="name" layoutX="20.0" layoutY="89.0" prefHeight="26.0" prefWidth="200.0" promptText="Nom du projet" style="-fx-background-color: ffffff;" />
+            <Button fx:id="delete" layoutX="20.0" layoutY="599.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #e2001a;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
@@ -34,13 +34,23 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextField alignment="TOP_LEFT" layoutX="20.0" layoutY="151.0" prefHeight="134.0" prefWidth="200.0" promptText="Description" />
-            <Text fill="WHITE" layoutX="20.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Taches" wrappingWidth="81.52501678466797">
+            <TextField fx:id="desc" alignment="TOP_LEFT" layoutX="20.0" layoutY="151.0" prefHeight="99.0" prefWidth="200.0" promptText="Description" />
+            <Text fill="WHITE" layoutX="20.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Taches" wrappingWidth="81.52501678466797">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <ListView layoutX="20.0" layoutY="323.0" prefHeight="256.0" prefWidth="200.0" />
+            <ListView fx:id="tasks" layoutX="20.0" layoutY="281.0" prefHeight="218.0" prefWidth="200.0" />
+            <Button fx:id="save" layoutX="20.0" layoutY="557.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #506486;" text="Enregistrer les modifications" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="add" layoutX="20.0" layoutY="515.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #506486;" text="Ajouter tache" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

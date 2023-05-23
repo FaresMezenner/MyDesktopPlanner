@@ -197,6 +197,12 @@ public class AjouterTacheView extends Stage {
                         throw new RuntimeException(e);
                     }
                 }
+
+                try {
+                    MainView.getInstance().update();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 

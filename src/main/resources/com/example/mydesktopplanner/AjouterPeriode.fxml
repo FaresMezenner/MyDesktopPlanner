@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="392.0" prefWidth="340.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.AjouterTache">
+<AnchorPane prefHeight="392.0" prefWidth="340.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mydesktopplanner.View.AjouterPeriode">
    <children>
       <AnchorPane prefHeight="86.0" prefWidth="340.0" style="-fx-background-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
          <children>
@@ -19,12 +19,12 @@
             </Text>
          </children>
       </AnchorPane>
-      <Button fx:id="ok" layoutX="109.0" layoutY="332.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
+      <Button fx:id="ok" layoutX="109.0" layoutY="332.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="36.0" prefWidth="119.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <TextField layoutX="50.0" layoutY="138.0" prefHeight="26.0" prefWidth="242.0" promptText="Nom de la periode" style="-fx-background-color: ffffff;">
+      <TextField fx:id="nom" layoutX="50.0" layoutY="138.0" prefHeight="26.0" prefWidth="242.0" promptText="Nom de la periode" style="-fx-background-color: ffffff;">
          <font>
             <Font size="15.0" />
          </font>
@@ -34,14 +34,14 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <DatePicker layoutX="49.0" layoutY="210.0" prefHeight="30.0" prefWidth="242.0" />
+      <DatePicker fx:id="debut" layoutX="49.0" layoutY="210.0" prefHeight="30.0" prefWidth="242.0" />
       <Text layoutX="50.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de début" wrappingWidth="119.20000000000005">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
       <AnchorPane layoutY="65.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: #000000;" />
-      <DatePicker layoutX="49.0" layoutY="283.0" prefHeight="30.0" prefWidth="242.0" />
+      <DatePicker fx:id="fin" layoutX="49.0" layoutY="283.0" prefHeight="30.0" prefWidth="242.0" />
       <Text layoutX="49.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de fin" wrappingWidth="81.52501678466797">
          <font>
             <Font size="16.0" />

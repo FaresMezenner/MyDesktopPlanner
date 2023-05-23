@@ -122,9 +122,6 @@ public class MyDesktopPlanner {
     }
 
 
-    public void supprimerCreneau(Creneau creneau) {
-        utilisateur.suprimerCreneau(creneau);
-    }
 
     public Utilisateur getUtilisateur() {
         return utilisateur;
@@ -153,6 +150,12 @@ public class MyDesktopPlanner {
 
     public void supprimerProjet(Projet projet){
         utilisateur.supprimerProjet(projet);
+    }
+
+    public void supprimerProjetAvecCreneau(Projet projet){
+
+        utilisateur.supprimerProjet(projet);
+        utilisateur.suprimerCreneaux((Creneau[]) projet.getTaches().values().toArray());
     }
 
     public void dissocierTacheCreneau(Creneau creneau){

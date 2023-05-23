@@ -269,7 +269,6 @@ public Calendrier() {
             date = periode.getDebut();
 
             while (date.isBefore(periode.getFin()) || date.isEqual(periode.getFin())){
-                System.out.println("HEY");
                 jour = jours.get(date);
 
                 //we'll add the task to scheduledTasks and schedule it in the day

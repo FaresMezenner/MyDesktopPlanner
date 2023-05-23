@@ -68,6 +68,15 @@ public class CalendarView {
         LinkedList<Periode> periodes = new LinkedList<>();
         for (int i = 0; i < 7; i++) {
 
+            Periode periode = null;
+
+            //now getting the periodes that will be shown
+            periode = MyDesktopPlanner.getInstance().getUtilisateur().getCalendrier().getPeriode(date);
+            if (periode != null) {
+                periodes.add(periode);
+
+            }
+
             //setting creneaux
             LinkedList<Creneau> creneaux;
             try {
@@ -90,13 +99,6 @@ public class CalendarView {
                 }
             }
 
-
-            //now getting the periodes that will be shown
-            Periode periode = MyDesktopPlanner.getInstance().getUtilisateur().getCalendrier().getPeriode(date);
-            if (periode != null) {
-                periodes.add(periode);
-
-            }
 
 
             date = date.plusDays(1);

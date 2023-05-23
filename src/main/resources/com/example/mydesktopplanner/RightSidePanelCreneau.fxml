@@ -114,7 +114,7 @@
                         <ChoiceBox fx:id="EtatChoiceBox" layoutX="14.0" layoutY="350.0" prefHeight="28.0" prefWidth="224.0" />
                      </children>
                   </AnchorPane>
-                  <CheckBox fx:id="free" disable="true" layoutX="208.0" layoutY="288.0" mnemonicParsing="false" />
+                  <CheckBox fx:id="free" layoutX="208.0" layoutY="288.0" mnemonicParsing="false" />
                   <CheckBox fx:id="perio" disable="true" layoutX="208.0" layoutY="339.0" mnemonicParsing="false" />
                </children>
             </AnchorPane>
